@@ -343,13 +343,6 @@ function verPuntos() {
 
   .then(function(result) {
 
-    if(result.error){
-
-      mostrarMensaje(result.error,"mensaje-error");
-
-      return;
-    }
-
     const puntos = result.puntos;
 
     if (puntos == -1) {
@@ -385,6 +378,7 @@ function verPuntos() {
       for(let i = 1; i < premios.length; i++) {
 
         html += `
+
           <div class="premio">
 
             <img src="${premios[i][3]}&t=${new Date().getTime()}">
@@ -397,7 +391,7 @@ function verPuntos() {
 
             Cantidad:<br>
 
-            <input 
+            <input
               type="number"
               min="0"
               max="${premios[i][2]}"
@@ -406,6 +400,7 @@ function verPuntos() {
             >
 
           </div>
+
         `;
       }
 
@@ -457,6 +452,10 @@ function comprar() {
 
     method: "POST",
 
+    headers: {
+      "Content-Type": "application/json"
+    },
+
     body: JSON.stringify({
       action: "procesarCompra",
       nombre: nombre,
@@ -486,6 +485,14 @@ function comprar() {
     document.getElementById("nombre").value = "";
 
     document.getElementById("apellido").value = "";
+
+  })
+
+  .catch(function(error){
+
+    mostrarMensaje("Error conectando con el servidor","mensaje-error");
+
+    console.log(error);
 
   });
 
