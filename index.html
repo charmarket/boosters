@@ -20,11 +20,45 @@
     body{
       background:#f4f4f4;
       padding:20px;
+      position:relative;
+      overflow-x:hidden;
+    }
+
+    /* FONDO RULETA */
+
+    body::before{
+
+      content:"";
+
+      position:fixed;
+
+      top:50%;
+      left:50%;
+
+      transform:translate(-50%,-50%);
+
+      width:1200px;
+      height:1200px;
+
+      background-image:url('https://lh3.googleusercontent.com/d/1WdB_N_o50RRWUVba7fKzr0Tew4bJ3pKd');
+
+      background-repeat:no-repeat;
+      background-position:center;
+      background-size:contain;
+
+      opacity:0.08;
+
+      z-index:-1;
+
+      filter:blur(1px);
+
     }
 
     .container{
       max-width:1100px;
       margin:auto;
+      position:relative;
+      z-index:2;
     }
 
     .top{
@@ -40,6 +74,7 @@
       margin:auto;
       box-shadow:0 5px 20px rgba(0,0,0,0.15);
       border:4px solid white;
+      background:white;
     }
 
     .logo img{
@@ -70,7 +105,8 @@
     }
 
     .card{
-      background:white;
+      background:rgba(255,255,255,0.95);
+      backdrop-filter:blur(3px);
       border-radius:25px;
       padding:25px;
       box-shadow:0 10px 30px rgba(0,0,0,0.08);
@@ -187,7 +223,8 @@
     }
 
     .premio{
-      background:white;
+      background:rgba(255,255,255,0.96);
+      backdrop-filter:blur(3px);
       border-radius:20px;
       padding:15px;
       text-align:center;
@@ -221,6 +258,14 @@
     }
 
     @media(max-width:768px){
+
+      body::before{
+
+        width:700px;
+        height:700px;
+
+        opacity:0.06;
+      }
 
       #boosters{
         grid-template-columns:repeat(2,1fr);
@@ -302,187 +347,6 @@
   <div id="boosters"></div>
 
 </div>
-
-<script>
-
-const API_URL = "https://script.google.com/macros/s/AKfycbzQz9UAHHkwy7G1wVNB13d52T-8cempfD0TrNVbRmdNzqBtQdUxUZuk0eg7_uy_pn0IzA/exec";
-
-let premios = [];
-
-function mostrarMensaje(texto, clase) {
-
-  const mensajeDiv = document.getElementById("mensaje");
-
-  mensajeDiv.innerText = texto;
-
-  mensajeDiv.className = clase;
-
-  mensajeDiv.style.display = "block";
-}
-
-function verPuntos() {
-
-  const nombre = document.getElementById("nombre").value.trim();
-  const apellido = document.getElementById("apellido").value.trim();
-
-  if (!nombre || !apellido) {
-
-    mostrarMensaje("Debes ingresar nombre y apellido","mensaje-error");
-
-    return;
-  }
-
-  fetch(`${API_URL}?action=obtenerPuntos&nombre=${encodeURIComponent(nombre)}&apellido=${encodeURIComponent(apellido)}`)
-
-  .then(response => response.json())
-
-  .then(function(result) {
-
-    const puntos = result.puntos;
-
-    if (puntos == -1) {
-
-      mostrarMensaje("Usuario no encontrado","mensaje-error");
-
-      return;
-    }
-
-    if (puntos == 0) {
-
-      mostrarMensaje("No tienes puntos para canjear","mensaje-no-puntos");
-
-      return;
-    }
-
-    document.getElementById("puntos").innerText = "Tus puntos: " + puntos;
-
-    document.getElementById("puntos").style.display = "block";
-
-    document.getElementById("mensaje").style.display = "none";
-
-    fetch(`${API_URL}?action=obtenerDatos`)
-
-    .then(response => response.json())
-
-    .then(function(data) {
-
-      premios = data.premios;
-
-      let html = "";
-
-      for(let i = 1; i < premios.length; i++) {
-
-        html += `
-
-          <div class="premio">
-
-            <img src="${premios[i][3]}&t=${new Date().getTime()}">
-
-            <b>${premios[i][0]}</b><br><br>
-
-            ${premios[i][1]} pts<br>
-
-            Stock: ${premios[i][2]}<br><br>
-
-            Cantidad:<br>
-
-            <input
-              type="number"
-              min="0"
-              max="${premios[i][2]}"
-              value="0"
-              id="b${i}"
-            >
-
-          </div>
-
-        `;
-      }
-
-      document.getElementById("boosters").innerHTML = html;
-
-    });
-
-  });
-
-}
-
-function comprar() {
-
-  const nombre = document.getElementById("nombre").value.trim();
-  const apellido = document.getElementById("apellido").value.trim();
-
-  if (!nombre || !apellido) {
-
-    alert("Debes ingresar nombre y apellido");
-
-    return;
-  }
-
-  let carrito = [];
-
-  for(let i = 1; i < premios.length; i++) {
-
-    let cantidad = Number(document.getElementById("b"+i).value);
-
-    if(cantidad > 0){
-
-      carrito.push({
-        booster: premios[i][0],
-        cantidad: cantidad
-      });
-
-    }
-
-  }
-
-  if(carrito.length === 0){
-
-    alert("Debes seleccionar al menos un premio");
-
-    return;
-  }
-
-  fetch(API_URL, {
-
-    method: "POST",
-
-    body: JSON.stringify({
-      action: "procesarCompra",
-      nombre: nombre,
-      apellido: apellido,
-      carrito: carrito
-    })
-
-  })
-
-  .then(response => response.json())
-
-  .then(function(res){
-
-    mostrarMensaje(res.mensaje,"mensaje-puntos");
-
-    document.getElementById("boosters").innerHTML = "";
-
-    document.getElementById("puntos").innerHTML = "";
-
-    document.getElementById("nombre").value = "";
-
-    document.getElementById("apellido").value = "";
-
-  })
-
-  .catch(function(error){
-
-    mostrarMensaje("Error conectando con el servidor","mensaje-error");
-
-    console.log(error);
-
-  });
-
-}
-
-</script>
 
 </body>
 </html>
