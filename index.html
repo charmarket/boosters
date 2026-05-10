@@ -6,7 +6,6 @@
 
   <title>Charmarket</title>
 
-  <!-- ICONOS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
@@ -27,8 +26,6 @@
       max-width:1100px;
       margin:auto;
     }
-
-    /* HEADER */
 
     .top{
       text-align:center;
@@ -72,8 +69,6 @@
       border-radius:10px;
     }
 
-    /* CARD */
-
     .card{
       background:white;
       border-radius:25px;
@@ -88,8 +83,6 @@
       margin-bottom:20px;
       color:#333;
     }
-
-    /* INPUTS */
 
     .input-group{
       display:flex;
@@ -119,8 +112,6 @@
       outline:none;
       font-size:16px;
     }
-
-    /* BOTONES */
 
     .buttons{
       display:flex;
@@ -159,8 +150,6 @@
       color:white;
     }
 
-    /* MENSAJES */
-
     #mensaje{
       margin-top:20px;
       padding:15px;
@@ -188,16 +177,12 @@
       color:black;
     }
 
-    /* PUNTOS */
-
     #puntos{
       margin-top:20px;
       text-align:center;
       font-size:24px;
       color:#28a745;
     }
-
-    /* BOOSTERS */
 
     #boosters{
       display:grid;
@@ -267,11 +252,8 @@
 
 <div class="container">
 
-  <!-- HEADER -->
-
   <div class="top">
 
-    <!-- ACA DESPUES VAMOS A PONER TU LOGO -->
     <div class="logo">
       <img src="https://lh3.googleusercontent.com/d/1kdUUypk6s558Qmu5ocRPCK7isohJ8kTy">
     </div>
@@ -286,33 +268,23 @@
 
   </div>
 
-  <!-- CARD -->
-
   <div class="card">
 
     <div class="subtitle">
       Canje de Boosters
     </div>
 
-    <!-- INPUT NOMBRE -->
-
     <div class="input-group">
       <i class="fa-regular fa-user"></i>
       <input id="nombre" placeholder="Ingresa tu nombre">
     </div>
-
-    <!-- INPUT APELLIDO -->
 
     <div class="input-group">
       <i class="fa-regular fa-user"></i>
       <input id="apellido" placeholder="Ingresa tu apellido">
     </div>
 
-    <!-- MENSAJES -->
-
     <div id="mensaje"></div>
-
-    <!-- BOTONES -->
 
     <div class="buttons">
 
@@ -328,19 +300,17 @@
 
     </div>
 
-    <!-- PUNTOS -->
-
     <h3 id="puntos"></h3>
 
   </div>
-
-  <!-- BOOSTERS -->
 
   <div id="boosters"></div>
 
 </div>
 
 <script>
+
+const API_URL = "https://script.google.com/macros/s/AKfycbwZvn31D196-tzzgzB4kAcwTNF4atFH6D-ALzdZ1mUYdeMPbkbwSLGpPFIsEphKz8R-zg/exec";
 
 let premios = [];
 
@@ -364,7 +334,13 @@ function verPuntos() {
     return;
   }
 
-  google.script.run.withSuccessHandler(function(p) {
+  fetch(`${API_URL}?action=obtenerPuntos&nombre=${encodeURIComponent(nombre)}&apellido=${encodeURIComponent(apellido)}`)
+
+  .then(response => response.json())
+
+  .then(function(result) {
+
+    const p = result.puntos;
 
     if (p == -1) {
 
@@ -417,7 +393,11 @@ function verPuntos() {
       return;
     }
 
-    google.script.run.withSuccessHandler(function(data) {
+    fetch(`${API_URL}?action=obtenerDatos`)
+
+    .then(response => response.json())
+
+    .then(function(data) {
 
       premios = data.premios;
 
@@ -446,91 +426,15 @@ function verPuntos() {
 
       document.getElementById("boosters").innerHTML = html;
 
-    }).obtenerDatos();
+    });
 
-  }).obtenerPuntos(nombre, apellido);
+  });
 
 }
 
 function comprar() {
 
-  const nombre = document.getElementById("nombre").value;
-  const apellido = document.getElementById("apellido").value;
-
-  if (!nombre || !apellido) {
-
-    alert("Debes ingresar nombre y apellido antes de comprar");
-
-    return;
-  }
-
-  let carrito = [];
-
-  let mensajeError = false;
-
-  for (let i = 1; i < premios.length; i++) {
-
-    let cantidad = document.getElementById("b" + i).value;
-
-    cantidad = Number(cantidad);
-
-    if (cantidad > 0) {
-
-      if (cantidad > 10) {
-
-        mensajeError = true;
-
-        alert("Solo puedes seleccionar hasta 10 de un mismo premio.");
-
-        break;
-      }
-
-      carrito.push({
-        booster: premios[i][0],
-        cantidad: Number(cantidad)
-      });
-
-    }
-
-  }
-
-  if (mensajeError) {
-    return;
-  }
-
-  if (carrito.length === 0) {
-
-    alert("Debes seleccionar al menos un premio");
-
-    return;
-  }
-
-  google.script.run.withSuccessHandler(function(res) {
-
-    const mensajeDiv = document.getElementById("mensaje");
-
-    mensajeDiv.innerText = res;
-
-    mensajeDiv.className = "mensaje-puntos";
-
-    mensajeDiv.style.display = "block";
-
-    document.getElementById("nombre").value = "";
-    document.getElementById("apellido").value = "";
-
-    document.getElementById("puntos").style.display = "none";
-
-    setTimeout(function () {
-
-      document.getElementById("mensaje").style.display = "none";
-
-      document.getElementById("puntos").style.display = "none";
-
-      document.getElementById("boosters").innerHTML = "";
-
-    }, 3000);
-
-  }).procesarCompra(nombre, apellido, carrito);
+  alert("La conexión de compras se activará en el siguiente paso 😎🔥");
 
 }
 
