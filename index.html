@@ -314,22 +314,25 @@ const API_URL = "https://script.google.com/macros/s/AKfycbwZvn31D196-tzzgzB4kAcw
 
 let premios = [];
 
-function verPuntos() {
-
-  const nombre = document.getElementById("nombre").value;
-  const apellido = document.getElementById("apellido").value;
+function mostrarMensaje(texto, clase) {
 
   const mensajeDiv = document.getElementById("mensaje");
-  const boostersDiv = document.getElementById("boosters");
+
+  mensajeDiv.innerText = texto;
+
+  mensajeDiv.className = clase;
+
+  mensajeDiv.style.display = "block";
+}
+
+function verPuntos() {
+
+  const nombre = document.getElementById("nombre").value.trim();
+  const apellido = document.getElementById("apellido").value.trim();
 
   if (!nombre || !apellido) {
 
-    mensajeDiv.innerText = "Debes ingresar nombre y apellido";
-    mensajeDiv.className = "mensaje-error";
-    mensajeDiv.style.display = "block";
-
-    document.getElementById("boosters").innerHTML = "";
-    document.getElementById("puntos").innerText = "";
+    mostrarMensaje("Debes ingresar nombre y apellido","mensaje-error");
 
     return;
   }
@@ -340,58 +343,34 @@ function verPuntos() {
 
   .then(function(result) {
 
-    const p = result.puntos;
+    if(result.error){
 
-    if (p == -1) {
-
-      mensajeDiv.innerText = "Usuario no encontrado";
-      mensajeDiv.className = "mensaje-error";
-      mensajeDiv.style.display = "block";
-
-      boostersDiv.style.display = "none";
+      mostrarMensaje(result.error,"mensaje-error");
 
       return;
     }
 
-    if (p === 0) {
+    const puntos = result.puntos;
 
-      mensajeDiv.innerText = "No tienes puntos para canjear";
-      mensajeDiv.className = "mensaje-no-puntos";
-      mensajeDiv.style.display = "block";
+    if (puntos == -1) {
 
-      boostersDiv.style.display = "none";
-
-    } else {
-
-      document.getElementById("puntos").innerText = "Tus puntos: " + p;
-      document.getElementById("puntos").style.display = "block";
-
-      mensajeDiv.style.display = "none";
-
-    }
-
-    const fechaActual = new Date();
-
-    const fechaLimite = new Date(
-      fechaActual.getFullYear(),
-      fechaActual.getMonth(),
-      5,
-      23,
-      59,
-      59
-    );
-
-    if (fechaActual > fechaLimite) {
-
-      mensajeDiv.innerText = "Fuera de la fecha límite, ya no puedes canjear tus puntos";
-      mensajeDiv.className = "mensaje-fecha-limite";
-      mensajeDiv.style.display = "block";
-
-      document.getElementById("puntos").style.display = "none";
-      document.getElementById("boosters").style.display = "none";
+      mostrarMensaje("Usuario no encontrado","mensaje-error");
 
       return;
     }
+
+    if (puntos == 0) {
+
+      mostrarMensaje("No tienes puntos para canjear","mensaje-no-puntos");
+
+      return;
+    }
+
+    document.getElementById("puntos").innerText = "Tus puntos: " + puntos;
+
+    document.getElementById("puntos").style.display = "block";
+
+    document.getElementById("mensaje").style.display = "none";
 
     fetch(`${API_URL}?action=obtenerDatos`)
 
@@ -403,26 +382,32 @@ function verPuntos() {
 
       let html = "";
 
-      for (let i = 1; i < premios.length; i++) {
+      for(let i = 1; i < premios.length; i++) {
 
-        html += "<div class='premio'>";
+        html += `
+          <div class="premio">
 
-        html += "<img src='" + premios[i][3] + "&t=" + new Date().getTime() + "' onerror='this.src=\"https://via.placeholder.com/100x100?text=Sin+Imagen\"'>";
+            <img src="${premios[i][3]}&t=${new Date().getTime()}">
 
-        html += "<br><b>" + premios[i][0] + "</b><br><br>";
+            <b>${premios[i][0]}</b><br><br>
 
-        html += premios[i][1] + " pts<br>";
+            ${premios[i][1]} pts<br>
 
-        html += "Stock: <span id='stock" + i + "'>" + premios[i][2] + "</span><br><br>";
+            Stock: ${premios[i][2]}<br><br>
 
-        html += "Cantidad:<br>";
+            Cantidad:<br>
 
-        html += "<input type='number' min='0' max='" + premios[i][2] + "' value='0' id='b"+i+"'>";
+            <input 
+              type="number"
+              min="0"
+              max="${premios[i][2]}"
+              value="0"
+              id="b${i}"
+            >
 
-        html += "</div>";
+          </div>
+        `;
       }
-
-      document.getElementById("boosters").style.display = "grid";
 
       document.getElementById("boosters").innerHTML = html;
 
@@ -434,7 +419,75 @@ function verPuntos() {
 
 function comprar() {
 
-  alert("La conexión de compras se activará en el siguiente paso 😎🔥");
+  const nombre = document.getElementById("nombre").value.trim();
+  const apellido = document.getElementById("apellido").value.trim();
+
+  if (!nombre || !apellido) {
+
+    alert("Debes ingresar nombre y apellido");
+
+    return;
+  }
+
+  let carrito = [];
+
+  for(let i = 1; i < premios.length; i++) {
+
+    let cantidad = Number(document.getElementById("b"+i).value);
+
+    if(cantidad > 0){
+
+      carrito.push({
+        booster: premios[i][0],
+        cantidad: cantidad
+      });
+
+    }
+
+  }
+
+  if(carrito.length === 0){
+
+    alert("Debes seleccionar al menos un premio");
+
+    return;
+  }
+
+  fetch(API_URL, {
+
+    method: "POST",
+
+    body: JSON.stringify({
+      action: "procesarCompra",
+      nombre: nombre,
+      apellido: apellido,
+      carrito: carrito
+    })
+
+  })
+
+  .then(response => response.json())
+
+  .then(function(res){
+
+    if(res.error){
+
+      mostrarMensaje(res.error,"mensaje-error");
+
+      return;
+    }
+
+    mostrarMensaje(res.mensaje,"mensaje-puntos");
+
+    document.getElementById("boosters").innerHTML = "";
+
+    document.getElementById("puntos").innerHTML = "";
+
+    document.getElementById("nombre").value = "";
+
+    document.getElementById("apellido").value = "";
+
+  });
 
 }
 
