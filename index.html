@@ -323,5 +323,199 @@
 
 </div>
 
+<script>
+
+const API_URL = "https://script.google.com/macros/s/AKfycbwZvn31D196-tzzgzB4kAcwTNF4atFH6D-ALzdZ1mUYdeMPbkbwSLGpPFIsEphKz8R-zg/exec";
+
+let premios = [];
+
+function mostrarMensaje(texto, clase) {
+
+  const mensajeDiv = document.getElementById("mensaje");
+
+  mensajeDiv.innerText = texto;
+
+  mensajeDiv.className = clase;
+
+  mensajeDiv.style.display = "block";
+}
+
+function verPuntos() {
+
+  const nombre = document.getElementById("nombre").value.trim();
+  const apellido = document.getElementById("apellido").value.trim();
+
+  if (!nombre || !apellido) {
+
+    mostrarMensaje("Debes ingresar nombre y apellido","mensaje-error");
+
+    return;
+  }
+
+  fetch(`${API_URL}?action=obtenerPuntos&nombre=${encodeURIComponent(nombre)}&apellido=${encodeURIComponent(apellido)}`)
+
+  .then(response => response.json())
+
+  .then(function(result) {
+
+    const puntos = result.puntos;
+
+    if (puntos == -1) {
+
+      mostrarMensaje("Usuario no encontrado","mensaje-error");
+
+      return;
+    }
+
+    if (puntos == 0) {
+
+      mostrarMensaje("No tienes puntos para canjear","mensaje-no-puntos");
+
+      return;
+    }
+
+    document.getElementById("puntos").innerText = "Tus puntos: " + puntos;
+
+    document.getElementById("puntos").style.display = "block";
+
+    document.getElementById("mensaje").style.display = "none";
+
+    fetch(`${API_URL}?action=obtenerDatos`)
+
+    .then(response => response.json())
+
+    .then(function(data) {
+
+      premios = data.premios;
+
+      let html = "";
+
+      for(let i = 1; i < premios.length; i++) {
+
+        html += `
+          <div class="premio">
+
+            <img src="${premios[i][3]}&t=${new Date().getTime()}">
+
+            <b>${premios[i][0]}</b><br><br>
+
+            ${premios[i][1]} pts<br>
+
+            Stock: ${premios[i][2]}<br><br>
+
+            Cantidad:<br>
+
+            <input 
+              type="number"
+              min="0"
+              max="${premios[i][2]}"
+              value="0"
+              id="b${i}"
+            >
+
+          </div>
+        `;
+      }
+
+      document.getElementById("boosters").innerHTML = html;
+
+    });
+
+  })
+
+  .catch(function(){
+
+    mostrarMensaje("Error conectando con el servidor","mensaje-error");
+
+  });
+
+}
+
+function comprar() {
+
+  const nombre = document.getElementById("nombre").value.trim();
+  const apellido = document.getElementById("apellido").value.trim();
+
+  if (!nombre || !apellido) {
+
+    alert("Debes ingresar nombre y apellido");
+
+    return;
+  }
+
+  let carrito = [];
+
+  for(let i = 1; i < premios.length; i++) {
+
+    let cantidad = Number(document.getElementById("b"+i).value);
+
+    if(cantidad > 0){
+
+      carrito.push({
+        booster: premios[i][0],
+        cantidad: cantidad
+      });
+
+    }
+
+  }
+
+  if(carrito.length === 0){
+
+    alert("Debes seleccionar al menos un premio");
+
+    return;
+  }
+
+  fetch(API_URL, {
+
+    method: "POST",
+
+    headers:{
+      "Content-Type":"text/plain;charset=utf-8"
+    },
+
+    body: JSON.stringify({
+      action: "procesarCompra",
+      nombre: nombre,
+      apellido: apellido,
+      carrito: carrito
+    })
+
+  })
+
+  .then(response => response.json())
+
+  .then(function(res){
+
+    if(res.error){
+
+      mostrarMensaje(res.error,"mensaje-error");
+
+      return;
+    }
+
+    mostrarMensaje(res.mensaje || "Compra realizada correctamente","mensaje-puntos");
+
+    document.getElementById("boosters").innerHTML = "";
+
+    document.getElementById("puntos").innerHTML = "";
+
+    document.getElementById("nombre").value = "";
+
+    document.getElementById("apellido").value = "";
+
+  })
+
+  .catch(function(){
+
+    mostrarMensaje("Error conectando con el servidor","mensaje-error");
+
+  });
+
+}
+
+</script>
+
 </body>
 </html>
