@@ -187,7 +187,7 @@
     }
 
     .mensaje-fecha-limite{
-      background:#ff9800;
+      background:#ffcc00;
       color:black;
     }
 
@@ -340,10 +340,33 @@ function mostrarMensaje(texto, clase) {
   mensajeDiv.style.display = "block";
 }
 
+function estaFueraDeFecha() {
+
+  const fechaActual = new Date();
+
+  const dia = fechaActual.getDate();
+
+  if (dia > 10) {
+    return true;
+  }
+
+  return false;
+}
+
+function limpiarPantalla() {
+
+  document.getElementById("boosters").innerHTML = "";
+
+  document.getElementById("puntos").innerHTML = "";
+
+}
+
 function verPuntos() {
 
   const nombre = document.getElementById("nombre").value.trim();
   const apellido = document.getElementById("apellido").value.trim();
+
+  limpiarPantalla();
 
   if (!nombre || !apellido) {
 
@@ -351,6 +374,20 @@ function verPuntos() {
 
     return;
   }
+
+  // 🔒 PRIMERO VALIDAR FECHA
+
+  if (estaFueraDeFecha()) {
+
+    mostrarMensaje(
+      "Fuera de fecha límite para canjear",
+      "mensaje-fecha-limite"
+    );
+
+    return;
+  }
+
+  // 🔓 SI ESTA DENTRO DE FECHA RECIEN CONSULTA PUNTOS
 
   fetch(`${API_URL}?action=obtenerPuntos&nombre=${encodeURIComponent(nombre)}&apellido=${encodeURIComponent(apellido)}`)
 
@@ -432,6 +469,20 @@ function verPuntos() {
 }
 
 function comprar() {
+
+  // 🔒 TAMBIEN BLOQUEA COMPRA FUERA DE FECHA
+
+  if (estaFueraDeFecha()) {
+
+    mostrarMensaje(
+      "Fuera de fecha límite para canjear",
+      "mensaje-fecha-limite"
+    );
+
+    limpiarPantalla();
+
+    return;
+  }
 
   const nombre = document.getElementById("nombre").value.trim();
   const apellido = document.getElementById("apellido").value.trim();
