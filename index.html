@@ -904,60 +904,81 @@
   // BOOSTERS Y CARRITO
   // --------------------------------------------------
 
-  function dibujarProductos() {
-    const grilla = document.getElementById("grillaProductos");
-    grilla.innerHTML = "";
+  
+function dibujarProductos() {
+  const grilla = document.getElementById("grillaProductos");
+  grilla.innerHTML = "";
 
-    premios.forEach(function(premio, indice) {
-      const cantidad = Number(carrito[premio.nombre] || 0);
-      const agotado = premio.stock <= 0;
+  // Orden automático: menor a mayor cantidad de puntos.
+  // Si cuestan lo mismo, conserva el orden original de la planilla.
+  const premiosOrdenados = premios
+    .map(function(premio, indiceOriginal) {
+      return {
+        premio: premio,
+        indiceOriginal: indiceOriginal
+      };
+    })
+    .sort(function(a, b) {
+      const diferencia = a.premio.precio - b.premio.precio;
 
-      const tarjeta = document.createElement("div");
-      tarjeta.className = "producto";
-
-      tarjeta.innerHTML = `
-        <img
-          src="${escaparHTML(premio.imagen)}"
-          alt="${escaparHTML(premio.nombre)}"
-          onerror="this.style.display='none'"
-        >
-        <div class="producto-info">
-          <div class="producto-nombre">
-            ${escaparHTML(premio.nombre)}
-          </div>
-          <div class="producto-precio">
-            ${formatoNumero(premio.precio)} puntos
-          </div>
-          <div class="producto-stock">
-            ${agotado ? "Sin stock" : "Stock: " + formatoNumero(premio.stock)}
-          </div>
-          <div class="producto-controles">
-            <button
-              class="btn-secundario"
-              onclick="cambiarCantidad(${indice}, -1)"
-              ${cantidad <= 0 ? "disabled" : ""}
-            >−</button>
-            <input
-              type="number"
-              min="0"
-              max="${premio.stock}"
-              value="${cantidad}"
-              id="cantidad-${indice}"
-              onchange="establecerCantidad(${indice}, this.value)"
-              ${agotado ? "disabled" : ""}
-            >
-            <button
-              class="btn-principal"
-              onclick="cambiarCantidad(${indice}, 1)"
-              ${agotado || cantidad >= premio.stock ? "disabled" : ""}
-            >+</button>
-          </div>
-        </div>
-      `;
-
-      grilla.appendChild(tarjeta);
+      return diferencia !== 0
+        ? diferencia
+        : a.indiceOriginal - b.indiceOriginal;
     });
-  }
+
+  premiosOrdenados.forEach(function(elemento) {
+    const premio = elemento.premio;
+    const indice = elemento.indiceOriginal;
+
+    const cantidad = Number(carrito[premio.nombre] || 0);
+    const agotado = premio.stock <= 0;
+
+    const tarjeta = document.createElement("div");
+    tarjeta.className = "producto";
+
+    tarjeta.innerHTML = `
+      <img
+        src="${escaparHTML(premio.imagen)}"
+        alt="${escaparHTML(premio.nombre)}"
+        onerror="this.style.display='none'"
+      >
+      <div class="producto-info">
+        <div class="producto-nombre">
+          ${escaparHTML(premio.nombre)}
+        </div>
+        <div class="producto-precio">
+          ${formatoNumero(premio.precio)} puntos
+        </div>
+        <div class="producto-stock">
+          ${agotado ? "Sin stock" : "Stock: " + formatoNumero(premio.stock)}
+        </div>
+        <div class="producto-controles">
+          <button
+            class="btn-secundario"
+            onclick="cambiarCantidad(${indice}, -1)"
+            ${cantidad <= 0 ? "disabled" : ""}
+          >−</button>
+          <input
+            type="number"
+            min="0"
+            max="${premio.stock}"
+            value="${cantidad}"
+            id="cantidad-${indice}"
+            onchange="establecerCantidad(${indice}, this.value)"
+            ${agotado ? "disabled" : ""}
+          >
+          <button
+            class="btn-principal"
+            onclick="cambiarCantidad(${indice}, 1)"
+            ${agotado || cantidad >= premio.stock ? "disabled" : ""}
+          >+</button>
+        </div>
+      </div>
+    `;
+
+    grilla.appendChild(tarjeta);
+  });
+}
 
   function cambiarCantidad(indice, cambio) {
     const premio = premios[indice];
