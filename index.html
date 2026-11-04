@@ -1,570 +1,1557 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Charmarket</title>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>Charmarket | Canje de Boosters Pokémon</title>
 
   <style>
-
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family:'Segoe UI', sans-serif;
+    :root {
+      --naranja: #f47721;
+      --naranja-oscuro: #d95c0b;
+      --fondo: #fff8f1;
+      --texto: #292522;
+      --gris: #777;
+      --borde: #f0dfd0;
+      --blanco: #fff;
+      --verde: #218838;
+      --rojo: #c62828;
     }
 
-    body{
-      padding:20px;
-      min-height:100vh;
+    * {
+      box-sizing: border-box;
+    }
 
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--texto);
       background:
-        linear-gradient(
-          rgba(255,248,240,0.88),
-          rgba(255,248,240,0.88)
-        ),
-        url('https://drive.google.com/thumbnail?id=1WdB_N_o50RRWUVba7fKzr0Tew4bJ3pKd&sz=w2000');
-
-      background-size:cover;
-      background-position:center;
-      background-repeat:no-repeat;
-      background-attachment:fixed;
+        linear-gradient(rgba(255,248,241,.90), rgba(255,248,241,.94)),
+        url("https://drive.google.com/thumbnail?id=1WdB_N_o50RRWUVba7fKzr0Tew4bJ3pKd&sz=w2000")
+        center / cover fixed;
     }
 
-    .container{
-      max-width:1100px;
-      margin:auto;
+    header {
+      background: linear-gradient(135deg, #ff922e, #ed6815);
+      padding: 24px 15px 28px;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 14px rgba(0,0,0,.15);
     }
 
-    .top{
-      text-align:center;
-      margin-bottom:25px;
+    header img {
+      width: 150px;
+      max-width: 45vw;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto 10px;
+      filter: drop-shadow(0 3px 5px rgba(0,0,0,.15));
     }
 
-    .logo{
-      width:90px;
-      height:90px;
-      border-radius:50%;
-      overflow:hidden;
-      margin:auto;
-      box-shadow:0 5px 20px rgba(0,0,0,0.15);
-      border:4px solid white;
-      background:white;
+    header h1 {
+      margin: 8px 0 5px;
+      font-size: 29px;
+      letter-spacing: .5px;
     }
 
-    .logo img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
+    header p {
+      margin: 0;
+      font-size: 15px;
     }
 
-    .sparkles{
-      color:#ff9800;
-      margin-top:8px;
-      font-size:14px;
+    main {
+      width: min(1100px, 94%);
+      margin: 25px auto 50px;
     }
 
-    .title{
-      margin-top:12px;
-      font-size:32px;
-      font-weight:bold;
-      color:#222;
+    .panel {
+      background: rgba(255,255,255,.96);
+      border: 1px solid var(--borde);
+      border-radius: 17px;
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 18px rgba(90,50,20,.08);
     }
 
-    .line{
-      width:150px;
-      height:5px;
-      background:linear-gradient(to right,#ff7b00,#ffb347);
-      margin:10px auto 0;
-      border-radius:10px;
+    h2 {
+      margin: 0 0 15px;
+      color: var(--naranja-oscuro);
+      font-size: 22px;
     }
 
-    .card{
-      background:rgba(255,255,255,0.92);
-      backdrop-filter:blur(4px);
-      border-radius:25px;
-      padding:25px;
-      box-shadow:0 10px 30px rgba(0,0,0,0.08);
-      margin-bottom:25px;
+    h3 {
+      margin: 0 0 12px;
+      font-size: 18px;
     }
 
-    .subtitle{
-      font-size:22px;
-      font-weight:bold;
-      margin-bottom:20px;
-      color:#333;
+    .subtitulo {
+      color: var(--gris);
+      margin: -7px 0 18px;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
-    .input-group{
-      display:flex;
-      align-items:center;
-      background:#fff5ea;
-      padding:15px;
-      border-radius:15px;
-      margin-bottom:15px;
-      border:2px solid transparent;
-      transition:0.3s;
+    .fila {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
-    .input-group:focus-within{
-      border-color:#ff9800;
+    .campo {
+      flex: 1 1 200px;
+      min-width: 0;
+      margin-bottom: 13px;
     }
 
-    .input-group i{
-      color:#ff9800;
-      font-size:18px;
-      margin-right:10px;
+    label {
+      display: block;
+      font-weight: bold;
+      font-size: 13px;
+      margin-bottom: 6px;
     }
 
-    .input-group input{
-      border:none;
-      background:transparent;
-      width:100%;
-      outline:none;
-      font-size:16px;
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d9d9d9;
+      border-radius: 9px;
+      font-size: 15px;
+      background: white;
+      color: var(--texto);
+      outline: none;
     }
 
-    .buttons{
-      display:flex;
-      gap:15px;
-      flex-wrap:wrap;
-      margin-top:10px;
+    input:focus, select:focus {
+      border-color: var(--naranja);
+      box-shadow: 0 0 0 2px rgba(244,119,33,.12);
     }
 
-    .btn{
-      flex:1;
-      min-width:200px;
-      border:none;
-      padding:15px;
-      border-radius:15px;
-      font-size:16px;
-      font-weight:bold;
-      cursor:pointer;
-      transition:0.3s;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 12px 19px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: .15s;
     }
 
-    .btn:hover{
-      transform:translateY(-2px);
+    button:disabled {
+      opacity: .55;
+      cursor: not-allowed;
     }
 
-    .btn-light{
-      background:#fff3e0;
-      color:#ff7b00;
+    .btn-principal {
+      color: white;
+      background: var(--naranja);
     }
 
-    .btn-main{
-      background:linear-gradient(to right,#ff7b00,#ff9800);
-      color:white;
+    .btn-principal:hover:not(:disabled) {
+      background: var(--naranja-oscuro);
+      transform: translateY(-1px);
     }
 
-    #mensaje{
-      margin-top:20px;
-      padding:15px;
-      border-radius:15px;
-      text-align:center;
-      font-weight:bold;
-      color:white;
-      display:none;
+    .btn-secundario {
+      color: var(--naranja-oscuro);
+      background: #fff0e3;
+      border: 1px solid #f6d4b8;
     }
 
-    .mensaje-puntos{
-      background:#28a745;
+    .btn-secundario:hover:not(:disabled) {
+      background: #ffe3cc;
     }
 
-    .mensaje-no-puntos{
-      background:#dc3545;
+    .btn-chico {
+      padding: 7px 11px;
+      font-size: 14px;
     }
 
-    .mensaje-error{
-      background:#6c757d;
+    .mensaje {
+      display: none;
+      padding: 12px 14px;
+      border-radius: 9px;
+      margin: 12px 0;
+      line-height: 1.45;
+      font-size: 14px;
     }
 
-    .mensaje-fecha-limite{
-      background:#ffcc00;
-      color:black;
+    .mensaje.error {
+      display: block;
+      color: #8d1717;
+      background: #ffebeb;
+      border: 1px solid #f3c3c3;
     }
 
-    #puntos{
-      margin-top:20px;
-      text-align:center;
-      font-size:24px;
-      color:#28a745;
+    .mensaje.ok {
+      display: block;
+      color: #17652a;
+      background: #e9f8ec;
+      border: 1px solid #c2e9ca;
     }
 
-    #boosters{
-      display:grid;
-      grid-template-columns:repeat(5,1fr);
-      gap:20px;
-      margin-top:30px;
+    .mensaje.info {
+      display: block;
+      color: #80500d;
+      background: #fff6df;
+      border: 1px solid #f4dfaa;
     }
 
-    .premio{
-      background:rgba(255,255,255,0.95);
-      backdrop-filter:blur(4px);
-      border-radius:20px;
-      padding:15px;
-      text-align:center;
-      box-shadow:0 5px 20px rgba(0,0,0,0.08);
-      transition:0.3s;
+    .oculto {
+      display: none !important;
     }
 
-    .premio:hover{
-      transform:translateY(-5px);
+    .puntos {
+      display: inline-block;
+      background: #fff0df;
+      color: #a94706;
+      padding: 9px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+      margin: 8px 0 15px;
     }
 
-    .premio img{
-      width:100%;
-      height:140px;
-      object-fit:contain;
-      margin-bottom:10px;
+    .grilla {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
     }
 
-    .premio b{
-      color:#222;
-      font-size:18px;
+    .producto {
+      border: 1px solid var(--borde);
+      background: white;
+      border-radius: 13px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      transition: .15s;
     }
 
-    .premio input{
-      width:70px;
-      padding:8px;
-      margin-top:10px;
-      border-radius:10px;
-      border:1px solid #ccc;
-      text-align:center;
+    .producto:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 14px rgba(0,0,0,.08);
     }
 
-    @media(max-width:768px){
+    .producto img {
+      width: 100%;
+      height: 145px;
+      object-fit: contain;
+      padding: 8px;
+      background: #fffaf5;
+    }
 
-      #boosters{
-        grid-template-columns:repeat(2,1fr);
+    .producto-info {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .producto-nombre {
+      font-size: 14px;
+      font-weight: bold;
+      min-height: 35px;
+      line-height: 1.3;
+    }
+
+    .producto-precio {
+      color: var(--naranja-oscuro);
+      font-weight: bold;
+      margin: 7px 0 4px;
+      font-size: 14px;
+    }
+
+    .producto-stock {
+      color: var(--gris);
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    .producto-controles {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: auto;
+    }
+
+    .producto-controles button {
+      width: 31px;
+      height: 31px;
+      padding: 0;
+      flex-shrink: 0;
+      font-size: 18px;
+    }
+
+    .producto-controles input {
+      padding: 6px 3px;
+      text-align: center;
+      min-width: 0;
+      height: 31px;
+      font-size: 14px;
+    }
+
+    .resumen-total {
+      margin-top: 18px;
+      padding: 15px;
+      background: #fff5eb;
+      border-radius: 11px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-weight: bold;
+    }
+
+    .total-grande {
+      color: var(--naranja-oscuro);
+      font-size: 21px;
+    }
+
+    .metodos {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .metodo {
+      border: 2px solid var(--borde);
+      border-radius: 12px;
+      padding: 15px;
+      cursor: pointer;
+      background: white;
+      transition: .15s;
+    }
+
+    .metodo:hover {
+      border-color: #f5ad75;
+    }
+
+    .metodo.seleccionado {
+      border-color: var(--naranja);
+      background: #fff5eb;
+    }
+
+    .metodo strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .metodo small {
+      color: var(--gris);
+      line-height: 1.4;
+    }
+
+    .direccion-retiro {
+      background: #fff5eb;
+      padding: 15px;
+      border-radius: 10px;
+      line-height: 1.6;
+      margin: 10px 0;
+    }
+
+    .transferencia {
+      background: #fff8e8;
+      border: 1px solid #f2dba4;
+      padding: 16px;
+      border-radius: 12px;
+      margin-top: 15px;
+      line-height: 1.7;
+      overflow-wrap: anywhere;
+    }
+
+    .transferencia strong {
+      color: #8a4a00;
+    }
+
+    .resumen-linea {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 9px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+    }
+
+    .resumen-linea:last-child {
+      border-bottom: 0;
+    }
+
+    .pasos {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .paso {
+      padding: 7px 12px;
+      border-radius: 20px;
+      background: #f1eee9;
+      color: #777;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .paso.activo {
+      background: var(--naranja);
+      color: white;
+    }
+
+    .acciones {
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .centrado {
+      text-align: center;
+    }
+
+    .pedido-exito {
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    footer {
+      text-align: center;
+      color: #777;
+      font-size: 12px;
+      padding: 20px;
+    }
+
+    @media (max-width: 850px) {
+      .grilla {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      header {
+        padding: 18px 10px 22px;
       }
 
-      .title{
-        font-size:26px;
+      header h1 {
+        font-size: 24px;
       }
 
-      .buttons{
-        flex-direction:column;
+      main {
+        width: 94%;
+        margin-top: 15px;
       }
 
-      .btn{
-        width:100%;
+      .panel {
+        padding: 16px;
       }
 
+      .grilla {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .producto img {
+        height: 125px;
+      }
+
+      .metodos {
+        grid-template-columns: 1fr;
+      }
+
+      .acciones button {
+        flex: 1;
+      }
     }
-
   </style>
 </head>
 
 <body>
 
-<div class="container">
+<header>
+  <img
+    src="https://lh3.googleusercontent.com/d/1kdUUypk6s558Qmu5ocRPCK7isohJ8kTy"
+    alt="Charmarket"
+    onerror="this.style.display='none'"
+  >
+  <h1>CHARMARKET</h1>
+  <p>Canjeá tus puntos por boosters Pokémon</p>
+</header>
 
-  <div class="top">
+<main>
 
-    <div class="logo">
-      <img src="https://lh3.googleusercontent.com/d/1kdUUypk6s558Qmu5ocRPCK7isohJ8kTy">
-    </div>
-
-    <div class="sparkles">✨ ✨ ✨</div>
-
-    <div class="title">
-      Bienvenido Charmarketero
-    </div>
-
-    <div class="line"></div>
-
+  <div class="pasos" id="barraPasos">
+    <span class="paso activo" id="paso1">1. Tus puntos</span>
+    <span class="paso" id="paso2">2. Boosters</span>
+    <span class="paso" id="paso3">3. Entrega</span>
+    <span class="paso" id="paso4">4. Confirmación</span>
   </div>
 
-  <div class="card">
+  <!-- PASO 1: INGRESO -->
+  <section class="panel" id="seccionIngreso">
+    <h2>¡Bienvenido a Charmarket!</h2>
+    <p class="subtitulo">
+      Ingresá tu nombre y apellido para consultar tus puntos disponibles.
+    </p>
 
-    <div class="subtitle">
-      Canje de Boosters
+    <div class="fila">
+      <div class="campo">
+        <label for="nombre">Nombre</label>
+        <input id="nombre" type="text" placeholder="Tu nombre" autocomplete="given-name">
+      </div>
+
+      <div class="campo">
+        <label for="apellido">Apellido</label>
+        <input id="apellido" type="text" placeholder="Tu apellido" autocomplete="family-name">
+      </div>
     </div>
 
-    <div class="input-group">
-      <i class="fa-regular fa-user"></i>
-      <input id="nombre" placeholder="Ingresa tu nombre">
+    <button class="btn-principal" id="btnConsultar" onclick="consultarPuntos()">
+      Consultar mis puntos
+    </button>
+
+    <div id="mensajeIngreso" class="mensaje"></div>
+  </section>
+
+  <!-- PASO 2: SELECCIÓN DE BOOSTERS -->
+  <section class="panel oculto" id="seccionProductos">
+    <h2>Elegí tus boosters</h2>
+    <p class="subtitulo">
+      Seleccioná las cantidades que querés canjear.
+    </p>
+
+    <div class="puntos">
+      Puntos disponibles: <span id="puntosDisponibles">0</span>
     </div>
 
-    <div class="input-group">
-      <i class="fa-regular fa-user"></i>
-      <input id="apellido" placeholder="Ingresa tu apellido">
+    <div id="grillaProductos" class="grilla"></div>
+
+    <div class="resumen-total">
+      <span>Total de puntos del carrito</span>
+      <span class="total-grande" id="totalPuntos">0 puntos</span>
     </div>
 
-    <div id="mensaje"></div>
+    <div id="mensajeProductos" class="mensaje"></div>
 
-    <div class="buttons">
-
-      <button class="btn btn-light" onclick="verPuntos()">
-        <i class="fa-regular fa-star"></i>
-        Ver puntos
+    <div class="acciones">
+      <button class="btn-secundario" onclick="volverIngreso()">
+        Volver
       </button>
-
-      <button class="btn btn-main" onclick="comprar()">
-        <i class="fa-solid fa-bag-shopping"></i>
-        Confirmar compra
+      <button class="btn-principal" onclick="irAEntrega()">
+        Siguiente
       </button>
+    </div>
+  </section>
 
+  <!-- PASO 3: ENTREGA -->
+  <section class="panel oculto" id="seccionEntrega">
+    <h2>¿Cómo querés recibir tu pedido?</h2>
+    <p class="subtitulo">
+      Podés retirar tu pedido o solicitar envío a domicilio.
+      Los envíos están disponibles a partir de 10 boosters.
+    </p>
+
+    <div class="metodos">
+      <div class="metodo" id="metodoRetiro" onclick="seleccionarMetodo('RETIRO')">
+        <strong>📍 Retiro</strong>
+        <small>Retirá tu pedido en nuestro punto de entrega.</small>
+      </div>
+
+      <div class="metodo" id="metodoMoto" onclick="seleccionarMetodo('MOTO')">
+        <strong>🛵 Moto</strong>
+        <small>Envío por moto. El costo depende de la zona y localidad.</small>
+      </div>
+
+      <div class="metodo" id="metodoCorreo" onclick="seleccionarMetodo('CORREO_ARGENTINO')">
+        <strong>📦 Correo Argentino</strong>
+        <small>Envío a cotizar. Te informaremos el costo.</small>
+      </div>
+
+      <div class="metodo" id="metodoAndreani" onclick="seleccionarMetodo('ANDREANI')">
+        <strong>🚚 Andreani</strong>
+        <small>Envío a cotizar. Te informaremos el costo.</small>
+      </div>
     </div>
 
-    <h3 id="puntos"></h3>
+    <div id="bloqueRetiro" class="oculto">
+      <div class="direccion-retiro">
+        <strong>Dirección de retiro:</strong><br>
+        Adolfo Alsina 4327, Villa Martelli, Buenos Aires, CP 1603.
+        <br><br>
+        Una vez que tu pedido esté listo, recibirás un correo electrónico.
+        Tendrás 60 días para retirarlo.
+      </div>
+    </div>
 
-  </div>
+    <div id="bloqueEnvio" class="oculto">
+      <h3>Datos para el envío</h3>
 
-  <div id="boosters"></div>
+      <div class="campo">
+        <label for="direccion">Dirección y altura</label>
+        <input id="direccion" type="text" placeholder="Calle, número, piso, departamento">
+      </div>
 
-</div>
+      <div class="fila">
+        <div class="campo">
+          <label for="codigoPostal">Código postal</label>
+          <input id="codigoPostal" type="text" placeholder="Ej. 1603">
+        </div>
+
+        <div class="campo oculto" id="campoProvincia">
+          <label for="provincia">Provincia</label>
+          <input id="provincia" type="text" placeholder="Ej. Buenos Aires">
+        </div>
+      </div>
+    </div>
+
+    <div id="bloqueLocalidad" class="oculto">
+      <div class="campo">
+        <label for="localidad">Localidad</label>
+        <select id="localidad">
+          <option value="">Seleccioná una localidad</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="bloqueZona" class="oculto">
+      <div class="campo">
+        <label for="zona">Zona de entrega</label>
+        <select id="zona" onchange="actualizarLocalidadesMoto()">
+          <option value="">Seleccioná una zona</option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label for="localidadMoto">Localidad</label>
+        <select id="localidadMoto" onchange="actualizarCostoMoto()">
+          <option value="">Primero seleccioná una zona</option>
+        </select>
+      </div>
+
+      <div class="resumen-total">
+        <span>Costo de envío por moto</span>
+        <span class="total-grande" id="costoMoto">$0</span>
+      </div>
+    </div>
+
+    <div id="avisoCotizacion" class="mensaje info oculto">
+      El envío queda pendiente de cotización. Una vez que revisemos los datos,
+      te informaremos el costo correspondiente. No realices transferencias por
+      el envío hasta recibir la cotización.
+    </div>
+
+    <h3 style="margin-top:20px;">Datos de contacto</h3>
+
+    <div class="fila">
+      <div class="campo">
+        <label for="email">Correo electrónico</label>
+        <input id="email" type="email" placeholder="tuemail@ejemplo.com" autocomplete="email">
+      </div>
+
+      <div class="campo">
+        <label for="telefono">Teléfono / WhatsApp</label>
+        <input id="telefono" type="tel" placeholder="Tu número de contacto" autocomplete="tel">
+      </div>
+    </div>
+
+    <div id="mensajeEntrega" class="mensaje"></div>
+
+    <div class="acciones">
+      <button class="btn-secundario" onclick="volverProductos()">
+        Volver
+      </button>
+      <button class="btn-principal" onclick="irAResumen()">
+        Continuar
+      </button>
+    </div>
+  </section>
+
+  <!-- PASO 4: RESUMEN -->
+  <section class="panel oculto" id="seccionResumen">
+    <h2>Revisá tu pedido</h2>
+    <p class="subtitulo">
+      Verificá que todos los datos sean correctos antes de confirmar.
+    </p>
+
+    <div id="resumenPedido"></div>
+
+    <div id="mensajeResumen" class="mensaje"></div>
+
+    <div class="acciones">
+      <button class="btn-secundario" onclick="volverEntrega()">
+        Volver
+      </button>
+      <button class="btn-principal" id="btnConfirmar" onclick="confirmarPedido()">
+        REALIZAR PEDIDO
+      </button>
+    </div>
+  </section>
+
+  <!-- RESULTADO -->
+  <section class="panel oculto centrado" id="seccionResultado">
+    <div id="contenidoResultado" class="pedido-exito"></div>
+  </section>
+
+</main>
+
+<footer>
+  Charmarket · Canje de puntos Pokémon
+</footer>
 
 <script>
+  // --------------------------------------------------
+  // CONFIGURACIÓN
+  // --------------------------------------------------
 
-const API_URL = "https://script.google.com/macros/s/AKfycbzAhEiGnwSqj0pMiG_l8M63DKQLv5DGeeEQsKolIS-ZrT9mbajgfqglYL-vY3zp_T-cYw/exec";
+  const API_URL =
+    "https://script.google.com/macros/s/AKfycbxAYfQlV5HedLTAnDTnWS0gRDS6UZZ1TiZoTk7C0yzMeUjNPydGCFgFyYX9TKjrIrthYQ/exec";
 
-let premios = [];
+  let usuarioActual = {
+    nombre: "",
+    apellido: "",
+    puntos: 0
+  };
 
-function mostrarMensaje(texto, clase) {
+  let premios = [];
+  let tarifasMoto = [];
+  let carrito = {};
+  let metodoSeleccionado = "";
 
-  const mensajeDiv = document.getElementById("mensaje");
+  // --------------------------------------------------
+  // FUNCIONES GENERALES
+  // --------------------------------------------------
 
-  mensajeDiv.innerText = texto;
-
-  mensajeDiv.className = clase;
-
-  mensajeDiv.style.display = "block";
-}
-
-function estaFueraDeFecha() {
-
-  const fechaActual = new Date();
-
-  const dia = fechaActual.getDate();
-
-  if (dia > 10) {
-    return true;
+  function mostrarMensaje(id, texto, tipo) {
+    const elemento = document.getElementById(id);
+    elemento.textContent = texto;
+    elemento.className = "mensaje " + (tipo || "info");
   }
 
-  return false;
-}
-
-function limpiarPantalla() {
-
-  document.getElementById("boosters").innerHTML = "";
-
-  document.getElementById("puntos").innerHTML = "";
-
-}
-
-function verPuntos() {
-
-  const nombre = document.getElementById("nombre").value.trim();
-  const apellido = document.getElementById("apellido").value.trim();
-
-  limpiarPantalla();
-
-  if (!nombre || !apellido) {
-
-    mostrarMensaje("Debes ingresar nombre y apellido","mensaje-error");
-
-    return;
+  function ocultarMensaje(id) {
+    const elemento = document.getElementById(id);
+    elemento.textContent = "";
+    elemento.className = "mensaje";
   }
 
-  // 🔒 PRIMERO VALIDAR FECHA
+  function mostrarSeccion(id) {
+    const secciones = [
+      "seccionIngreso",
+      "seccionProductos",
+      "seccionEntrega",
+      "seccionResumen",
+      "seccionResultado"
+    ];
 
-  if (estaFueraDeFecha()) {
-
-    mostrarMensaje(
-      "Fuera de fecha límite para canjear",
-      "mensaje-fecha-limite"
-    );
-
-    return;
-  }
-
-  // 🔓 SI ESTA DENTRO DE FECHA RECIEN CONSULTA PUNTOS
-
-  fetch(`${API_URL}?action=obtenerPuntos&nombre=${encodeURIComponent(nombre)}&apellido=${encodeURIComponent(apellido)}`)
-
-  .then(response => response.json())
-
-  .then(function(result) {
-
-    const puntos = result.puntos;
-
-    if (puntos == -1) {
-
-      mostrarMensaje("Usuario no encontrado","mensaje-error");
-
-      return;
-    }
-
-    if (puntos == 0) {
-
-      mostrarMensaje("No tienes puntos para canjear","mensaje-no-puntos");
-
-      return;
-    }
-
-    document.getElementById("puntos").innerText = "Tus puntos: " + puntos;
-
-    document.getElementById("puntos").style.display = "block";
-
-    document.getElementById("mensaje").style.display = "none";
-
-    fetch(`${API_URL}?action=obtenerDatos`)
-
-    .then(response => response.json())
-
-    .then(function(data) {
-
-      premios = data.premios;
-
-      let html = "";
-
-      for(let i = 1; i < premios.length; i++) {
-
-        html += `
-          <div class="premio">
-
-            <img src="${premios[i][3]}&t=${new Date().getTime()}">
-
-            <b>${premios[i][0]}</b><br><br>
-
-            ${premios[i][1]} pts<br>
-
-            Stock: ${premios[i][2]}<br><br>
-
-            Cantidad:<br>
-
-            <input 
-              type="number"
-              min="0"
-              max="${premios[i][2]}"
-              value="0"
-              id="b${i}"
-            >
-
-          </div>
-        `;
-      }
-
-      document.getElementById("boosters").innerHTML = html;
-
+    secciones.forEach(function(nombre) {
+      document.getElementById(nombre).classList.add("oculto");
     });
 
-  })
-
-  .catch(function(){
-
-    mostrarMensaje("Error conectando con el servidor","mensaje-error");
-
-  });
-
-}
-
-function comprar() {
-
-  // 🔒 TAMBIEN BLOQUEA COMPRA FUERA DE FECHA
-
-  if (estaFueraDeFecha()) {
-
-    mostrarMensaje(
-      "Fuera de fecha límite para canjear",
-      "mensaje-fecha-limite"
-    );
-
-    limpiarPantalla();
-
-    return;
+    document.getElementById(id).classList.remove("oculto");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  const nombre = document.getElementById("nombre").value.trim();
-  const apellido = document.getElementById("apellido").value.trim();
-
-  if (!nombre || !apellido) {
-
-    alert("Debes ingresar nombre y apellido");
-
-    return;
-  }
-
-  let carrito = [];
-
-  for(let i = 1; i < premios.length; i++) {
-
-    let cantidad = Number(document.getElementById("b"+i).value);
-
-    if(cantidad > 0){
-
-      carrito.push({
-        booster: premios[i][0],
-        cantidad: cantidad
-      });
-
+  function actualizarPaso(numero) {
+    for (let i = 1; i <= 4; i++) {
+      const elemento = document.getElementById("paso" + i);
+      elemento.classList.toggle("activo", i === numero);
     }
-
   }
 
-  if(carrito.length === 0){
-
-    alert("Debes seleccionar al menos un premio");
-
-    return;
+  function escaparHTML(valor) {
+    return String(valor == null ? "" : valor)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
   }
 
-  fetch(API_URL, {
+  function formatoNumero(valor) {
+    return Number(valor || 0).toLocaleString("es-AR");
+  }
 
-    method: "POST",
+  function normalizar(valor) {
+    return String(valor || "").trim().toLowerCase();
+  }
 
-    headers:{
-      "Content-Type":"text/plain;charset=utf-8"
-    },
+  // --------------------------------------------------
+  // CONSULTA DE PUNTOS Y DATOS
+  // --------------------------------------------------
 
-    body: JSON.stringify({
-      action: "procesarCompra",
-      nombre: nombre,
-      apellido: apellido,
-      carrito: carrito
-    })
+  async function consultarPuntos() {
+    ocultarMensaje("mensajeIngreso");
 
-  })
+    const nombre = document.getElementById("nombre").value.trim();
+    const apellido = document.getElementById("apellido").value.trim();
+    const boton = document.getElementById("btnConsultar");
 
-  .then(response => response.json())
-
-  .then(function(res){
-
-    if(res.error){
-
-      mostrarMensaje(res.error,"mensaje-error");
-
+    if (!nombre || !apellido) {
+      mostrarMensaje(
+        "mensajeIngreso",
+        "Ingresá tu nombre y apellido.",
+        "error"
+      );
       return;
     }
 
-    mostrarMensaje(res.mensaje || "Compra realizada correctamente","mensaje-puntos");
+    boton.disabled = true;
+    boton.textContent = "Consultando...";
 
-    document.getElementById("boosters").innerHTML = "";
+    try {
+      const url = API_URL +
+        "?action=obtenerPuntos" +
+        "&nombre=" + encodeURIComponent(nombre) +
+        "&apellido=" + encodeURIComponent(apellido);
 
-    document.getElementById("puntos").innerHTML = "";
+      const respuesta = await fetch(url);
+      const resultado = await respuesta.json();
 
-    document.getElementById("nombre").value = "";
+      if (resultado.error) {
+        throw new Error(resultado.error);
+      }
 
-    document.getElementById("apellido").value = "";
+      if (Number(resultado.puntos) < 0) {
+        throw new Error(
+          "No encontramos un usuario con ese nombre y apellido. Revisá los datos."
+        );
+      }
 
-  })
+      usuarioActual.nombre = nombre;
+      usuarioActual.apellido = apellido;
+      usuarioActual.puntos = Number(resultado.puntos);
 
-  .catch(function(){
+      const hoy = new Date();
+      const dia = hoy.getDate();
 
-    mostrarMensaje("Error conectando con el servidor","mensaje-error");
+      if (dia < 1 || dia > 5) {
+        mostrarMensaje(
+          "mensajeIngreso",
+          "El período de canje está habilitado únicamente del día 1 al 5 de cada mes.",
+          "error"
+        );
+        return;
+      }
 
-  });
+      await cargarDatos();
+      await cargarTarifas();
 
-}
+      document.getElementById("puntosDisponibles").textContent =
+        formatoNumero(usuarioActual.puntos);
+
+      dibujarProductos();
+      actualizarTotal();
+
+      actualizarPaso(2);
+      mostrarSeccion("seccionProductos");
+
+    } catch (error) {
+      mostrarMensaje(
+        "mensajeIngreso",
+        error.message || "No se pudo consultar la información.",
+        "error"
+      );
+    } finally {
+      boton.disabled = false;
+      boton.textContent = "Consultar mis puntos";
+    }
+  }
+
+  async function cargarDatos() {
+    const respuesta = await fetch(API_URL + "?action=obtenerDatos");
+    const datos = await respuesta.json();
+
+    if (datos.error) {
+      throw new Error(datos.error);
+    }
+
+    if (!Array.isArray(datos.premios)) {
+      throw new Error("No se pudieron cargar los boosters.");
+    }
+
+    premios = datos.premios.slice(1).map(function(fila) {
+      return {
+        nombre: String(fila[0] || "").trim(),
+        precio: Number(fila[1]) || 0,
+        stock: Number(fila[2]) || 0,
+        imagen: String(fila[3] || "")
+      };
+    }).filter(function(p) {
+      return p.nombre !== "";
+    });
+  }
+
+  async function cargarTarifas() {
+    const respuesta = await fetch(
+      API_URL + "?action=obtenerTarifasMoto"
+    );
+
+    const datos = await respuesta.json();
+
+    if (datos.error) {
+      throw new Error(datos.error);
+    }
+
+    tarifasMoto = Array.isArray(datos.tarifas)
+      ? datos.tarifas
+      : [];
+  }
+
+  // --------------------------------------------------
+  // BOOSTERS Y CARRITO
+  // --------------------------------------------------
+
+  function dibujarProductos() {
+    const grilla = document.getElementById("grillaProductos");
+    grilla.innerHTML = "";
+
+    premios.forEach(function(premio, indice) {
+      const cantidad = Number(carrito[premio.nombre] || 0);
+      const agotado = premio.stock <= 0;
+
+      const tarjeta = document.createElement("div");
+      tarjeta.className = "producto";
+
+      tarjeta.innerHTML = `
+        <img
+          src="${escaparHTML(premio.imagen)}"
+          alt="${escaparHTML(premio.nombre)}"
+          onerror="this.style.display='none'"
+        >
+        <div class="producto-info">
+          <div class="producto-nombre">
+            ${escaparHTML(premio.nombre)}
+          </div>
+          <div class="producto-precio">
+            ${formatoNumero(premio.precio)} puntos
+          </div>
+          <div class="producto-stock">
+            ${agotado ? "Sin stock" : "Stock: " + formatoNumero(premio.stock)}
+          </div>
+          <div class="producto-controles">
+            <button
+              class="btn-secundario"
+              onclick="cambiarCantidad(${indice}, -1)"
+              ${cantidad <= 0 ? "disabled" : ""}
+            >−</button>
+            <input
+              type="number"
+              min="0"
+              max="${premio.stock}"
+              value="${cantidad}"
+              id="cantidad-${indice}"
+              onchange="establecerCantidad(${indice}, this.value)"
+              ${agotado ? "disabled" : ""}
+            >
+            <button
+              class="btn-principal"
+              onclick="cambiarCantidad(${indice}, 1)"
+              ${agotado || cantidad >= premio.stock ? "disabled" : ""}
+            >+</button>
+          </div>
+        </div>
+      `;
+
+      grilla.appendChild(tarjeta);
+    });
+  }
+
+  function cambiarCantidad(indice, cambio) {
+    const premio = premios[indice];
+    const actual = Number(carrito[premio.nombre] || 0);
+    const nueva = Math.max(
+      0,
+      Math.min(premio.stock, actual + cambio)
+    );
+
+    carrito[premio.nombre] = nueva;
+    dibujarProductos();
+    actualizarTotal();
+  }
+
+  function establecerCantidad(indice, valor) {
+    const premio = premios[indice];
+    let cantidad = Math.floor(Number(valor) || 0);
+
+    cantidad = Math.max(
+      0,
+      Math.min(premio.stock, cantidad)
+    );
+
+    carrito[premio.nombre] = cantidad;
+    dibujarProductos();
+    actualizarTotal();
+  }
+
+  function obtenerItemsCarrito() {
+    return Object.keys(carrito)
+      .filter(function(nombre) {
+        return Number(carrito[nombre]) > 0;
+      })
+      .map(function(nombre) {
+        return {
+          booster: nombre,
+          cantidad: Number(carrito[nombre])
+        };
+      });
+  }
+
+  function calcularTotalPuntos() {
+    return obtenerItemsCarrito().reduce(function(total, item) {
+      const premio = premios.find(function(p) {
+        return p.nombre === item.booster;
+      });
+
+      return total + (premio ? premio.precio * item.cantidad : 0);
+    }, 0);
+  }
+
+  function calcularCantidadBoosters() {
+    return obtenerItemsCarrito().reduce(function(total, item) {
+      return total + item.cantidad;
+    }, 0);
+  }
+
+  function actualizarTotal() {
+    document.getElementById("totalPuntos").textContent =
+      formatoNumero(calcularTotalPuntos()) + " puntos";
+  }
+
+  function irAEntrega() {
+    ocultarMensaje("mensajeProductos");
+
+    const items = obtenerItemsCarrito();
+
+    if (items.length === 0) {
+      mostrarMensaje(
+        "mensajeProductos",
+        "Seleccioná al menos un booster para continuar.",
+        "error"
+      );
+      return;
+    }
+
+    if (calcularTotalPuntos() > usuarioActual.puntos) {
+      mostrarMensaje(
+        "mensajeProductos",
+        "No tenés puntos suficientes para este pedido.",
+        "error"
+      );
+      return;
+    }
+
+    actualizarPaso(3);
+    mostrarSeccion("seccionEntrega");
+  }
+
+  function volverIngreso() {
+    actualizarPaso(1);
+    mostrarSeccion("seccionIngreso");
+  }
+
+  function volverProductos() {
+    actualizarPaso(2);
+    mostrarSeccion("seccionProductos");
+  }
+
+  // --------------------------------------------------
+  // MÉTODOS DE ENTREGA
+  // --------------------------------------------------
+
+  function seleccionarMetodo(metodo) {
+    metodoSeleccionado = metodo;
+
+    [
+      "metodoRetiro",
+      "metodoMoto",
+      "metodoCorreo",
+      "metodoAndreani"
+    ].forEach(function(id) {
+      document.getElementById(id)
+        .classList.remove("seleccionado");
+    });
+
+    const ids = {
+      RETIRO: "metodoRetiro",
+      MOTO: "metodoMoto",
+      CORREO_ARGENTINO: "metodoCorreo",
+      ANDREANI: "metodoAndreani"
+    };
+
+    document.getElementById(ids[metodo])
+      .classList.add("seleccionado");
+
+    document.getElementById("bloqueRetiro")
+      .classList.toggle("oculto", metodo !== "RETIRO");
+
+    document.getElementById("bloqueEnvio")
+      .classList.toggle("oculto", metodo === "RETIRO");
+
+    document.getElementById("bloqueZona")
+      .classList.toggle("oculto", metodo !== "MOTO");
+
+    document.getElementById("bloqueLocalidad")
+      .classList.toggle(
+        "oculto",
+        metodo !== "CORREO_ARGENTINO" && metodo !== "ANDREANI"
+      );
+
+    document.getElementById("campoProvincia")
+      .classList.toggle(
+        "oculto",
+        metodo !== "CORREO_ARGENTINO" && metodo !== "ANDREANI"
+      );
+
+    document.getElementById("avisoCotizacion")
+      .classList.toggle(
+        "oculto",
+        metodo !== "CORREO_ARGENTINO" && metodo !== "ANDREANI"
+      );
+
+    if (metodo === "MOTO") {
+      cargarZonasMoto();
+    }
+  }
+
+  function cargarZonasMoto() {
+    const select = document.getElementById("zona");
+    const zonas = [...new Set(
+      tarifasMoto.map(function(t) {
+        return String(t.zona || "").trim();
+      }).filter(Boolean)
+    )];
+
+    select.innerHTML =
+      '<option value="">Seleccioná una zona</option>';
+
+    zonas.forEach(function(zona) {
+      const opcion = document.createElement("option");
+      opcion.value = zona;
+      opcion.textContent = zona;
+      select.appendChild(opcion);
+    });
+
+    actualizarLocalidadesMoto();
+  }
+
+  function actualizarLocalidadesMoto() {
+    const zona = document.getElementById("zona").value;
+    const select = document.getElementById("localidadMoto");
+
+    select.innerHTML =
+      '<option value="">Seleccioná una localidad</option>';
+
+    const localidades = tarifasMoto.filter(function(t) {
+      return normalizar(t.zona) === normalizar(zona);
+    });
+
+    localidades.forEach(function(tarifa) {
+      const opcion = document.createElement("option");
+      opcion.value = tarifa.localidad;
+      opcion.textContent = tarifa.localidad;
+      select.appendChild(opcion);
+    });
+
+    actualizarCostoMoto();
+  }
+
+  function actualizarCostoMoto() {
+    const zona = document.getElementById("zona").value;
+    const localidad = document.getElementById("localidadMoto").value;
+
+    const tarifa = tarifasMoto.find(function(t) {
+      return (
+        normalizar(t.zona) === normalizar(zona) &&
+        normalizar(t.localidad) === normalizar(localidad)
+      );
+    });
+
+    document.getElementById("costoMoto").textContent =
+      tarifa
+        ? "$" + formatoNumero(tarifa.precio)
+        : "Seleccioná localidad";
+  }
+
+  function obtenerCostoMoto() {
+    const zona = document.getElementById("zona").value;
+    const localidad = document.getElementById("localidadMoto").value;
+
+    const tarifa = tarifasMoto.find(function(t) {
+      return (
+        normalizar(t.zona) === normalizar(zona) &&
+        normalizar(t.localidad) === normalizar(localidad)
+      );
+    });
+
+    return tarifa ? Number(tarifa.precio) : null;
+  }
+
+  function validarEntrega() {
+    if (!metodoSeleccionado) {
+      throw new Error("Seleccioná cómo querés recibir tu pedido.");
+    }
+
+    const cantidad = calcularCantidadBoosters();
+
+    if (metodoSeleccionado !== "RETIRO" && cantidad < 10) {
+      throw new Error(
+        "Para solicitar envío necesitás al menos 10 boosters. Podés elegir retiro."
+      );
+    }
+
+    const email = document.getElementById("email").value.trim();
+    const telefono = document.getElementById("telefono").value.trim();
+
+    if (!email || !email.includes("@")) {
+      throw new Error("Ingresá un correo electrónico válido.");
+    }
+
+    if (!telefono) {
+      throw new Error("Ingresá tu teléfono o WhatsApp.");
+    }
+
+    if (metodoSeleccionado !== "RETIRO") {
+      const direccion = document.getElementById("direccion").value.trim();
+      const cp = document.getElementById("codigoPostal").value.trim();
+
+      if (!direccion || !cp) {
+        throw new Error("Completá la dirección y el código postal.");
+      }
+
+      if (metodoSeleccionado === "MOTO") {
+        if (!document.getElementById("zona").value) {
+          throw new Error("Seleccioná una zona.");
+        }
+
+        if (!document.getElementById("localidadMoto").value) {
+          throw new Error("Seleccioná una localidad para la moto.");
+        }
+
+        if (obtenerCostoMoto() === null) {
+          throw new Error("No encontramos el costo de esa localidad.");
+        }
+      }
+
+      if (
+        metodoSeleccionado === "CORREO_ARGENTINO" ||
+        metodoSeleccionado === "ANDREANI"
+      ) {
+        if (!document.getElementById("localidad").value.trim()) {
+          throw new Error("Ingresá la localidad.");
+        }
+
+        if (!document.getElementById("provincia").value.trim()) {
+          throw new Error("Ingresá la provincia.");
+        }
+      }
+    }
+  }
+
+  function irAResumen() {
+    ocultarMensaje("mensajeEntrega");
+
+    try {
+      validarEntrega();
+      dibujarResumen();
+      actualizarPaso(4);
+      mostrarSeccion("seccionResumen");
+
+    } catch (error) {
+      mostrarMensaje(
+        "mensajeEntrega",
+        error.message,
+        "error"
+      );
+    }
+  }
+
+  function volverEntrega() {
+    actualizarPaso(3);
+    mostrarSeccion("seccionEntrega");
+  }
+
+  // --------------------------------------------------
+  // RESUMEN DEL PEDIDO
+  // --------------------------------------------------
+
+  function dibujarResumen() {
+    const items = obtenerItemsCarrito();
+    const total = calcularTotalPuntos();
+    const cantidad = calcularCantidadBoosters();
+
+    let detalle = "";
+
+    items.forEach(function(item) {
+      const premio = premios.find(function(p) {
+        return p.nombre === item.booster;
+      });
+
+      detalle += `
+        <div class="resumen-linea">
+          <span>${item.cantidad} x ${escaparHTML(item.booster)}</span>
+          <strong>${formatoNumero(item.cantidad * premio.precio)} puntos</strong>
+        </div>
+      `;
+    });
+
+    let entrega = "";
+    let costo = "";
+
+    if (metodoSeleccionado === "RETIRO") {
+      entrega = `
+        <strong>Retiro en persona</strong>
+        <p>Adolfo Alsina 4327, Villa Martelli, Buenos Aires, CP 1603.</p>
+      `;
+      costo = "No aplica";
+
+    } else if (metodoSeleccionado === "MOTO") {
+      const precio = obtenerCostoMoto();
+
+      entrega = `
+        <strong>Envío por moto</strong>
+        <p>Zona: ${escaparHTML(document.getElementById("zona").value)}</p>
+        <p>Localidad: ${escaparHTML(document.getElementById("localidadMoto").value)}</p>
+        <p>Dirección: ${escaparHTML(document.getElementById("direccion").value)}</p>
+        <p>CP: ${escaparHTML(document.getElementById("codigoPostal").value)}</p>
+      `;
+
+      costo = "$" + formatoNumero(precio);
+
+    } else {
+      const nombreMetodo =
+        metodoSeleccionado === "CORREO_ARGENTINO"
+          ? "Correo Argentino"
+          : "Andreani";
+
+      entrega = `
+        <strong>${nombreMetodo}</strong>
+        <p>Localidad: ${escaparHTML(document.getElementById("localidad").value)}</p>
+        <p>Provincia: ${escaparHTML(document.getElementById("provincia").value)}</p>
+        <p>Dirección: ${escaparHTML(document.getElementById("direccion").value)}</p>
+        <p>CP: ${escaparHTML(document.getElementById("codigoPostal").value)}</p>
+        <p><strong>Envío a cotizar.</strong> Te informaremos el costo.</p>
+      `;
+
+      costo = "A cotizar";
+    }
+
+    const contacto = `
+      <p>Email: ${escaparHTML(document.getElementById("email").value)}</p>
+      <p>Teléfono: ${escaparHTML(document.getElementById("telefono").value)}</p>
+    `;
+
+    document.getElementById("resumenPedido").innerHTML = `
+      <h3>Boosters seleccionados</h3>
+      ${detalle}
+
+      <div class="resumen-linea">
+        <strong>Cantidad total</strong>
+        <strong>${cantidad} boosters</strong>
+      </div>
+
+      <div class="resumen-linea">
+        <strong>Total de puntos</strong>
+        <strong>${formatoNumero(total)} puntos</strong>
+      </div>
+
+      <hr style="border:0;border-top:1px solid #eee;margin:18px 0">
+
+      <h3>Entrega</h3>
+      ${entrega}
+
+      <div class="resumen-linea">
+        <strong>Costo del envío</strong>
+        <strong>${costo}</strong>
+      </div>
+
+      <hr style="border:0;border-top:1px solid #eee;margin:18px 0">
+
+      <h3>Contacto</h3>
+      ${contacto}
+    `;
+  }
+
+  // --------------------------------------------------
+  // CONFIRMAR Y ENVIAR PEDIDO AL SERVIDOR
+  // --------------------------------------------------
+
+  async function confirmarPedido() {
+    ocultarMensaje("mensajeResumen");
+
+    const boton = document.getElementById("btnConfirmar");
+
+    try {
+      validarEntrega();
+
+      if (calcularTotalPuntos() > usuarioActual.puntos) {
+        throw new Error("No tenés puntos suficientes.");
+      }
+
+      boton.disabled = true;
+      boton.textContent = "Registrando pedido...";
+
+      const datos = {
+        action: "crearPedido",
+        nombre: usuarioActual.nombre,
+        apellido: usuarioActual.apellido,
+        email: document.getElementById("email").value.trim(),
+        telefono: document.getElementById("telefono").value.trim(),
+        metodo: metodoSeleccionado,
+        carrito: obtenerItemsCarrito(),
+        direccion: "",
+        codigoPostal: "",
+        provincia: "",
+        localidad: "",
+        zona: ""
+      };
+
+      if (metodoSeleccionado !== "RETIRO") {
+        datos.direccion =
+          document.getElementById("direccion").value.trim();
+
+        datos.codigoPostal =
+          document.getElementById("codigoPostal").value.trim();
+      }
+
+      if (metodoSeleccionado === "MOTO") {
+        datos.zona = document.getElementById("zona").value;
+        datos.localidad =
+          document.getElementById("localidadMoto").value;
+      }
+
+      if (
+        metodoSeleccionado === "CORREO_ARGENTINO" ||
+        metodoSeleccionado === "ANDREANI"
+      ) {
+        datos.localidad =
+          document.getElementById("localidad").value.trim();
+
+        datos.provincia =
+          document.getElementById("provincia").value.trim();
+      }
+
+      const respuesta = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(datos)
+      });
+
+      const resultado = await respuesta.json();
+
+      if (!resultado.ok) {
+        throw new Error(
+          resultado.error || "No se pudo registrar el pedido."
+        );
+      }
+
+      mostrarResultado(resultado);
+
+    } catch (error) {
+      mostrarMensaje(
+        "mensajeResumen",
+        error.message || "Ocurrió un error al registrar el pedido.",
+        "error"
+      );
+
+    } finally {
+      boton.disabled = false;
+      boton.textContent = "REALIZAR PEDIDO";
+    }
+  }
+
+  // --------------------------------------------------
+  // RESULTADO Y DATOS DE PAGO
+  // --------------------------------------------------
+
+  function mostrarResultado(resultado) {
+    actualizarPaso(4);
+
+    const transferencia = resultado.transferencia;
+    let contenidoPago = "";
+
+    if (
+      resultado.metodo === "MOTO" &&
+      transferencia &&
+      resultado.estadoPago === "PENDIENTE DE PAGO"
+    ) {
+      contenidoPago = `
+        <div class="transferencia" style="text-align:left">
+          <h3>Datos para realizar la transferencia</h3>
+
+          <strong>Banco:</strong> ${escaparHTML(transferencia.banco)}<br>
+          <strong>Titular:</strong> ${escaparHTML(transferencia.titular)}<br>
+          <strong>Alias:</strong> ${escaparHTML(transferencia.alias)}<br>
+          <strong>CBU:</strong> ${escaparHTML(transferencia.cbu)}<br>
+          <strong>CUIT:</strong> ${escaparHTML(transferencia.cuit)}<br>
+          <strong>Costo de envío:</strong> $${formatoNumero(resultado.costoEnvio)}<br><br>
+
+          Antes de transferir, verificá que el destinatario sea el indicado.
+          <br>
+          Una vez realizada la transferencia, enviá el comprobante por WhatsApp
+          indicando tu número de pedido.
+          <br><br>
+
+          <strong>WhatsApp:</strong>
+          ${escaparHTML(transferencia.whatsapp)}
+        </div>
+      `;
+
+    } else if (
+      resultado.metodo === "CORREO_ARGENTINO" ||
+      resultado.metodo === "ANDREANI"
+    ) {
+      contenidoPago = `
+        <div class="mensaje info" style="display:block;text-align:left">
+          Tu pedido quedó registrado y el envío está pendiente de cotización.
+          Nos comunicaremos para informarte el costo del envío.
+          No realices transferencias por el envío hasta recibir esa información.
+        </div>
+      `;
+
+    } else if (resultado.metodo === "RETIRO") {
+      contenidoPago = `
+        <div class="mensaje info" style="display:block;text-align:left">
+          Tu pedido quedó registrado para retiro.
+          Cuando esté listo, te enviaremos un correo electrónico.
+          Tendrás 60 días para retirarlo.
+        </div>
+      `;
+    }
+
+    document.getElementById("contenidoResultado").innerHTML = `
+      <div style="font-size:48px;margin-bottom:10px">🎉</div>
+
+      <h2>¡Pedido registrado!</h2>
+
+      <p>
+        Gracias por elegir Charmarket.
+        Tu pedido se registró correctamente.
+      </p>
+
+      <div class="direccion-retiro">
+        <strong>Número de pedido:</strong><br>
+        <span style="font-size:24px;color:#d95c0b;font-weight:bold">
+          ${escaparHTML(resultado.idPedido)}
+        </span>
+        <br><br>
+        <strong>Boosters:</strong> ${formatoNumero(resultado.cantidad)}<br>
+        <strong>Total:</strong> ${formatoNumero(resultado.totalPuntos)} puntos
+      </div>
+
+      ${contenidoPago}
+
+      <p style="font-size:13px;color:#777">
+        Guardá tu número de pedido para cualquier consulta.
+      </p>
+    `;
+
+    mostrarSeccion("seccionResultado");
+  }
 
 </script>
 
