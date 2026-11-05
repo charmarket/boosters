@@ -493,7 +493,7 @@
 
   <!-- PASO 1: INGRESO -->
   <section class="panel" id="seccionIngreso">
-    <h2>¡Bienvenido a Charmarket!</h2>
+    <h2>Bienvenido al Sistema de Recompensa</h2>
     <p class="subtitulo">
       Ingresá tu nombre y apellido para consultar tus puntos disponibles.
     </p>
@@ -557,12 +557,12 @@
 
     <div class="metodos">
       <div class="metodo" id="metodoRetiro" onclick="seleccionarMetodo('RETIRO')">
-        <strong>📍 Retiro</strong>
+        <strong>📍 Retiro en persona</strong>
         <small>Retirá tu pedido en nuestro punto de entrega.</small>
       </div>
 
       <div class="metodo" id="metodoMoto" onclick="seleccionarMetodo('MOTO')">
-        <strong>🛵 Moto</strong>
+        <strong>🛵 Moto Envío</strong>
         <small>Envío por moto. El costo depende de la zona y localidad.</small>
       </div>
 
@@ -579,8 +579,12 @@
 
     <div id="bloqueRetiro" class="oculto">
       <div class="direccion-retiro">
-        <strong>Dirección de retiro:</strong><br>
+        <strong>Dirección del domicilio:</strong><br>
         Adolfo Alsina 4327, Villa Martelli, Buenos Aires, CP 1603.
+        <br><br>
+        <a href="https://share.google/B9jcVJEKCJPOdXIsS" target="_blank">
+          Ver ubicación en el mapa
+        </a> 
         <br><br>
         Una vez que tu pedido esté listo, recibirás un correo electrónico.
         Tendrás 60 días para retirarlo.
@@ -947,7 +951,7 @@ function dibujarProductos() {
           ${escaparHTML(premio.nombre)}
         </div>
         <div class="producto-precio">
-          ${formatoNumero(premio.precio)} puntos
+          ${formatoNumero(premio.precio)} ${Number(premio.precio) === 1 ? "punto" : "puntos"}
         </div>
         <div class="producto-stock">
           ${agotado ? "Sin stock" : "Stock: " + formatoNumero(premio.stock)}
