@@ -723,6 +723,11 @@
   let tarifasMoto = [];
   let carrito = {};
   let metodoSeleccionado = "";
+  let seccionActual = "seccionIngreso";
+let restaurandoProgreso = false;
+let resultadoFinal = null;
+
+const CLAVE_PROGRESO = "charmarket_canje_en_curso";
 
   // --------------------------------------------------
   // FUNCIONES GENERALES
@@ -748,6 +753,168 @@
       "seccionResumen",
       "seccionResultado"
     ];
+
+    seccionActual = id;
+
+    secciones.forEach(function(nombre) {
+      document.getElementById(nombre).classList.add("oculto");
+    });
+
+    document.getElementById(id).classList.remove("oculto");
+
+    if (!restaurandoProgreso) {
+      guardarProgreso();
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function guardarProgreso() {
+    if (restaurandoProgreso) return;
+
+    if (seccionActual === "seccionIngreso") {
+      sessionStorage.removeItem(CLAVE_PROGRESO);
+     return;
+    }
+
+    const progreso = {
+      seccion: seccionActual,
+      usuario: usuarioActual,
+      carrito: carrito,
+      metodo: metodoSeleccionado,
+      resultado: resultadoFinal,
+      campos: {
+        nombre: document.getElementById("nombre").value,
+        apellido: document.getElementById("apellido").value,
+        direccion: document.getElementById("direccion").value,
+        codigoPostal: document.getElementById("codigoPostal").value,
+        provincia: document.getElementById("provincia").value,
+        localidad: document.getElementById("localidad").value,
+        zona: document.getElementById("zona").value,
+        localidadMoto: document.getElementById("localidadMoto").value,
+        email: document.getElementById("email").value,
+        telefono: document.getElementById("telefono").value
+     }
+   };
+
+   try {
+     sessionStorage.setItem(
+       CLAVE_PROGRESO,
+       JSON.stringify(progreso)
+     );
+   } catch (error) {
+     console.error("No se pudo guardar el progreso:", error);
+   }
+ }
+
+ async function restaurarProgreso() {
+   const guardado = sessionStorage.getItem(CLAVE_PROGRESO);
+
+   if (!guardado) return;
+
+   try {
+     const progreso = JSON.parse(guardado);
+
+     if (
+       !progreso ||
+       !progreso.usuario ||
+       !progreso.usuario.nombre ||
+       !progreso.usuario.apellido
+     ) {
+       sessionStorage.removeItem(CLAVE_PROGRESO);
+       return;
+     }
+
+     restaurandoProgreso = true;
+
+     usuarioActual = progreso.usuario;
+     carrito = progreso.carrito || {};
+     metodoSeleccionado = "";
+
+     const campos = progreso.campos || {};
+
+     document.getElementById("nombre").value = campos.nombre || "";
+     document.getElementById("apellido").value = campos.apellido || "";
+     document.getElementById("direccion").value = campos.direccion || "";
+     document.getElementById("codigoPostal").value = campos.codigoPostal || "";
+     document.getElementById("provincia").value = campos.provincia || "";
+     document.getElementById("email").value = campos.email || "";
+     document.getElementById("telefono").value = campos.telefono || "";
+
+     await cargarDatos();
+     await cargarTarifas();
+
+     document.getElementById("puntosDisponibles").textContent =
+       formatoNumero(usuarioActual.puntos);
+
+     dibujarProductos();
+     actualizarTotal();
+
+     if (progreso.metodo) {
+       seleccionarMetodo(progreso.metodo);
+
+       document.getElementById("direccion").value = campos.direccion || "";
+       document.getElementById("codigoPostal").value = campos.codigoPostal || "";
+       document.getElementById("provincia").value = campos.provincia || "";
+       document.getElementById("email").value = campos.email || "";
+       document.getElementById("telefono").value = campos.telefono || "";
+
+       if (progreso.metodo === "MOTO") {
+         document.getElementById("zona").value = campos.zona || "";
+         actualizarLocalidadesMoto();
+
+         document.getElementById("localidadMoto").value =
+           campos.localidadMoto || "";
+
+         actualizarCostoMoto();
+       }
+
+       if (
+         progreso.metodo === "CORREO_ARGENTINO" ||
+         progreso.metodo === "ANDREANI"
+       ) {
+         document.getElementById("localidad").value =
+           campos.localidad || "";
+       }
+     }
+
+     resultadoFinal = progreso.resultado || null;
+
+     seccionActual = progreso.seccion || "seccionProductos";
+
+     if (seccionActual === "seccionResultado" && resultadoFinal) {
+       mostrarResultado(resultadoFinal);
+     } else if (
+       [
+         "seccionProductos",
+         "seccionEntrega",
+         "seccionResumen"
+       ].includes(seccionActual)
+     ) {
+       if (seccionActual === "seccionResumen") {
+         dibujarResumen();
+         actualizarPaso(4);
+       } else if (seccionActual === "seccionEntrega") {
+         actualizarPaso(3);
+       } else {
+         actualizarPaso(2);
+       }
+
+       mostrarSeccion(seccionActual);
+     } else {
+       sessionStorage.removeItem(CLAVE_PROGRESO);
+       seccionActual = "seccionIngreso";
+     }
+
+   } catch (error) {
+     console.error("No se pudo recuperar el canje:", error);
+     sessionStorage.removeItem(CLAVE_PROGRESO);
+
+     seccionActual = "seccionIngreso";
+   } finally {
+     restaurandoProgreso = false;
+   }
+ }
 
     secciones.forEach(function(nombre) {
       document.getElementById(nombre).classList.add("oculto");
