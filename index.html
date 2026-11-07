@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -915,14 +916,6 @@ const CLAVE_PROGRESO = "charmarket_canje_en_curso";
      restaurandoProgreso = false;
    }
  }
-
-    secciones.forEach(function(nombre) {
-      document.getElementById(nombre).classList.add("oculto");
-    });
-
-    document.getElementById(id).classList.remove("oculto");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
 
   function actualizarPaso(numero) {
     for (let i = 1; i <= 4; i++) {
