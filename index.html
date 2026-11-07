@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -1067,7 +1066,7 @@ const CLAVE_PROGRESO = "charmarket_canje_en_curso";
   // BOOSTERS Y CARRITO
   // --------------------------------------------------
 
-  
+
 function dibujarProductos() {
   const grilla = document.getElementById("grillaProductos");
   grilla.innerHTML = "";
@@ -1732,9 +1731,63 @@ function dibujarProductos() {
       <p style="font-size:13px;color:#777">
         Guardá tu número de pedido para cualquier consulta.
       </p>
+
+      <button
+        class="btn-principal"
+        style="margin-top:18px;"
+        onclick="volverAlInicio()"
+      >
+        Ir a Inicio
+      </button>
     `;
 
     mostrarSeccion("seccionResultado");
+  }
+
+  // --------------------------------------------------
+  // VOLVER AL INICIO PARA UN NUEVO INGRESO
+  // --------------------------------------------------
+
+  function volverAlInicio() {
+    sessionStorage.removeItem(CLAVE_PROGRESO);
+
+    usuarioActual = {
+      nombre: "",
+      apellido: "",
+      puntos: 0
+    };
+
+    carrito = {};
+    metodoSeleccionado = "";
+    resultadoFinal = null;
+    seccionActual = "seccionIngreso";
+
+    [
+      "nombre",
+      "apellido",
+      "direccion",
+      "codigoPostal",
+      "provincia",
+      "localidad",
+      "zona",
+      "localidadMoto",
+      "email",
+      "telefono"
+    ].forEach(function(id) {
+      const campo = document.getElementById(id);
+
+      if (campo) {
+        campo.value = "";
+      }
+    });
+
+    ocultarMensaje("mensajeIngreso");
+    ocultarMensaje("mensajeProductos");
+    ocultarMensaje("mensajeEntrega");
+    ocultarMensaje("mensajeResumen");
+
+    actualizarPaso(1);
+    mostrarSeccion("seccionIngreso");
   }
 
 </script>
