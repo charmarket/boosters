@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -419,6 +418,200 @@
       line-height: 1.7;
     }
 
+    /* --------------------------------------------------
+       HISTORIAL DE RECOMPENSAS
+    -------------------------------------------------- */
+
+    .boton-historial {
+      display: block;
+      width: 100%;
+      margin: 0 0 18px;
+      padding: 14px 18px;
+      font-size: 15px;
+      text-align: center;
+    }
+
+    .historial-resumen {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0 22px;
+    }
+
+    .historial-indicador {
+      background: #fff5eb;
+      border: 1px solid #f3dfce;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      min-width: 0;
+    }
+
+    .historial-indicador strong {
+      display: block;
+      color: var(--naranja-oscuro);
+      font-size: 23px;
+      margin-bottom: 5px;
+      overflow-wrap: anywhere;
+    }
+
+    .historial-indicador span {
+      color: var(--gris);
+      font-size: 13px;
+    }
+
+    .historial-seccion {
+      margin-top: 24px;
+    }
+
+    .historial-seccion h3 {
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .historial-boosters {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .historial-booster {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 1px solid var(--borde);
+      border-radius: 10px;
+      background: white;
+      font-size: 14px;
+    }
+
+    .historial-booster strong {
+      color: var(--naranja-oscuro);
+      white-space: nowrap;
+    }
+
+    .historial-pedido {
+      border: 1px solid var(--borde);
+      border-radius: 13px;
+      padding: 16px;
+      margin-bottom: 13px;
+      background: white;
+    }
+
+    .historial-pedido-cabecera {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .historial-pedido-cabecera strong {
+      font-size: 16px;
+    }
+
+    .historial-fecha {
+      display: block;
+      color: var(--gris);
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .historial-estado {
+      display: inline-block;
+      border-radius: 20px;
+      padding: 7px 11px;
+      font-size: 12px;
+      font-weight: bold;
+      background: #f1eee9;
+      color: #555;
+    }
+
+    .estado-retirado,
+    .estado-entregado {
+      background: #e7f6eb;
+      color: #17652a;
+    }
+
+    .estado-vencido {
+      background: #ffebeb;
+      color: #a51e1e;
+    }
+
+    .estado-pendiente {
+      background: #fff4d9;
+      color: #80500d;
+    }
+
+    .estado-listo {
+      background: #fff0df;
+      color: #a94706;
+    }
+
+    .estado-enviado {
+      background: #e8f1ff;
+      color: #24558e;
+    }
+
+    .estado-otro {
+      background: #f1eee9;
+      color: #555;
+    }
+
+    .historial-datos {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px 18px;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    .historial-dato {
+      min-width: 0;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .historial-dato span {
+      display: block;
+      color: var(--gris);
+      font-size: 12px;
+      margin-bottom: 2px;
+    }
+
+    .historial-detalle {
+      background: #fffaf5;
+      border-radius: 9px;
+      padding: 11px 12px;
+      margin-top: 10px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .historial-plazo {
+      background: #fff5eb;
+      border: 1px solid #f3dfce;
+      border-radius: 9px;
+      padding: 12px;
+      margin-top: 12px;
+      color: #80500d;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .historial-vacio {
+      text-align: center;
+      background: #fffaf5;
+      border: 1px dashed #e9cdb6;
+      border-radius: 12px;
+      padding: 22px 15px;
+      color: var(--gris);
+      line-height: 1.6;
+    }
+
     footer {
       text-align: center;
       color: #777;
@@ -465,6 +658,18 @@
 
       .acciones button {
         flex: 1;
+      }
+
+      .historial-resumen {
+        grid-template-columns: 1fr;
+      }
+
+      .historial-boosters {
+        grid-template-columns: 1fr;
+      }
+
+      .historial-datos {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -528,6 +733,14 @@
       Puntos disponibles: <span id="puntosDisponibles">0</span>
     </div>
 
+    <button
+      class="btn-secundario boton-historial"
+      type="button"
+      onclick="abrirHistorial()"
+    >
+      📋 Mi historial de recompensas
+    </button>
+
     <div id="grillaProductos" class="grilla"></div>
 
     <div class="resumen-total">
@@ -543,6 +756,32 @@
       </button>
       <button class="btn-principal" onclick="irAEntrega()">
         Siguiente
+      </button>
+    </div>
+  </section>
+
+  <!-- HISTORIAL DE RECOMPENSAS -->
+  <section class="panel oculto" id="seccionHistorial">
+    <h2>Mi historial de recompensas</h2>
+    <p class="subtitulo">
+      Consultá tus puntos, los boosters que obtuviste y el estado de tus pedidos.
+    </p>
+
+    <div id="contenidoHistorial">
+      <div class="historial-vacio">
+        Cargando tu historial...
+      </div>
+    </div>
+
+    <div id="mensajeHistorial" class="mensaje"></div>
+
+    <div class="acciones">
+      <button
+        class="btn-secundario"
+        type="button"
+        onclick="volverDesdeHistorial()"
+      >
+        Volver a mis boosters
       </button>
     </div>
   </section>
@@ -712,7 +951,7 @@
   // --------------------------------------------------
 
   const API_URL =
-    "https://script.google.com/macros/s/AKfycbw1fDqI1ZXGdyiMCycxKHGdrm2-2M5-yBjRAcC0w2Mm4NWJ_E7zealgwmj7CuMO2CICyw/exec";
+    "https://script.google.com/macros/s/AKfycbyxoolPkI_id3LWKZd2qbnc6W0TdobebW9o3cD9ptMCm2APDPi6nygs1cSTCufxvUki9Q/exec";
 
   let usuarioActual = {
     nombre: "",
@@ -752,7 +991,8 @@
       "seccionProductos",
       "seccionEntrega",
       "seccionResumen",
-      "seccionResultado"
+      "seccionResultado",
+      "seccionHistorial"
     ];
 
     seccionActual = id;
@@ -939,6 +1179,275 @@
 
   function normalizar(valor) {
     return String(valor || "").trim().toLowerCase();
+  }
+
+  // --------------------------------------------------
+  // HISTORIAL DE RECOMPENSAS
+  // --------------------------------------------------
+
+  async function abrirHistorial() {
+    ocultarMensaje("mensajeHistorial");
+
+    const secciones = [
+      "seccionIngreso",
+      "seccionProductos",
+      "seccionEntrega",
+      "seccionResumen",
+      "seccionResultado",
+      "seccionHistorial"
+    ];
+
+    secciones.forEach(function(id) {
+      document.getElementById(id).classList.add("oculto");
+    });
+
+    document.getElementById("seccionHistorial").classList.remove("oculto");
+
+    // No se modifica seccionActual ni el progreso del canje.
+    document.getElementById("contenidoHistorial").innerHTML = `
+      <div class="historial-vacio">
+        Consultando tu historial de recompensas...
+      </div>
+    `;
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    try {
+      const url = API_URL +
+        "?action=obtenerHistorial" +
+        "&nombre=" + encodeURIComponent(usuarioActual.nombre) +
+        "&apellido=" + encodeURIComponent(usuarioActual.apellido);
+
+      const respuesta = await fetch(url);
+      const datos = await respuesta.json();
+
+      if (!respuesta.ok || datos.error || !datos.ok) {
+        throw new Error(
+          datos.error || "No se pudo consultar tu historial."
+        );
+      }
+
+      dibujarHistorial(datos);
+
+    } catch (error) {
+      document.getElementById("contenidoHistorial").innerHTML = "";
+      mostrarMensaje(
+        "mensajeHistorial",
+        error.message || "No se pudo cargar tu historial. Intentá nuevamente.",
+        "error"
+      );
+    }
+  }
+
+  function volverDesdeHistorial() {
+    ocultarMensaje("mensajeHistorial");
+
+    document.getElementById("seccionHistorial")
+      .classList.add("oculto");
+
+    // Se vuelve a la selección sin cambiar el carrito ni el progreso.
+    document.getElementById("seccionProductos")
+      .classList.remove("oculto");
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function dibujarHistorial(datos) {
+    const usuario = datos.usuario || {};
+    const boosters = Array.isArray(datos.boosters) ? datos.boosters : [];
+    const pedidos = Array.isArray(datos.pedidos) ? datos.pedidos : [];
+
+    let html = `
+      <div class="historial-resumen">
+        <div class="historial-indicador">
+          <strong>${formatoNumero(usuario.puntosDisponibles)}</strong>
+          <span>Puntos disponibles</span>
+        </div>
+
+        <div class="historial-indicador">
+          <strong>${formatoNumero(usuario.puntosCanjeados)}</strong>
+          <span>Puntos canjeados</span>
+        </div>
+
+        <div class="historial-indicador">
+          <strong>${formatoNumero(
+            boosters.reduce(function(total, item) {
+              return total + Number(item.cantidad || 0);
+            }, 0)
+          )}</strong>
+          <span>Boosters obtenidos</span>
+        </div>
+      </div>
+    `;
+
+    html += `
+      <div class="historial-seccion">
+        <h3>👤 Datos de tu cuenta</h3>
+
+        <div class="historial-datos">
+          <div class="historial-dato">
+            <span>Nombre</span>
+            <strong>${escaparHTML(usuario.nombre)}</strong>
+          </div>
+
+          <div class="historial-dato">
+            <span>Apellido</span>
+            <strong>${escaparHTML(usuario.apellido)}</strong>
+          </div>
+        </div>
+      </div>
+    `;
+
+    html += `
+      <div class="historial-seccion">
+        <h3>🎁 Mis boosters obtenidos</h3>
+    `;
+
+    if (boosters.length) {
+      html += '<div class="historial-boosters">';
+
+      boosters.forEach(function(item) {
+        html += `
+          <div class="historial-booster">
+            <span>${escaparHTML(item.nombre)}</span>
+            <strong>${formatoNumero(item.cantidad)} unidades</strong>
+          </div>
+        `;
+      });
+
+      html += '</div>';
+    } else {
+      html += `
+        <div class="historial-vacio">
+          Todavía no tenés boosters registrados en tu historial.
+        </div>
+      `;
+    }
+
+    html += '</div>';
+
+    html += `
+      <div class="historial-seccion">
+        <h3>📦 Historial de pedidos</h3>
+    `;
+
+    if (pedidos.length) {
+      pedidos.forEach(function(pedido) {
+        const claseEstado = /^[a-z0-9_-]+$/i.test(pedido.claseEstado || "")
+          ? pedido.claseEstado
+          : "estado-otro";
+
+        let detalleBoosters = "";
+
+        if (Array.isArray(pedido.boosters) && pedido.boosters.length) {
+          detalleBoosters = pedido.boosters.map(function(item) {
+            return `
+              <div>
+                ${formatoNumero(item.cantidad)} x ${escaparHTML(item.nombre)}
+              </div>
+            `;
+          }).join("");
+        } else {
+          detalleBoosters = escaparHTML(pedido.detalle || "Sin detalle");
+        }
+
+        let informacionPlazo = "";
+
+        // El plazo se muestra exclusivamente para retiros listos.
+        // Un pedido retirado no entra en este bloque.
+        if (
+          pedido.mostrarPlazoRetiro &&
+          pedido.estadoVisual === "Listo para retirar"
+        ) {
+          let textoDias = "";
+
+          if (Number(pedido.diasRestantes) === 0) {
+            textoDias = "<strong>Hoy es el último día para retirar tu pedido.</strong>";
+          } else if (Number(pedido.diasRestantes) === 1) {
+            textoDias = "<strong>Queda 1 día para retirar tu pedido.</strong>";
+          } else {
+            textoDias = "<strong>Quedan " +
+              formatoNumero(pedido.diasRestantes) +
+              " días para retirar tu pedido.</strong>";
+          }
+
+          informacionPlazo = `
+            <div class="historial-plazo">
+              ${textoDias}
+              <br>
+              Fecha en que estuvo listo: ${escaparHTML(pedido.fechaListo || "No informada")}
+              <br>
+              Fecha límite para retirar: ${escaparHTML(pedido.fechaVencimiento || "No informada")}
+            </div>
+          `;
+        }
+
+        html += `
+          <article class="historial-pedido">
+            <div class="historial-pedido-cabecera">
+              <div>
+                <strong>Pedido ${escaparHTML(pedido.idPedido || "")}</strong>
+                <span class="historial-fecha">
+                  Fecha del pedido: ${escaparHTML(pedido.fecha || "No informada")}
+                </span>
+              </div>
+
+              <span class="historial-estado ${claseEstado}">
+                ${escaparHTML(pedido.estadoVisual || pedido.estado || "Sin estado")}
+              </span>
+            </div>
+
+            <div class="historial-detalle">
+              <strong>Boosters del pedido</strong>
+              ${detalleBoosters}
+            </div>
+
+            <div class="historial-datos">
+              <div class="historial-dato">
+                <span>Cantidad total</span>
+                <strong>${formatoNumero(pedido.cantidadBoosters)} boosters</strong>
+              </div>
+
+              <div class="historial-dato">
+                <span>Puntos utilizados</span>
+                <strong>${formatoNumero(pedido.totalPuntos)} puntos</strong>
+              </div>
+
+              <div class="historial-dato">
+                <span>Método de entrega</span>
+                <strong>${escaparHTML(pedido.metodo || "No informado")}</strong>
+              </div>
+
+              ${
+                pedido.localidad
+                  ? `
+                    <div class="historial-dato">
+                      <span>Localidad</span>
+                      <strong>${escaparHTML(pedido.localidad)}</strong>
+                    </div>
+                  `
+                  : ""
+              }
+            </div>
+
+            ${informacionPlazo}
+          </article>
+        `;
+      });
+
+    } else {
+      html += `
+        <div class="historial-vacio">
+          Todavía no registrás pedidos de canje.
+          <br>
+          Cuando realices tu primer pedido, aparecerá acá.
+        </div>
+      `;
+    }
+
+    html += '</div>';
+
+    document.getElementById("contenidoHistorial").innerHTML = html;
   }
 
   // --------------------------------------------------
@@ -1824,25 +2333,27 @@
     document.getElementById("grillaProductos").innerHTML = "";
     document.getElementById("resumenPedido").innerHTML = "";
     document.getElementById("contenidoResultado").innerHTML = "";
+    document.getElementById("contenidoHistorial").innerHTML = "";
 
     // Limpiar mensajes anteriores.
     ocultarMensaje("mensajeIngreso");
     ocultarMensaje("mensajeProductos");
     ocultarMensaje("mensajeEntrega");
     ocultarMensaje("mensajeResumen");
+    ocultarMensaje("mensajeHistorial");
 
     // Volver al primer paso y mostrar el ingreso.
     actualizarPaso(1);
     mostrarSeccion("seccionIngreso");
   }
 
+  // --------------------------------------------------
+  // INICIO
+  // --------------------------------------------------
+
+  restaurarProgreso();
+
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
