@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -583,7 +584,7 @@
         <br><br>
         <a href="https://share.google/B9jcVJEKCJPOdXIsS" target="_blank">
           Ver ubicación en el mapa
-        </a> 
+        </a>
         <br><br>
         Una vez que tu pedido esté listo, recibirás un correo electrónico.
         Tendrás 60 días para retirarlo.
@@ -702,7 +703,7 @@
 </main>
 
 <footer>
-  Charmarket 2026 
+  Charmarket 2026
 </footer>
 
 <script>
@@ -724,10 +725,10 @@
   let carrito = {};
   let metodoSeleccionado = "";
   let seccionActual = "seccionIngreso";
-let restaurandoProgreso = false;
-let resultadoFinal = null;
+  let restaurandoProgreso = false;
+  let resultadoFinal = null;
 
-const CLAVE_PROGRESO = "charmarket_canje_en_curso";
+  const CLAVE_PROGRESO = "charmarket_canje_en_curso";
 
   // --------------------------------------------------
   // FUNCIONES GENERALES
@@ -774,7 +775,7 @@ const CLAVE_PROGRESO = "charmarket_canje_en_curso";
 
     if (seccionActual === "seccionIngreso") {
       sessionStorage.removeItem(CLAVE_PROGRESO);
-     return;
+      return;
     }
 
     const progreso = {
@@ -794,127 +795,127 @@ const CLAVE_PROGRESO = "charmarket_canje_en_curso";
         localidadMoto: document.getElementById("localidadMoto").value,
         email: document.getElementById("email").value,
         telefono: document.getElementById("telefono").value
-     }
-   };
+      }
+    };
 
-   try {
-     sessionStorage.setItem(
-       CLAVE_PROGRESO,
-       JSON.stringify(progreso)
-     );
-   } catch (error) {
-     console.error("No se pudo guardar el progreso:", error);
-   }
- }
+    try {
+      sessionStorage.setItem(
+        CLAVE_PROGRESO,
+        JSON.stringify(progreso)
+      );
+    } catch (error) {
+      console.error("No se pudo guardar el progreso:", error);
+    }
+  }
 
- async function restaurarProgreso() {
-   const guardado = sessionStorage.getItem(CLAVE_PROGRESO);
+  async function restaurarProgreso() {
+    const guardado = sessionStorage.getItem(CLAVE_PROGRESO);
 
-   if (!guardado) return;
+    if (!guardado) return;
 
-   try {
-     const progreso = JSON.parse(guardado);
+    try {
+      const progreso = JSON.parse(guardado);
 
-     if (
-       !progreso ||
-       !progreso.usuario ||
-       !progreso.usuario.nombre ||
-       !progreso.usuario.apellido
-     ) {
-       sessionStorage.removeItem(CLAVE_PROGRESO);
-       return;
-     }
+      if (
+        !progreso ||
+        !progreso.usuario ||
+        !progreso.usuario.nombre ||
+        !progreso.usuario.apellido
+      ) {
+        sessionStorage.removeItem(CLAVE_PROGRESO);
+        return;
+      }
 
-     restaurandoProgreso = true;
+      restaurandoProgreso = true;
 
-     usuarioActual = progreso.usuario;
-     carrito = progreso.carrito || {};
-     metodoSeleccionado = "";
+      usuarioActual = progreso.usuario;
+      carrito = progreso.carrito || {};
+      metodoSeleccionado = "";
 
-     const campos = progreso.campos || {};
+      const campos = progreso.campos || {};
 
-     document.getElementById("nombre").value = campos.nombre || "";
-     document.getElementById("apellido").value = campos.apellido || "";
-     document.getElementById("direccion").value = campos.direccion || "";
-     document.getElementById("codigoPostal").value = campos.codigoPostal || "";
-     document.getElementById("provincia").value = campos.provincia || "";
-     document.getElementById("email").value = campos.email || "";
-     document.getElementById("telefono").value = campos.telefono || "";
+      document.getElementById("nombre").value = campos.nombre || "";
+      document.getElementById("apellido").value = campos.apellido || "";
+      document.getElementById("direccion").value = campos.direccion || "";
+      document.getElementById("codigoPostal").value = campos.codigoPostal || "";
+      document.getElementById("provincia").value = campos.provincia || "";
+      document.getElementById("email").value = campos.email || "";
+      document.getElementById("telefono").value = campos.telefono || "";
 
-     await cargarDatos();
-     await cargarTarifas();
+      await cargarDatos();
+      await cargarTarifas();
 
-     document.getElementById("puntosDisponibles").textContent =
-       formatoNumero(usuarioActual.puntos);
+      document.getElementById("puntosDisponibles").textContent =
+        formatoNumero(usuarioActual.puntos);
 
-     dibujarProductos();
-     actualizarTotal();
+      dibujarProductos();
+      actualizarTotal();
 
-     if (progreso.metodo) {
-       seleccionarMetodo(progreso.metodo);
+      if (progreso.metodo) {
+        seleccionarMetodo(progreso.metodo);
 
-       document.getElementById("direccion").value = campos.direccion || "";
-       document.getElementById("codigoPostal").value = campos.codigoPostal || "";
-       document.getElementById("provincia").value = campos.provincia || "";
-       document.getElementById("email").value = campos.email || "";
-       document.getElementById("telefono").value = campos.telefono || "";
+        document.getElementById("direccion").value = campos.direccion || "";
+        document.getElementById("codigoPostal").value = campos.codigoPostal || "";
+        document.getElementById("provincia").value = campos.provincia || "";
+        document.getElementById("email").value = campos.email || "";
+        document.getElementById("telefono").value = campos.telefono || "";
 
-       if (progreso.metodo === "MOTO") {
-         document.getElementById("zona").value = campos.zona || "";
-         actualizarLocalidadesMoto();
+        if (progreso.metodo === "MOTO") {
+          document.getElementById("zona").value = campos.zona || "";
+          actualizarLocalidadesMoto();
 
-         document.getElementById("localidadMoto").value =
-           campos.localidadMoto || "";
+          document.getElementById("localidadMoto").value =
+            campos.localidadMoto || "";
 
-         actualizarCostoMoto();
-       }
+          actualizarCostoMoto();
+        }
 
-       if (
-         progreso.metodo === "CORREO_ARGENTINO" ||
-         progreso.metodo === "ANDREANI"
-       ) {
-         document.getElementById("localidad").value =
-           campos.localidad || "";
-       }
-     }
+        if (
+          progreso.metodo === "CORREO_ARGENTINO" ||
+          progreso.metodo === "ANDREANI"
+        ) {
+          document.getElementById("localidad").value =
+            campos.localidad || "";
+        }
+      }
 
-     resultadoFinal = progreso.resultado || null;
+      resultadoFinal = progreso.resultado || null;
 
-     seccionActual = progreso.seccion || "seccionProductos";
+      seccionActual = progreso.seccion || "seccionProductos";
 
-     if (seccionActual === "seccionResultado" && resultadoFinal) {
-       mostrarResultado(resultadoFinal);
-     } else if (
-       [
-         "seccionProductos",
-         "seccionEntrega",
-         "seccionResumen"
-       ].includes(seccionActual)
-     ) {
-       if (seccionActual === "seccionResumen") {
-         dibujarResumen();
-         actualizarPaso(4);
-       } else if (seccionActual === "seccionEntrega") {
-         actualizarPaso(3);
-       } else {
-         actualizarPaso(2);
-       }
+      if (seccionActual === "seccionResultado" && resultadoFinal) {
+        mostrarResultado(resultadoFinal);
+      } else if (
+        [
+          "seccionProductos",
+          "seccionEntrega",
+          "seccionResumen"
+        ].includes(seccionActual)
+      ) {
+        if (seccionActual === "seccionResumen") {
+          dibujarResumen();
+          actualizarPaso(4);
+        } else if (seccionActual === "seccionEntrega") {
+          actualizarPaso(3);
+        } else {
+          actualizarPaso(2);
+        }
 
-       mostrarSeccion(seccionActual);
-     } else {
-       sessionStorage.removeItem(CLAVE_PROGRESO);
-       seccionActual = "seccionIngreso";
-     }
+        mostrarSeccion(seccionActual);
+      } else {
+        sessionStorage.removeItem(CLAVE_PROGRESO);
+        seccionActual = "seccionIngreso";
+      }
 
-   } catch (error) {
-     console.error("No se pudo recuperar el canje:", error);
-     sessionStorage.removeItem(CLAVE_PROGRESO);
+    } catch (error) {
+      console.error("No se pudo recuperar el canje:", error);
+      sessionStorage.removeItem(CLAVE_PROGRESO);
 
-     seccionActual = "seccionIngreso";
-   } finally {
-     restaurandoProgreso = false;
-   }
- }
+      seccionActual = "seccionIngreso";
+    } finally {
+      restaurandoProgreso = false;
+    }
+  }
 
   function actualizarPaso(numero) {
     for (let i = 1; i <= 4; i++) {
@@ -1066,81 +1067,80 @@ const CLAVE_PROGRESO = "charmarket_canje_en_curso";
   // BOOSTERS Y CARRITO
   // --------------------------------------------------
 
+  function dibujarProductos() {
+    const grilla = document.getElementById("grillaProductos");
+    grilla.innerHTML = "";
 
-function dibujarProductos() {
-  const grilla = document.getElementById("grillaProductos");
-  grilla.innerHTML = "";
+    // Orden automático: menor a mayor cantidad de puntos.
+    // Si cuestan lo mismo, conserva el orden original de la planilla.
+    const premiosOrdenados = premios
+      .map(function(premio, indiceOriginal) {
+        return {
+          premio: premio,
+          indiceOriginal: indiceOriginal
+        };
+      })
+      .sort(function(a, b) {
+        const diferencia = a.premio.precio - b.premio.precio;
 
-  // Orden automático: menor a mayor cantidad de puntos.
-  // Si cuestan lo mismo, conserva el orden original de la planilla.
-  const premiosOrdenados = premios
-    .map(function(premio, indiceOriginal) {
-      return {
-        premio: premio,
-        indiceOriginal: indiceOriginal
-      };
-    })
-    .sort(function(a, b) {
-      const diferencia = a.premio.precio - b.premio.precio;
+        return diferencia !== 0
+          ? diferencia
+          : a.indiceOriginal - b.indiceOriginal;
+      });
 
-      return diferencia !== 0
-        ? diferencia
-        : a.indiceOriginal - b.indiceOriginal;
+    premiosOrdenados.forEach(function(elemento) {
+      const premio = elemento.premio;
+      const indice = elemento.indiceOriginal;
+
+      const cantidad = Number(carrito[premio.nombre] || 0);
+      const agotado = premio.stock <= 0;
+
+      const tarjeta = document.createElement("div");
+      tarjeta.className = "producto";
+
+      tarjeta.innerHTML = `
+        <img
+          src="${escaparHTML(premio.imagen)}"
+          alt="${escaparHTML(premio.nombre)}"
+          onerror="this.style.display='none'"
+        >
+        <div class="producto-info">
+          <div class="producto-nombre">
+            ${escaparHTML(premio.nombre)}
+          </div>
+          <div class="producto-precio">
+            ${formatoNumero(premio.precio)} ${Number(premio.precio) === 1 ? "punto" : "puntos"}
+          </div>
+          <div class="producto-stock">
+            ${agotado ? "Sin stock" : "Stock: " + formatoNumero(premio.stock)}
+          </div>
+          <div class="producto-controles">
+            <button
+              class="btn-secundario"
+              onclick="cambiarCantidad(${indice}, -1)"
+              ${cantidad <= 0 ? "disabled" : ""}
+            >−</button>
+            <input
+              type="number"
+              min="0"
+              max="${premio.stock}"
+              value="${cantidad}"
+              id="cantidad-${indice}"
+              onchange="establecerCantidad(${indice}, this.value)"
+              ${agotado ? "disabled" : ""}
+            >
+            <button
+              class="btn-principal"
+              onclick="cambiarCantidad(${indice}, 1)"
+              ${agotado || cantidad >= premio.stock ? "disabled" : ""}
+            >+</button>
+          </div>
+        </div>
+      `;
+
+      grilla.appendChild(tarjeta);
     });
-
-  premiosOrdenados.forEach(function(elemento) {
-    const premio = elemento.premio;
-    const indice = elemento.indiceOriginal;
-
-    const cantidad = Number(carrito[premio.nombre] || 0);
-    const agotado = premio.stock <= 0;
-
-    const tarjeta = document.createElement("div");
-    tarjeta.className = "producto";
-
-    tarjeta.innerHTML = `
-      <img
-        src="${escaparHTML(premio.imagen)}"
-        alt="${escaparHTML(premio.nombre)}"
-        onerror="this.style.display='none'"
-      >
-      <div class="producto-info">
-        <div class="producto-nombre">
-          ${escaparHTML(premio.nombre)}
-        </div>
-        <div class="producto-precio">
-          ${formatoNumero(premio.precio)} ${Number(premio.precio) === 1 ? "punto" : "puntos"}
-        </div>
-        <div class="producto-stock">
-          ${agotado ? "Sin stock" : "Stock: " + formatoNumero(premio.stock)}
-        </div>
-        <div class="producto-controles">
-          <button
-            class="btn-secundario"
-            onclick="cambiarCantidad(${indice}, -1)"
-            ${cantidad <= 0 ? "disabled" : ""}
-          >−</button>
-          <input
-            type="number"
-            min="0"
-            max="${premio.stock}"
-            value="${cantidad}"
-            id="cantidad-${indice}"
-            onchange="establecerCantidad(${indice}, this.value)"
-            ${agotado ? "disabled" : ""}
-          >
-          <button
-            class="btn-principal"
-            onclick="cambiarCantidad(${indice}, 1)"
-            ${agotado || cantidad >= premio.stock ? "disabled" : ""}
-          >+</button>
-        </div>
-      </div>
-    `;
-
-    grilla.appendChild(tarjeta);
-  });
-}
+  }
 
   function cambiarCantidad(indice, cambio) {
     const premio = premios[indice];
@@ -1749,19 +1749,24 @@ function dibujarProductos() {
   // --------------------------------------------------
 
   function volverAlInicio() {
+    // Eliminar el progreso guardado del canje anterior.
     sessionStorage.removeItem(CLAVE_PROGRESO);
 
+    // Reiniciar los datos del usuario y del carrito.
     usuarioActual = {
       nombre: "",
       apellido: "",
       puntos: 0
     };
 
+    premios = [];
+    tarifasMoto = [];
     carrito = {};
     metodoSeleccionado = "";
     resultadoFinal = null;
     seccionActual = "seccionIngreso";
 
+    // Limpiar todos los campos de ingreso, envío y contacto.
     [
       "nombre",
       "apellido",
@@ -1781,11 +1786,52 @@ function dibujarProductos() {
       }
     });
 
+    // Quitar la selección visual de todos los métodos de entrega.
+    [
+      "metodoRetiro",
+      "metodoMoto",
+      "metodoCorreo",
+      "metodoAndreani"
+    ].forEach(function(id) {
+      document.getElementById(id).classList.remove("seleccionado");
+    });
+
+    // Ocultar todos los bloques de entrega anteriores.
+    [
+      "bloqueRetiro",
+      "bloqueEnvio",
+      "bloqueZona",
+      "bloqueLocalidad",
+      "campoProvincia",
+      "avisoCotizacion"
+    ].forEach(function(id) {
+      document.getElementById(id).classList.add("oculto");
+    });
+
+    // Reiniciar las listas desplegables de Moto.
+    document.getElementById("zona").innerHTML =
+      '<option value="">Seleccioná una zona</option>';
+
+    document.getElementById("localidadMoto").innerHTML =
+      '<option value="">Primero seleccioná una zona</option>';
+
+    // Eliminar el importe que quedó mostrado del envío anterior.
+    document.getElementById("costoMoto").textContent = "$0";
+
+    // Limpiar los datos visibles del canje anterior.
+    document.getElementById("puntosDisponibles").textContent = "0";
+    document.getElementById("totalPuntos").textContent = "0 puntos";
+    document.getElementById("grillaProductos").innerHTML = "";
+    document.getElementById("resumenPedido").innerHTML = "";
+    document.getElementById("contenidoResultado").innerHTML = "";
+
+    // Limpiar mensajes anteriores.
     ocultarMensaje("mensajeIngreso");
     ocultarMensaje("mensajeProductos");
     ocultarMensaje("mensajeEntrega");
     ocultarMensaje("mensajeResumen");
 
+    // Volver al primer paso y mostrar el ingreso.
     actualizarPaso(1);
     mostrarSeccion("seccionIngreso");
   }
@@ -1794,6 +1840,7 @@ function dibujarProductos() {
 
 </body>
 </html>
+
 
 
 
