@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -1048,113 +1049,51 @@
     }
   }
 
-  async function restaurarProgreso() {
-    const guardado = sessionStorage.getItem(CLAVE_PROGRESO);
+  // --------------------------------------------------
+  // INICIO
+  // --------------------------------------------------
 
-    if (!guardado) return;
+  function iniciarPagina() {
+    // Eliminar cualquier sesión anterior guardada.
+    sessionStorage.removeItem(CLAVE_PROGRESO);
 
-    try {
-      const progreso = JSON.parse(guardado);
+    // Reiniciar los datos del usuario.
+    usuarioActual = {
+      nombre: "",
+      apellido: "",
+      puntos: 0
+    };
 
-      if (
-        !progreso ||
-        !progreso.usuario ||
-        !progreso.usuario.nombre ||
-        !progreso.usuario.apellido
-      ) {
-        sessionStorage.removeItem(CLAVE_PROGRESO);
-        return;
-      }
+    premios = [];
+    tarifasMoto = [];
+    carrito = {};
+    metodoSeleccionado = "";
+    resultadoFinal = null;
+    seccionActual = "seccionIngreso";
 
-      restaurandoProgreso = true;
+    // Vaciar los campos de ingreso.
+    document.getElementById("nombre").value = "";
+    document.getElementById("apellido").value = "";
 
-      usuarioActual = progreso.usuario;
-      carrito = progreso.carrito || {};
-      metodoSeleccionado = "";
+    // Mostrar exclusivamente la pantalla de ingreso.
+    const secciones = [
+      "seccionIngreso",
+      "seccionProductos",
+      "seccionEntrega",
+      "seccionResumen",
+      "seccionResultado",
+      "seccionHistorial"
+    ];
 
-      const campos = progreso.campos || {};
+    secciones.forEach(function(id) {
+      document.getElementById(id).classList.add("oculto");
+    });
 
-      document.getElementById("nombre").value = campos.nombre || "";
-      document.getElementById("apellido").value = campos.apellido || "";
-      document.getElementById("direccion").value = campos.direccion || "";
-      document.getElementById("codigoPostal").value = campos.codigoPostal || "";
-      document.getElementById("provincia").value = campos.provincia || "";
-      document.getElementById("email").value = campos.email || "";
-      document.getElementById("telefono").value = campos.telefono || "";
+    document.getElementById("seccionIngreso").classList.remove("oculto");
 
-      await cargarDatos();
-      await cargarTarifas();
+    actualizarPaso(1);
 
-      document.getElementById("puntosDisponibles").textContent =
-        formatoNumero(usuarioActual.puntos);
-
-      dibujarProductos();
-      actualizarTotal();
-
-      if (progreso.metodo) {
-        seleccionarMetodo(progreso.metodo);
-
-        document.getElementById("direccion").value = campos.direccion || "";
-        document.getElementById("codigoPostal").value = campos.codigoPostal || "";
-        document.getElementById("provincia").value = campos.provincia || "";
-        document.getElementById("email").value = campos.email || "";
-        document.getElementById("telefono").value = campos.telefono || "";
-
-        if (progreso.metodo === "MOTO") {
-          document.getElementById("zona").value = campos.zona || "";
-          actualizarLocalidadesMoto();
-
-          document.getElementById("localidadMoto").value =
-            campos.localidadMoto || "";
-
-          actualizarCostoMoto();
-        }
-
-        if (
-          progreso.metodo === "CORREO_ARGENTINO" ||
-          progreso.metodo === "ANDREANI"
-        ) {
-          document.getElementById("localidad").value =
-            campos.localidad || "";
-        }
-      }
-
-      resultadoFinal = progreso.resultado || null;
-
-      seccionActual = progreso.seccion || "seccionProductos";
-
-      if (seccionActual === "seccionResultado" && resultadoFinal) {
-        mostrarResultado(resultadoFinal);
-      } else if (
-        [
-          "seccionProductos",
-          "seccionEntrega",
-          "seccionResumen"
-        ].includes(seccionActual)
-      ) {
-        if (seccionActual === "seccionResumen") {
-          dibujarResumen();
-          actualizarPaso(4);
-        } else if (seccionActual === "seccionEntrega") {
-          actualizarPaso(3);
-        } else {
-          actualizarPaso(2);
-        }
-
-        mostrarSeccion(seccionActual);
-      } else {
-        sessionStorage.removeItem(CLAVE_PROGRESO);
-        seccionActual = "seccionIngreso";
-      }
-
-    } catch (error) {
-      console.error("No se pudo recuperar el canje:", error);
-      sessionStorage.removeItem(CLAVE_PROGRESO);
-
-      seccionActual = "seccionIngreso";
-    } finally {
-      restaurandoProgreso = false;
-    }
+    window.scrollTo({ top: 0, behavior: "auto" });
   }
 
   function actualizarPaso(numero) {
@@ -1353,8 +1292,6 @@
 
         let informacionPlazo = "";
 
-        // El plazo se muestra exclusivamente para retiros listos.
-        // Un pedido retirado no entra en este bloque.
         if (
           pedido.mostrarPlazoRetiro &&
           pedido.estadoVisual === "Listo para retirar"
@@ -1580,8 +1517,6 @@
     const grilla = document.getElementById("grillaProductos");
     grilla.innerHTML = "";
 
-    // Orden automático: menor a mayor cantidad de puntos.
-    // Si cuestan lo mismo, conserva el orden original de la planilla.
     const premiosOrdenados = premios
       .map(function(premio, indiceOriginal) {
         return {
@@ -2258,10 +2193,8 @@
   // --------------------------------------------------
 
   function volverAlInicio() {
-    // Eliminar el progreso guardado del canje anterior.
     sessionStorage.removeItem(CLAVE_PROGRESO);
 
-    // Reiniciar los datos del usuario y del carrito.
     usuarioActual = {
       nombre: "",
       apellido: "",
@@ -2275,7 +2208,6 @@
     resultadoFinal = null;
     seccionActual = "seccionIngreso";
 
-    // Limpiar todos los campos de ingreso, envío y contacto.
     [
       "nombre",
       "apellido",
@@ -2295,7 +2227,6 @@
       }
     });
 
-    // Quitar la selección visual de todos los métodos de entrega.
     [
       "metodoRetiro",
       "metodoMoto",
@@ -2305,7 +2236,6 @@
       document.getElementById(id).classList.remove("seleccionado");
     });
 
-    // Ocultar todos los bloques de entrega anteriores.
     [
       "bloqueRetiro",
       "bloqueEnvio",
@@ -2317,17 +2247,14 @@
       document.getElementById(id).classList.add("oculto");
     });
 
-    // Reiniciar las listas desplegables de Moto.
     document.getElementById("zona").innerHTML =
       '<option value="">Seleccioná una zona</option>';
 
     document.getElementById("localidadMoto").innerHTML =
       '<option value="">Primero seleccioná una zona</option>';
 
-    // Eliminar el importe que quedó mostrado del envío anterior.
     document.getElementById("costoMoto").textContent = "$0";
 
-    // Limpiar los datos visibles del canje anterior.
     document.getElementById("puntosDisponibles").textContent = "0";
     document.getElementById("totalPuntos").textContent = "0 puntos";
     document.getElementById("grillaProductos").innerHTML = "";
@@ -2335,23 +2262,23 @@
     document.getElementById("contenidoResultado").innerHTML = "";
     document.getElementById("contenidoHistorial").innerHTML = "";
 
-    // Limpiar mensajes anteriores.
     ocultarMensaje("mensajeIngreso");
     ocultarMensaje("mensajeProductos");
     ocultarMensaje("mensajeEntrega");
     ocultarMensaje("mensajeResumen");
     ocultarMensaje("mensajeHistorial");
 
-    // Volver al primer paso y mostrar el ingreso.
     actualizarPaso(1);
     mostrarSeccion("seccionIngreso");
   }
 
   // --------------------------------------------------
-  // INICIO
+  // INICIO DE LA PÁGINA
   // --------------------------------------------------
 
-  restaurarProgreso();
+  // Ya no se restaura el progreso anterior al abrir o actualizar.
+  // Siempre se exige ingresar nombre, apellido y pulsar el botón.
+  iniciarPagina();
 
 </script>
 
