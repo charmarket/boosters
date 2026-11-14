@@ -1436,10 +1436,10 @@
       const hoy = new Date();
       const dia = hoy.getDate();
 
-      if (dia < 1 || dia > 10) {
+      if (dia < 1 || dia > 30) {
         mostrarMensaje(
           "mensajeIngreso",
-          "El período de canje está habilitado únicamente del día 1 al 10 de cada mes.",
+          "El período de canje está habilitado únicamente del día 1 al 30 de cada mes.",
           "error"
         );
         return;
