@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -344,6 +344,75 @@
     .metodo small {
       color: var(--gris);
       line-height: 1.4;
+    }
+
+    .andreani-opciones {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 14px 0 18px;
+    }
+
+    .andreani-opcion {
+      border: 2px solid var(--borde);
+      border-radius: 12px;
+      padding: 15px;
+      background: white;
+      color: var(--texto);
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .andreani-opcion.seleccionado {
+      border-color: var(--naranja);
+      background: #fff5eb;
+    }
+
+    .andreani-opcion strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .andreani-opcion small {
+      color: var(--gris);
+      line-height: 1.4;
+    }
+
+    .andreani-formulario {
+      border: 1px solid var(--borde);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 14px 0;
+      background: #fffdfb;
+    }
+
+    .andreani-formulario h3 {
+      color: var(--naranja-oscuro);
+      margin-bottom: 14px;
+    }
+
+    .andreani-ayuda {
+      color: var(--gris);
+      font-size: 13px;
+      line-height: 1.5;
+      margin: -5px 0 14px;
+    }
+
+    .btn-whatsapp {
+      background: #168c4a;
+      color: white;
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    .btn-whatsapp:hover:not(:disabled) {
+      background: #11743d;
+    }
+
+    @media (max-width: 560px) {
+      .andreani-opciones {
+        grid-template-columns: 1fr;
+      }
     }
 
     .direccion-retiro {
@@ -861,6 +930,157 @@
       </div>
     </div>
 
+    <!-- DATOS ESPECÍFICOS DE ANDREANI -->
+    <div id="bloqueAndreani" class="oculto">
+      <h3>¿Cómo querés recibir tu pedido por Andreani?</h3>
+      <p class="andreani-ayuda">
+        Elegí si preferís retirar el paquete en una sucursal Andreani o recibirlo en tu domicilio.
+      </p>
+
+      <div class="andreani-opciones">
+        <button
+          type="button"
+          class="andreani-opcion"
+          id="andreaniTipoSucursal"
+          onclick="seleccionarAndreaniTipo('SUCURSAL')"
+        >
+          <strong>📍 Retirar en sucursal</strong>
+          <small>Indicá la sucursal Andreani donde querés recibir tu pedido.</small>
+        </button>
+
+        <button
+          type="button"
+          class="andreani-opcion"
+          id="andreaniTipoDomicilio"
+          onclick="seleccionarAndreaniTipo('DOMICILIO')"
+        >
+          <strong>🏠 Envío a domicilio</strong>
+          <small>Completá la dirección donde querés recibir tu pedido.</small>
+        </button>
+      </div>
+
+      <div id="andreaniFormularioSucursal" class="andreani-formulario oculto">
+        <h3>Sucursal Andreani</h3>
+        <div class="fila">
+          <div class="campo">
+            <label for="andSucursalLocalidad">Localidad</label>
+            <input id="andSucursalLocalidad" type="text" placeholder="Localidad de la sucursal">
+          </div>
+          <div class="campo">
+            <label for="andSucursalProvincia">Provincia</label>
+            <input id="andSucursalProvincia" type="text" placeholder="Provincia">
+          </div>
+        </div>
+        <div class="fila">
+          <div class="campo">
+            <label for="andSucursalCP">Código postal</label>
+            <input id="andSucursalCP" type="text" placeholder="Código postal de la sucursal">
+          </div>
+          <div class="campo">
+            <label for="andSucursalDireccion">Dirección de la sucursal Andreani</label>
+            <input id="andSucursalDireccion" type="text" placeholder="Calle y altura de la sucursal">
+          </div>
+        </div>
+
+        <h3 style="margin-top:18px;">Datos del destinatario</h3>
+        <div class="fila">
+          <div class="campo">
+            <label for="andSucNombre">Nombre</label>
+            <input id="andSucNombre" type="text" placeholder="Nombre del destinatario" autocomplete="given-name">
+          </div>
+          <div class="campo">
+            <label for="andSucApellido">Apellido</label>
+            <input id="andSucApellido" type="text" placeholder="Apellido del destinatario" autocomplete="family-name">
+          </div>
+        </div>
+        <div class="fila">
+          <div class="campo">
+            <label for="andSucDni">DNI</label>
+            <input id="andSucDni" type="text" inputmode="numeric" placeholder="DNI del destinatario">
+          </div>
+          <div class="campo">
+            <label for="andSucEmail">Correo electrónico</label>
+            <input id="andSucEmail" type="email" placeholder="tuemail@ejemplo.com" autocomplete="email">
+          </div>
+          <div class="campo">
+            <label for="andSucTelefono">Teléfono / WhatsApp</label>
+            <input id="andSucTelefono" type="tel" placeholder="Tu número de contacto" autocomplete="tel">
+          </div>
+        </div>
+      </div>
+
+      <div id="andreaniFormularioDomicilio" class="andreani-formulario oculto">
+        <h3>Datos del destinatario</h3>
+        <div class="fila">
+          <div class="campo">
+            <label for="andDomNombre">Nombre y apellido</label>
+            <input id="andDomNombre" type="text" placeholder="Nombre y apellido completos" autocomplete="name">
+          </div>
+          <div class="campo">
+            <label for="andDomDni">DNI</label>
+            <input id="andDomDni" type="text" inputmode="numeric" placeholder="DNI del destinatario">
+          </div>
+        </div>
+        <div class="fila">
+          <div class="campo">
+            <label for="andDomTelefono">Teléfono / WhatsApp</label>
+            <input id="andDomTelefono" type="tel" placeholder="Tu número de contacto" autocomplete="tel">
+          </div>
+          <div class="campo">
+            <label for="andDomEmail">Correo electrónico</label>
+            <input id="andDomEmail" type="email" placeholder="tuemail@ejemplo.com" autocomplete="email">
+          </div>
+        </div>
+
+        <h3 style="margin-top:18px;">Dirección de entrega</h3>
+        <div class="fila">
+          <div class="campo">
+            <label for="andDomCalle">Calle</label>
+            <input id="andDomCalle" type="text" placeholder="Nombre de la calle">
+          </div>
+          <div class="campo">
+            <label for="andDomAltura">Altura / número</label>
+            <input id="andDomAltura" type="text" placeholder="Número">
+          </div>
+        </div>
+        <div class="fila">
+          <div class="campo">
+            <label for="andDomPiso">Piso (opcional)</label>
+            <input id="andDomPiso" type="text" placeholder="Piso">
+          </div>
+          <div class="campo">
+            <label for="andDomDepto">Departamento (opcional)</label>
+            <input id="andDomDepto" type="text" placeholder="Departamento">
+          </div>
+          <div class="campo">
+            <label for="andDomCP">Código postal</label>
+            <input id="andDomCP" type="text" placeholder="Código postal">
+          </div>
+        </div>
+        <div class="fila">
+          <div class="campo">
+            <label for="andDomLocalidad">Localidad</label>
+            <input id="andDomLocalidad" type="text" placeholder="Localidad">
+          </div>
+          <div class="campo">
+            <label for="andDomProvincia">Provincia</label>
+            <input id="andDomProvincia" type="text" placeholder="Provincia">
+          </div>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        class="btn-whatsapp"
+        id="btnEnviarAndreaniWhatsApp"
+        onclick="enviarDatosAndreaniWhatsApp()"
+      >
+        Enviar datos para el envío por WhatsApp
+      </button>
+
+      <div id="mensajeAndreani" class="mensaje"></div>
+    </div>
+
     <div id="bloqueZona" class="oculto">
       <div class="campo">
         <label for="zona">Zona de entrega</label>
@@ -888,17 +1108,19 @@
       el envío hasta recibir la cotización.
     </div>
 
-    <h3 style="margin-top:20px;">Datos de contacto</h3>
+    <div id="bloqueContactoGeneral">
+      <h3 style="margin-top:20px;">Datos de contacto</h3>
 
-    <div class="fila">
-      <div class="campo">
-        <label for="email">Correo electrónico</label>
-        <input id="email" type="email" placeholder="tuemail@ejemplo.com" autocomplete="email">
-      </div>
+      <div class="fila">
+        <div class="campo">
+          <label for="email">Correo electrónico</label>
+          <input id="email" type="email" placeholder="tuemail@ejemplo.com" autocomplete="email">
+        </div>
 
-      <div class="campo">
-        <label for="telefono">Teléfono / WhatsApp</label>
-        <input id="telefono" type="tel" placeholder="Tu número de contacto" autocomplete="tel">
+        <div class="campo">
+          <label for="telefono">Teléfono / WhatsApp</label>
+          <input id="telefono" type="tel" placeholder="Tu número de contacto" autocomplete="tel">
+        </div>
       </div>
     </div>
 
@@ -952,7 +1174,7 @@
   // --------------------------------------------------
 
   const API_URL =
-    "https://script.google.com/macros/s/AKfycby1CXpDRyrhyywgWlFg5m9gLCPgkp5L_7SVTpuvMOoqWinaLqflh8PAEspHcdqrss_c1w/exec";
+    "https://script.google.com/macros/s/AKfycbwQfu9b9kcBZbYfjC2zPykzxnjdBO4wfngrwBr23vEMiWCmi91eAtN7Cx5Zx8hOttnLgQ/exec";
 
   let usuarioActual = {
     nombre: "",
@@ -964,6 +1186,8 @@
   let tarifasMoto = [];
   let carrito = {};
   let metodoSeleccionado = "";
+  let tipoEntregaAndreani = "";
+  let andreaniDatosEnviados = false;
   let seccionActual = "seccionIngreso";
   let restaurandoProgreso = false;
   let resultadoFinal = null;
@@ -1068,6 +1292,8 @@
     tarifasMoto = [];
     carrito = {};
     metodoSeleccionado = "";
+    tipoEntregaAndreani = "";
+    andreaniDatosEnviados = false;
     resultadoFinal = null;
     seccionActual = "seccionIngreso";
 
@@ -1715,7 +1941,16 @@
       .classList.toggle("oculto", metodo !== "RETIRO");
 
     document.getElementById("bloqueEnvio")
-      .classList.toggle("oculto", metodo === "RETIRO");
+      .classList.toggle(
+        "oculto",
+        metodo === "RETIRO" || metodo === "ANDREANI"
+      );
+
+    document.getElementById("bloqueAndreani")
+      .classList.toggle("oculto", metodo !== "ANDREANI");
+
+    document.getElementById("bloqueContactoGeneral")
+      .classList.toggle("oculto", metodo === "ANDREANI");
 
     document.getElementById("bloqueZona")
       .classList.toggle("oculto", metodo !== "MOTO");
@@ -1723,13 +1958,13 @@
     document.getElementById("bloqueLocalidad")
       .classList.toggle(
         "oculto",
-        metodo !== "CORREO_ARGENTINO" && metodo !== "ANDREANI"
+        metodo !== "CORREO_ARGENTINO"
       );
 
     document.getElementById("campoProvincia")
       .classList.toggle(
         "oculto",
-        metodo !== "CORREO_ARGENTINO" && metodo !== "ANDREANI"
+        metodo !== "CORREO_ARGENTINO"
       );
 
     document.getElementById("avisoCotizacion")
@@ -1738,8 +1973,169 @@
         metodo !== "CORREO_ARGENTINO" && metodo !== "ANDREANI"
       );
 
+    if (metodo !== "ANDREANI") {
+      ocultarMensaje("mensajeAndreani");
+    }
+
     if (metodo === "MOTO") {
       cargarZonasMoto();
+    }
+  }
+
+  function seleccionarAndreaniTipo(tipo) {
+    tipoEntregaAndreani = tipo;
+    andreaniDatosEnviados = false;
+
+    document.getElementById("andreaniTipoSucursal")
+      .classList.toggle("seleccionado", tipo === "SUCURSAL");
+
+    document.getElementById("andreaniTipoDomicilio")
+      .classList.toggle("seleccionado", tipo === "DOMICILIO");
+
+    document.getElementById("andreaniFormularioSucursal")
+      .classList.toggle("oculto", tipo !== "SUCURSAL");
+
+    document.getElementById("andreaniFormularioDomicilio")
+      .classList.toggle("oculto", tipo !== "DOMICILIO");
+
+    ocultarMensaje("mensajeAndreani");
+    guardarProgreso();
+  }
+
+  function obtenerDatosAndreani() {
+    if (tipoEntregaAndreani === "SUCURSAL") {
+      return {
+        tipo: "Retiro en sucursal Andreani",
+        nombre: document.getElementById("andSucNombre").value.trim(),
+        apellido: document.getElementById("andSucApellido").value.trim(),
+        dni: document.getElementById("andSucDni").value.trim(),
+        email: document.getElementById("andSucEmail").value.trim(),
+        telefono: document.getElementById("andSucTelefono").value.trim(),
+        localidad: document.getElementById("andSucursalLocalidad").value.trim(),
+        provincia: document.getElementById("andSucursalProvincia").value.trim(),
+        codigoPostal: document.getElementById("andSucursalCP").value.trim(),
+        direccion: document.getElementById("andSucursalDireccion").value.trim()
+      };
+    }
+
+    if (tipoEntregaAndreani === "DOMICILIO") {
+      return {
+        tipo: "Envío a domicilio",
+        nombre: document.getElementById("andDomNombre").value.trim(),
+        dni: document.getElementById("andDomDni").value.trim(),
+        telefono: document.getElementById("andDomTelefono").value.trim(),
+        email: document.getElementById("andDomEmail").value.trim(),
+        calle: document.getElementById("andDomCalle").value.trim(),
+        altura: document.getElementById("andDomAltura").value.trim(),
+        piso: document.getElementById("andDomPiso").value.trim(),
+        departamento: document.getElementById("andDomDepto").value.trim(),
+        codigoPostal: document.getElementById("andDomCP").value.trim(),
+        localidad: document.getElementById("andDomLocalidad").value.trim(),
+        provincia: document.getElementById("andDomProvincia").value.trim()
+      };
+    }
+
+    return null;
+  }
+
+  function validarDatosAndreani() {
+    if (!tipoEntregaAndreani) {
+      throw new Error("Elegí retirar en sucursal o recibir el pedido a domicilio.");
+    }
+
+    const datos = obtenerDatosAndreani();
+
+    if (tipoEntregaAndreani === "SUCURSAL") {
+      if (
+        !datos.localidad || !datos.provincia ||
+        !datos.codigoPostal || !datos.direccion
+      ) {
+        throw new Error("Completá todos los datos de la sucursal Andreani.");
+      }
+      if (!datos.nombre || !datos.apellido || !datos.dni ||
+          !datos.email || !datos.email.includes("@") || !datos.telefono) {
+        throw new Error("Completá todos los datos del destinatario con un correo válido.");
+      }
+    } else {
+      if (!datos.nombre || !datos.dni || !datos.telefono ||
+          !datos.email || !datos.email.includes("@")) {
+        throw new Error("Completá los datos del destinatario con un correo válido.");
+      }
+      if (!datos.calle || !datos.altura || !datos.codigoPostal ||
+          !datos.localidad || !datos.provincia) {
+        throw new Error("Completá calle, altura, código postal, localidad y provincia.");
+      }
+    }
+
+    return datos;
+  }
+
+  function enviarDatosAndreaniWhatsApp() {
+    ocultarMensaje("mensajeAndreani");
+
+    try {
+      const datos = validarDatosAndreani();
+      const boosters = obtenerItemsCarrito().map(function(item) {
+        return item.cantidad + " x " + item.booster;
+      }).join("\\n");
+
+      let detalle = "";
+
+      if (tipoEntregaAndreani === "SUCURSAL") {
+        detalle =
+          "SUCURSAL ANDREANI\\n" +
+          "Localidad: " + datos.localidad + "\\n" +
+          "Provincia: " + datos.provincia + "\\n" +
+          "Código postal: " + datos.codigoPostal + "\\n" +
+          "Dirección de sucursal: " + datos.direccion + "\\n\\n" +
+          "DATOS DEL DESTINATARIO\\n" +
+          "Nombre y apellido: " + datos.nombre + " " + datos.apellido + "\\n" +
+          "DNI: " + datos.dni + "\\n" +
+          "Correo electrónico: " + datos.email + "\\n" +
+          "Teléfono/WhatsApp: " + datos.telefono;
+      } else {
+        detalle =
+          "ENVÍO ANDREANI A DOMICILIO\\n" +
+          "Nombre y apellido: " + datos.nombre + "\\n" +
+          "DNI: " + datos.dni + "\\n" +
+          "Teléfono/WhatsApp: " + datos.telefono + "\\n" +
+          "Correo electrónico: " + datos.email + "\\n\\n" +
+          "DIRECCIÓN DE ENTREGA\\n" +
+          "Calle: " + datos.calle + "\\n" +
+          "Altura/número: " + datos.altura + "\\n" +
+          "Piso: " + (datos.piso || "No especificado") + "\\n" +
+          "Departamento: " + (datos.departamento || "No especificado") + "\\n" +
+          "Código postal: " + datos.codigoPostal + "\\n" +
+          "Localidad: " + datos.localidad + "\\n" +
+          "Provincia: " + datos.provincia;
+      }
+
+      const mensaje =
+        "Hola, quiero coordinar un envío por Andreani desde Charmarket.\\n\\n" +
+        "Cuenta del cliente: " + usuarioActual.nombre + " " + usuarioActual.apellido + "\\n" +
+        "Modalidad: " + datos.tipo + "\\n\\n" +
+        detalle + "\\n\\n" +
+        "PEDIDO\\n" +
+        "Boosters: " + (boosters || "No especificados") + "\\n" +
+        "Cantidad total: " + calcularCantidadBoosters() + " boosters\\n" +
+        "Puntos: " + formatoNumero(calcularTotalPuntos());
+
+      const url = "https://wa.me/5491130822897?text=" +
+        encodeURIComponent(mensaje);
+
+      window.open(url, "_blank", "noopener,noreferrer");
+      andreaniDatosEnviados = true;
+
+      mostrarMensaje(
+        "mensajeAndreani",
+        "Se abrió WhatsApp con los datos preparados. Revisá el mensaje y pulsá Enviar. Después volvé a Charmarket y tocá Continuar para registrar tu pedido.",
+        "ok"
+      );
+
+      guardarProgreso();
+
+    } catch (error) {
+      mostrarMensaje("mensajeAndreani", error.message, "error");
     }
   }
 
@@ -1829,6 +2225,16 @@
       );
     }
 
+    if (metodoSeleccionado === "ANDREANI") {
+      validarDatosAndreani();
+      if (!andreaniDatosEnviados) {
+        throw new Error(
+          "Primero completá los datos y pulsá «Enviar datos para el envío por WhatsApp»."
+        );
+      }
+      return;
+    }
+
     const email = document.getElementById("email").value.trim();
     const telefono = document.getElementById("telefono").value.trim();
 
@@ -1862,10 +2268,7 @@
         }
       }
 
-      if (
-        metodoSeleccionado === "CORREO_ARGENTINO" ||
-        metodoSeleccionado === "ANDREANI"
-      ) {
+      if (metodoSeleccionado === "CORREO_ARGENTINO") {
         if (!document.getElementById("localidad").value.trim()) {
           throw new Error("Ingresá la localidad.");
         }
@@ -1909,100 +2312,200 @@
     const total = calcularTotalPuntos();
     const cantidad = calcularCantidadBoosters();
 
-    let detalle = "";
+    let html = `
+      <div class="resumen-linea">
+        <strong>Cliente</strong>
+        <span>${escaparHTML(usuarioActual.nombre)} ${escaparHTML(usuarioActual.apellido)}</span>
+      </div>
+    `;
 
     items.forEach(function(item) {
       const premio = premios.find(function(p) {
         return p.nombre === item.booster;
       });
 
-      detalle += `
+      html += `
         <div class="resumen-linea">
-          <span>${item.cantidad} x ${escaparHTML(item.booster)}</span>
-          <strong>${formatoNumero(item.cantidad * premio.precio)} puntos</strong>
+          <span>${formatoNumero(item.cantidad)} x ${escaparHTML(item.booster)}</span>
+          <strong>${formatoNumero(premio ? premio.precio * item.cantidad : 0)} puntos</strong>
         </div>
       `;
     });
 
-    let entrega = "";
-    let costo = "";
-
-    if (metodoSeleccionado === "RETIRO") {
-      entrega = `
-        <strong>Retiro en persona</strong>
-        <p>Adolfo Alsina 4327, Villa Martelli, Buenos Aires, CP 1603.</p>
-      `;
-      costo = "No aplica";
-
-    } else if (metodoSeleccionado === "MOTO") {
-      const precio = obtenerCostoMoto();
-
-      entrega = `
-        <strong>Envío por moto</strong>
-        <p>Zona: ${escaparHTML(document.getElementById("zona").value)}</p>
-        <p>Localidad: ${escaparHTML(document.getElementById("localidadMoto").value)}</p>
-        <p>Dirección: ${escaparHTML(document.getElementById("direccion").value)}</p>
-        <p>CP: ${escaparHTML(document.getElementById("codigoPostal").value)}</p>
-      `;
-
-      costo = "$" + formatoNumero(precio);
-
-    } else {
-      const nombreMetodo =
-        metodoSeleccionado === "CORREO_ARGENTINO"
-          ? "Correo Argentino"
-          : "Andreani";
-
-      entrega = `
-        <strong>${nombreMetodo}</strong>
-        <p>Localidad: ${escaparHTML(document.getElementById("localidad").value)}</p>
-        <p>Provincia: ${escaparHTML(document.getElementById("provincia").value)}</p>
-        <p>Dirección: ${escaparHTML(document.getElementById("direccion").value)}</p>
-        <p>CP: ${escaparHTML(document.getElementById("codigoPostal").value)}</p>
-        <p><strong>Envío a cotizar.</strong> Te informaremos el costo.</p>
-      `;
-
-      costo = "A cotizar";
-    }
-
-    const contacto = `
-      <p>Email: ${escaparHTML(document.getElementById("email").value)}</p>
-      <p>Teléfono: ${escaparHTML(document.getElementById("telefono").value)}</p>
-    `;
-
-    document.getElementById("resumenPedido").innerHTML = `
-      <h3>Boosters seleccionados</h3>
-      ${detalle}
-
+    html += `
       <div class="resumen-linea">
         <strong>Cantidad total</strong>
-        <strong>${cantidad} boosters</strong>
+        <strong>${formatoNumero(cantidad)} boosters</strong>
       </div>
 
       <div class="resumen-linea">
-        <strong>Total de puntos</strong>
-        <strong>${formatoNumero(total)} puntos</strong>
+        <strong>Total a descontar</strong>
+        <strong class="total-grande">${formatoNumero(total)} puntos</strong>
       </div>
-
-      <hr style="border:0;border-top:1px solid #eee;margin:18px 0">
-
-      <h3>Entrega</h3>
-      ${entrega}
 
       <div class="resumen-linea">
-        <strong>Costo del envío</strong>
-        <strong>${costo}</strong>
+        <strong>Método de entrega</strong>
+        <span>${escaparHTML(metodoSeleccionado)}</span>
       </div>
-
-      <hr style="border:0;border-top:1px solid #eee;margin:18px 0">
-
-      <h3>Contacto</h3>
-      ${contacto}
     `;
+
+    if (metodoSeleccionado === "RETIRO") {
+      html += `
+        <div class="direccion-retiro">
+          <strong>Retiro en persona</strong><br>
+          Adolfo Alsina 4327, Villa Martelli, Buenos Aires, CP 1603.
+        </div>
+      `;
+    }
+
+    if (metodoSeleccionado === "MOTO") {
+      html += `
+        <div class="resumen-linea">
+          <strong>Zona</strong>
+          <span>${escaparHTML(document.getElementById("zona").value)}</span>
+        </div>
+        <div class="resumen-linea">
+          <strong>Localidad</strong>
+          <span>${escaparHTML(document.getElementById("localidadMoto").value)}</span>
+        </div>
+        <div class="resumen-linea">
+          <strong>Dirección</strong>
+          <span>${escaparHTML(document.getElementById("direccion").value)}</span>
+        </div>
+        <div class="resumen-linea">
+          <strong>Costo de envío</strong>
+          <strong>$${formatoNumero(obtenerCostoMoto())}</strong>
+        </div>
+      `;
+    }
+
+    if (metodoSeleccionado === "CORREO_ARGENTINO") {
+      html += `
+        <div class="resumen-linea">
+          <strong>Dirección</strong>
+          <span>${escaparHTML(document.getElementById("direccion").value)}</span>
+        </div>
+        <div class="resumen-linea">
+          <strong>Localidad</strong>
+          <span>${escaparHTML(document.getElementById("localidad").value)}</span>
+        </div>
+        <div class="resumen-linea">
+          <strong>Provincia</strong>
+          <span>${escaparHTML(document.getElementById("provincia").value)}</span>
+        </div>
+        <div class="resumen-linea">
+          <strong>Código postal</strong>
+          <span>${escaparHTML(document.getElementById("codigoPostal").value)}</span>
+        </div>
+        <div class="mensaje info" style="display:block">
+          El costo del envío será informado después de cotizarlo.
+        </div>
+      `;
+    }
+
+    if (metodoSeleccionado === "ANDREANI") {
+      const and = obtenerDatosAndreani();
+
+      html += `
+        <div class="resumen-linea">
+          <strong>Modalidad Andreani</strong>
+          <span>${escaparHTML(and.tipo)}</span>
+        </div>
+      `;
+
+      if (tipoEntregaAndreani === "SUCURSAL") {
+        html += `
+          <div class="resumen-linea">
+            <strong>Sucursal</strong>
+            <span>${escaparHTML(and.direccion)}</span>
+          </div>
+          <div class="resumen-linea">
+            <strong>Localidad</strong>
+            <span>${escaparHTML(and.localidad)}</span>
+          </div>
+          <div class="resumen-linea">
+            <strong>Provincia</strong>
+            <span>${escaparHTML(and.provincia)}</span>
+          </div>
+          <div class="resumen-linea">
+            <strong>Código postal</strong>
+            <span>${escaparHTML(and.codigoPostal)}</span>
+          </div>
+          <div class="resumen-linea">
+            <strong>Destinatario</strong>
+            <span>${escaparHTML(and.nombre)} ${escaparHTML(and.apellido)}</span>
+          </div>
+        `;
+      } else {
+        html += `
+          <div class="resumen-linea">
+            <strong>Destinatario</strong>
+            <span>${escaparHTML(and.nombre)}</span>
+          </div>
+          <div class="resumen-linea">
+            <strong>Dirección</strong>
+            <span>${escaparHTML(and.calle)} ${escaparHTML(and.altura)}</span>
+          </div>
+          <div class="resumen-linea">
+            <strong>Piso / departamento</strong>
+            <span>${escaparHTML(and.piso || "-")} / ${escaparHTML(and.departamento || "-")}</span>
+          </div>
+          <div class="resumen-linea">
+            <strong>Localidad</strong>
+            <span>${escaparHTML(and.localidad)}</span>
+          </div>
+          <div class="resumen-linea">
+            <strong>Provincia</strong>
+            <span>${escaparHTML(and.provincia)}</span>
+          </div>
+          <div class="resumen-linea">
+            <strong>Código postal</strong>
+            <span>${escaparHTML(and.codigoPostal)}</span>
+          </div>
+        `;
+      }
+
+      html += `
+        <div class="mensaje info" style="display:block">
+          El costo del envío Andreani será informado después de cotizarlo.
+        </div>
+      `;
+    }
+
+    if (metodoSeleccionado !== "ANDREANI") {
+      html += `
+        <div class="resumen-linea">
+          <strong>Correo electrónico</strong>
+          <span>${escaparHTML(document.getElementById("email").value)}</span>
+        </div>
+        <div class="resumen-linea">
+          <strong>Teléfono</strong>
+          <span>${escaparHTML(document.getElementById("telefono").value)}</span>
+        </div>
+      `;
+    } else {
+      const and = obtenerDatosAndreani();
+      html += `
+        <div class="resumen-linea">
+          <strong>Correo electrónico</strong>
+          <span>${escaparHTML(and.email)}</span>
+        </div>
+        <div class="resumen-linea">
+          <strong>Teléfono</strong>
+          <span>${escaparHTML(and.telefono)}</span>
+        </div>
+        <div class="resumen-linea">
+          <strong>DNI</strong>
+          <span>${escaparHTML(and.dni)}</span>
+        </div>
+      `;
+    }
+
+    document.getElementById("resumenPedido").innerHTML = html;
   }
 
   // --------------------------------------------------
-  // CONFIRMAR Y ENVIAR PEDIDO AL SERVIDOR
+  // CONFIRMAR PEDIDO Y ENVIAR AL SERVIDOR
   // --------------------------------------------------
 
   async function confirmarPedido() {
@@ -2049,15 +2552,34 @@
           document.getElementById("localidadMoto").value;
       }
 
-      if (
-        metodoSeleccionado === "CORREO_ARGENTINO" ||
-        metodoSeleccionado === "ANDREANI"
-      ) {
+      if (metodoSeleccionado === "CORREO_ARGENTINO") {
         datos.localidad =
           document.getElementById("localidad").value.trim();
 
         datos.provincia =
           document.getElementById("provincia").value.trim();
+      }
+
+      if (metodoSeleccionado === "ANDREANI") {
+        const and = obtenerDatosAndreani();
+
+        datos.email = and.email;
+        datos.telefono = and.telefono;
+        datos.localidad = and.localidad;
+        datos.provincia = and.provincia;
+        datos.codigoPostal = and.codigoPostal;
+
+        if (tipoEntregaAndreani === "SUCURSAL") {
+          datos.direccion = "Sucursal Andreani: " + and.direccion +
+            " | Destinatario: " + and.nombre + " " + and.apellido +
+            " | DNI: " + and.dni;
+        } else {
+          datos.direccion = and.calle + " " + and.altura +
+            (and.piso ? ", Piso " + and.piso : "") +
+            (and.departamento ? ", Depto. " + and.departamento : "") +
+            " | Destinatario: " + and.nombre +
+            " | DNI: " + and.dni;
+        }
       }
 
       const respuesta = await fetch(API_URL, {
@@ -2205,6 +2727,8 @@
     tarifasMoto = [];
     carrito = {};
     metodoSeleccionado = "";
+    tipoEntregaAndreani = "";
+    andreaniDatosEnviados = false;
     resultadoFinal = null;
     seccionActual = "seccionIngreso";
 
@@ -2218,7 +2742,27 @@
       "zona",
       "localidadMoto",
       "email",
-      "telefono"
+      "telefono",
+      "andSucursalLocalidad",
+      "andSucursalProvincia",
+      "andSucursalCP",
+      "andSucursalDireccion",
+      "andSucNombre",
+      "andSucApellido",
+      "andSucDni",
+      "andSucEmail",
+      "andSucTelefono",
+      "andDomNombre",
+      "andDomDni",
+      "andDomTelefono",
+      "andDomEmail",
+      "andDomCalle",
+      "andDomAltura",
+      "andDomPiso",
+      "andDomDepto",
+      "andDomCP",
+      "andDomLocalidad",
+      "andDomProvincia"
     ].forEach(function(id) {
       const campo = document.getElementById(id);
 
@@ -2242,7 +2786,10 @@
       "bloqueZona",
       "bloqueLocalidad",
       "campoProvincia",
-      "avisoCotizacion"
+      "avisoCotizacion",
+      "bloqueAndreani",
+      "andreaniFormularioSucursal",
+      "andreaniFormularioDomicilio"
     ].forEach(function(id) {
       document.getElementById(id).classList.add("oculto");
     });
@@ -2254,6 +2801,10 @@
       '<option value="">Primero seleccioná una zona</option>';
 
     document.getElementById("costoMoto").textContent = "$0";
+    document.getElementById("bloqueContactoGeneral").classList.remove("oculto");
+    document.getElementById("andreaniTipoSucursal").classList.remove("seleccionado");
+    document.getElementById("andreaniTipoDomicilio").classList.remove("seleccionado");
+    ocultarMensaje("mensajeAndreani");
 
     document.getElementById("puntosDisponibles").textContent = "0";
     document.getElementById("totalPuntos").textContent = "0 puntos";
@@ -2271,6 +2822,14 @@
     actualizarPaso(1);
     mostrarSeccion("seccionIngreso");
   }
+
+  // Si el usuario modifica algún dato después de preparar el mensaje,
+  // deberá volver a abrir WhatsApp para enviar la información actualizada.
+  document.querySelectorAll("#bloqueAndreani input").forEach(function(campo) {
+    campo.addEventListener("input", function() {
+      andreaniDatosEnviados = false;
+    });
+  });
 
   // --------------------------------------------------
   // INICIO DE LA PÁGINA
