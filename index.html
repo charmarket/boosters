@@ -17,9 +17,7 @@
     --blanco: #ffffff;
   }
 
-  * {
-    box-sizing: border-box;
-  }
+  * { box-sizing: border-box; }
 
   body {
     margin: 0;
@@ -28,22 +26,22 @@
     color: var(--texto);
   }
 
-  /* =====================================================
-     ESTILOS GENERALES
-  ===================================================== */
-
   .contenedor {
     width: min(1180px, 94%);
     margin: 0 auto;
   }
 
-  .oculto {
-    display: none !important;
-  }
+  .oculto { display: none !important; }
 
   button {
     cursor: pointer;
     font-family: inherit;
+  }
+
+  button:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+    transform: none !important;
   }
 
   .btn-principal {
@@ -71,17 +69,13 @@
     font-weight: 700;
   }
 
-  .btn-secundario:hover {
-    background: #fff0e4;
-  }
+  .btn-secundario:hover { background: #fff0e4; }
 
-  /* =====================================================
-     ENCABEZADO
-  ===================================================== */
+  /* ENCABEZADO */
 
   header {
-    background: white;
-    border-bottom: 1px solid var(--borde);
+    background: var(--naranja);
+    border-bottom: 1px solid var(--naranja-oscuro);
     padding: 18px 0;
   }
 
@@ -101,20 +95,12 @@
 
   .marca h1 {
     margin: 0;
-    color: var(--naranja-oscuro);
+    color: #000000;
     font-size: 30px;
     letter-spacing: 1px;
   }
 
-  .marca p {
-    margin: 5px 0 0;
-    color: #555;
-    font-size: 14px;
-  }
-
-  /* =====================================================
-     INDICADOR DE PASOS
-  ===================================================== */
+  /* INDICADOR DE PASOS */
 
   .progreso {
     display: flex;
@@ -144,9 +130,7 @@
     color: #247a3d;
   }
 
-  /* =====================================================
-     PANELES
-  ===================================================== */
+  /* PANELES */
 
   .panel {
     background: white;
@@ -171,9 +155,7 @@
     line-height: 1.5;
   }
 
-  /* =====================================================
-     NUEVA PÁGINA DE INICIO
-  ===================================================== */
+  /* PÁGINA DE INICIO */
 
   .bienvenida-titulo {
     text-align: center;
@@ -206,9 +188,7 @@
     font-size: 18px;
   }
 
-  .inicio-tarjeta-contenido {
-    padding: 23px;
-  }
+  .inicio-tarjeta-contenido { padding: 23px; }
 
   .inicio-tarjeta-contenido p {
     color: #626262;
@@ -216,9 +196,7 @@
     margin-top: 0;
   }
 
-  .campo {
-    margin-bottom: 16px;
-  }
+  .campo { margin-bottom: 16px; }
 
   .campo label {
     display: block;
@@ -279,17 +257,11 @@
     padding: 5px;
   }
 
-  .enlace-reglamento:hover {
-    color: var(--naranja-oscuro);
-  }
+  .enlace-reglamento:hover { color: var(--naranja-oscuro); }
 
-  /* =====================================================
-     RANKING DE SORTEOS
-  ===================================================== */
+  /* RANKINGS */
 
-  .ranking-seccion {
-    margin: 42px auto 30px;
-  }
+  .ranking-seccion { margin: 42px auto 30px; }
 
   .ranking-titulo {
     text-align: center;
@@ -346,9 +318,7 @@
     width: 100%;
   }
 
-  /* =====================================================
-     VISOR DE REGLAMENTO
-  ===================================================== */
+  /* MODAL */
 
   .modal {
     position: fixed;
@@ -392,9 +362,7 @@
     margin-top: 8px;
   }
 
-  /* =====================================================
-     MENSAJES
-  ===================================================== */
+  /* MENSAJES */
 
   .mensaje {
     margin-top: 14px;
@@ -419,9 +387,7 @@
     color: #20538b;
   }
 
-  /* =====================================================
-     PRODUCTOS
-  ===================================================== */
+  /* PRODUCTOS */
 
   .productos-grid {
     display: grid;
@@ -470,9 +436,7 @@
     margin: 5px 0 12px;
   }
 
-  .producto-info button {
-    margin-top: auto;
-  }
+  .producto-info button { margin-top: auto; }
 
   .barra-puntos {
     display: flex;
@@ -491,9 +455,7 @@
     font-size: 20px;
   }
 
-  /* =====================================================
-     CARRITO
-  ===================================================== */
+  /* CARRITO */
 
   .carrito-item {
     display: flex;
@@ -504,9 +466,7 @@
     padding: 12px 0;
   }
 
-  .carrito-item:last-child {
-    border-bottom: 0;
-  }
+  .carrito-item:last-child { border-bottom: 0; }
 
   .carrito-controles {
     display: flex;
@@ -530,9 +490,7 @@
     margin-top: 15px;
   }
 
-  /* =====================================================
-     ENTREGA Y FORMULARIOS
-  ===================================================== */
+  /* ENTREGA */
 
   .opciones-entrega {
     display: grid;
@@ -555,9 +513,7 @@
     background: #fff5ed;
   }
 
-  .opcion-entrega input {
-    margin-top: 3px;
-  }
+  .opcion-entrega input { margin-top: 3px; }
 
   .form-grid {
     display: grid;
@@ -565,17 +521,11 @@
     gap: 15px;
   }
 
-  .form-grid .campo {
-    margin-bottom: 0;
-  }
+  .form-grid .campo { margin-bottom: 0; }
 
-  .form-grid .campo.completo {
-    grid-column: 1 / -1;
-  }
+  .form-grid .campo.completo { grid-column: 1 / -1; }
 
-  /* =====================================================
-     HISTORIAL
-  ===================================================== */
+  /* HISTORIAL */
 
   .historial-item {
     border: 1px solid var(--borde);
@@ -603,9 +553,33 @@
     font-weight: 700;
   }
 
-  /* =====================================================
-     CONFIRMACIÓN
-  ===================================================== */
+  .estado-listo {
+    background: #e5f5e9;
+    color: #247a3d;
+  }
+
+  .estado-enviado {
+    background: #eaf3ff;
+    color: #20538b;
+  }
+
+  .estado-entregado,
+  .estado-retirado {
+    background: #e5f5e9;
+    color: #247a3d;
+  }
+
+  .estado-vencido {
+    background: #fde8e8;
+    color: #a51f1f;
+  }
+
+  .estado-pendiente {
+    background: #fff0df;
+    color: #9b4b0a;
+  }
+
+  /* CONFIRMACIÓN */
 
   .confirmacion {
     text-align: center;
@@ -617,13 +591,21 @@
     margin-bottom: 12px;
   }
 
-  .confirmacion h2 {
-    color: #237b3d;
+  .confirmacion h2 { color: #237b3d; }
+
+  .datos-transferencia {
+    text-align: left;
+    background: #fff8f1;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    padding: 18px;
+    margin: 18px auto;
+    max-width: 560px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
   }
 
-  /* =====================================================
-     PIE DE PÁGINA
-  ===================================================== */
+  /* PIE */
 
   footer {
     text-align: center;
@@ -632,61 +614,39 @@
     font-size: 13px;
   }
 
-  /* =====================================================
-     RESPONSIVE
-  ===================================================== */
+  /* RESPONSIVE */
 
   @media (max-width: 760px) {
-    .encabezado {
-      gap: 10px;
-    }
+    .encabezado { gap: 10px; }
 
     .logo {
       width: 58px;
       height: 58px;
     }
 
-    .marca h1 {
-      font-size: 23px;
-    }
-
-    .marca p {
-      font-size: 12px;
-    }
+    .marca h1 { font-size: 23px; }
 
     .inicio-columnas,
     .ranking-columnas {
       grid-template-columns: 1fr;
     }
 
-    .panel {
-      padding: 18px;
-    }
+    .panel { padding: 18px; }
 
-    .titulo-seccion {
-      font-size: 25px;
-    }
+    .titulo-seccion { font-size: 25px; }
 
-    .ranking-titulo {
-      font-size: 27px;
-    }
+    .ranking-titulo { font-size: 27px; }
 
-    .progreso {
-      gap: 6px;
-    }
+    .progreso { gap: 6px; }
 
     .paso {
       font-size: 11px;
       padding: 8px 11px;
     }
 
-    .form-grid {
-      grid-template-columns: 1fr;
-    }
+    .form-grid { grid-template-columns: 1fr; }
 
-    .form-grid .campo.completo {
-      grid-column: auto;
-    }
+    .form-grid .campo.completo { grid-column: auto; }
 
     .barra-puntos {
       align-items: flex-start;
@@ -707,7 +667,6 @@
     >
     <div class="marca">
       <h1>CHARMARKET</h1>
-      <p>Canjeá tus puntos por boosters de Pokémon</p>
     </div>
   </div>
 </header>
@@ -721,9 +680,7 @@
     <span class="paso" id="paso4">4. Confirmación</span>
   </div>
 
-  <!-- ===================================================
-       INICIO / INGRESO
-  ==================================================== -->
+  <!-- INICIO / INGRESO -->
 
   <section id="seccionIngreso">
 
@@ -854,9 +811,7 @@
 
   </section>
 
-  <!-- ===================================================
-       SECCIÓN DE PRODUCTOS
-  ==================================================== -->
+  <!-- PRODUCTOS -->
 
   <section class="panel oculto" id="seccionProductos">
 
@@ -913,9 +868,7 @@
 
   </section>
 
-  <!-- ===================================================
-       SECCIÓN DE ENTREGA
-  ==================================================== -->
+  <!-- ENTREGA -->
 
   <section class="panel oculto" id="seccionEntrega">
 
@@ -1006,9 +959,7 @@
 
   </section>
 
-  <!-- ===================================================
-       SECCIÓN DE CONFIRMACIÓN
-  ==================================================== -->
+  <!-- CONFIRMACIÓN -->
 
   <section class="panel oculto" id="seccionConfirmacion">
 
@@ -1032,9 +983,7 @@
 
   </section>
 
-  <!-- ===================================================
-       HISTORIAL DE RECOMPENSAS
-  ==================================================== -->
+  <!-- HISTORIAL -->
 
   <section class="panel oculto" id="seccionHistorial">
 
@@ -1064,9 +1013,7 @@
   Charmarket 2026 · Sistema de recompensas Pokémon
 </footer>
 
-<!-- =====================================================
-     MODAL REGLAMENTO
-====================================================== -->
+<!-- MODAL REGLAMENTO -->
 
 <div id="modalReglamento" class="modal oculto" onclick="cerrarReglamento(event)">
   <div class="modal-contenido" onclick="event.stopPropagation()">
@@ -1110,7 +1057,7 @@ let pedidoEnProceso = false;
 let datosEntrega = {};
 
 /* =========================================================
-   FUNCIONES DE NAVEGACIÓN
+   NAVEGACIÓN
 ========================================================= */
 
 function mostrarSeccion(id) {
@@ -1131,7 +1078,6 @@ function mostrarSeccion(id) {
   if (destino) destino.classList.remove("oculto");
 
   actualizarPasos(id);
-
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -1176,20 +1122,31 @@ function volverAlInicio() {
   document.getElementById("mensajeEntrega").innerHTML = "";
   document.getElementById("formularioEntrega").innerHTML = "";
   document.getElementById("resumenEntrega").innerHTML = "";
+  document.getElementById("datosPedidoConfirmado").innerHTML = "";
+  document.getElementById("mensajeConfirmacion").textContent =
+    "Tu pedido fue registrado correctamente.";
+  document.getElementById("contenidoHistorial").innerHTML = "";
 
   document.querySelectorAll('input[name="metodoEntrega"]').forEach(r => {
     r.checked = false;
   });
 
+  renderizarCarrito();
   mostrarSeccion("seccionIngreso");
 }
 
 function volverAProductos() {
-  mostrarSeccion("seccionProductos");
-}
+  datosEntrega = {};
+  metodoEntregaSeleccionado = "";
 
-function volverAlInicioDesdeHistorial() {
-  mostrarSeccion("seccionIngreso");
+  document.querySelectorAll('input[name="metodoEntrega"]').forEach(r => {
+    r.checked = false;
+  });
+
+  document.getElementById("formularioEntrega").innerHTML = "";
+  document.getElementById("mensajeEntrega").innerHTML = "";
+
+  mostrarSeccion("seccionProductos");
 }
 
 /* =========================================================
@@ -1231,41 +1188,54 @@ async function consultarPuntos() {
 
   try {
     const respuesta = await llamarAPI({
-      accion: "obtenerPuntos",
+      action: "obtenerPuntos",
       nombre: nombre,
       apellido: apellido
     });
 
     if (!respuesta || respuesta.error) {
-      throw new Error(respuesta?.mensaje || respuesta?.error || "No se pudo consultar tus puntos.");
+      throw new Error(respuesta?.error || "No se pudo consultar tus puntos.");
     }
 
-    if (respuesta.encontrado === false || respuesta.existe === false) {
-      throw new Error("No encontramos un usuario con ese nombre y apellido. Verificá los datos ingresados.");
+    const puntos = Number(respuesta.puntos);
+
+    // El backend devuelve -1 cuando no encuentra una coincidencia exacta.
+    if (!Number.isFinite(puntos) || puntos < 0) {
+      throw new Error(
+        "No encontramos un usuario con ese nombre y apellido. Verificá los datos ingresados."
+      );
     }
 
     usuarioActual = {
       nombre: nombre,
-      apellido: apellido,
-      ...respuesta
+      apellido: apellido
     };
 
-    puntosActuales = Number(
-      respuesta.puntos ??
-      respuesta.puntosDisponibles ??
-      respuesta.saldo ??
-      0
-    );
+    puntosActuales = puntos;
 
-    document.getElementById("puntosDisponibles").textContent = formatearNumero(puntosActuales);
+    document.getElementById("puntosDisponibles").textContent =
+      formatearNumero(puntosActuales);
 
-    await cargarDatosProductos();
-    await cargarTarifasMoto();
+    carrito = [];
+    renderizarCarrito();
+
+    await Promise.all([
+      cargarDatosProductos(),
+      cargarTarifasMoto()
+    ]);
+
+    if (!productosDisponibles.length) {
+      throw new Error("No hay boosters disponibles para mostrar en este momento.");
+    }
 
     mostrarSeccion("seccionProductos");
 
   } catch (error) {
-    mostrarMensaje(mensaje, error.message || "No se pudo consultar tus puntos.", "error");
+    mostrarMensaje(
+      mensaje,
+      error.message || "No se pudo consultar tus puntos.",
+      "error"
+    );
   } finally {
     boton.disabled = false;
     boton.textContent = "Consultar mis puntos";
@@ -1282,30 +1252,39 @@ async function cargarDatosProductos() {
 
   try {
     const respuesta = await llamarAPI({
-      accion: "obtenerDatos"
+      action: "obtenerDatos"
     });
 
     if (!respuesta || respuesta.error) {
-      throw new Error(respuesta?.mensaje || "No se pudieron cargar los boosters.");
+      throw new Error(respuesta?.error || "No se pudieron cargar los boosters.");
     }
 
-    let lista = [];
-
-    if (Array.isArray(respuesta)) {
-      lista = respuesta;
-    } else if (Array.isArray(respuesta.premios)) {
-      lista = respuesta.premios;
-    } else if (Array.isArray(respuesta.productos)) {
-      lista = respuesta.productos;
-    } else if (Array.isArray(respuesta.datos)) {
-      lista = respuesta.datos;
+    if (!Array.isArray(respuesta.premios)) {
+      throw new Error("El servidor no devolvió la lista de premios esperada.");
     }
 
-    productosDisponibles = lista;
+    // Apps Script devuelve una matriz:
+    // fila 0 = encabezados; desde fila 1 = productos.
+    productosDisponibles = respuesta.premios
+      .slice(1)
+      .map(fila => ({
+        nombre: String(fila[0] || "").trim(),
+        puntos: Number(fila[1]) || 0,
+        stock: Number(fila[2]) || 0,
+        imagen: String(fila[3] || "").trim()
+      }))
+      .filter(producto => producto.nombre !== "");
+
     renderizarProductos();
 
   } catch (error) {
-    grid.innerHTML = `<div class="mensaje error">${escaparHTML(error.message)}</div>`;
+    productosDisponibles = [];
+    grid.innerHTML = `
+      <div class="mensaje error">
+        ${escaparHTML(error.message)}
+      </div>
+    `;
+    throw error;
   }
 }
 
@@ -1320,21 +1299,30 @@ function renderizarProductos() {
   grid.innerHTML = "";
 
   productosDisponibles.forEach((producto, indice) => {
-    const nombre = producto.nombre || producto.booster || producto.producto || "Booster";
-    const puntos = Number(producto.puntos ?? producto.costo ?? producto.precio ?? 0);
-    const stock = Number(producto.stock ?? producto.cantidad ?? 0);
-    const imagen = producto.imagen || producto.urlImagen || producto.foto || "";
+    const nombre = producto.nombre;
+    const puntos = producto.puntos;
+    const stock = producto.stock;
+    const imagen = producto.imagen;
 
     const tarjeta = document.createElement("div");
     tarjeta.className = "producto";
 
     tarjeta.innerHTML = `
-      <img src="${escaparAtributo(imagen)}" alt="${escaparAtributo(nombre)}" loading="lazy">
+      <img
+        src="${escaparAtributo(imagen)}"
+        alt="${escaparAtributo(nombre)}"
+        loading="lazy"
+      >
       <div class="producto-info">
         <h3>${escaparHTML(nombre)}</h3>
         <div class="producto-precio">${formatearNumero(puntos)} puntos</div>
         <div class="producto-stock">Stock disponible: ${formatearNumero(stock)}</div>
-        <button class="btn-principal" type="button" onclick="agregarAlCarrito(${indice})" ${stock <= 0 ? "disabled" : ""}>
+        <button
+          class="btn-principal"
+          type="button"
+          onclick="agregarAlCarrito(${indice})"
+          ${stock <= 0 ? "disabled" : ""}
+        >
           ${stock <= 0 ? "Sin stock" : "Agregar"}
         </button>
       </div>
@@ -1352,9 +1340,9 @@ function agregarAlCarrito(indice) {
   const producto = productosDisponibles[indice];
   if (!producto) return;
 
-  const nombre = producto.nombre || producto.booster || producto.producto || "Booster";
-  const puntos = Number(producto.puntos ?? producto.costo ?? producto.precio ?? 0);
-  const stock = Number(producto.stock ?? producto.cantidad ?? 0);
+  const nombre = producto.nombre;
+  const puntos = producto.puntos;
+  const stock = producto.stock;
 
   const existente = carrito.find(item => item.nombre === nombre);
   const cantidadActual = existente ? existente.cantidad : 0;
@@ -1371,8 +1359,7 @@ function agregarAlCarrito(indice) {
       nombre: nombre,
       puntos: puntos,
       cantidad: 1,
-      stock: stock,
-      id: producto.id || producto.codigo || ""
+      stock: stock
     });
   }
 
@@ -1419,24 +1406,37 @@ function renderizarCarrito() {
         <small>${formatearNumero(item.puntos)} puntos por unidad</small>
       </div>
       <div class="carrito-controles">
-        <button type="button" onclick="modificarCantidad('${escaparAtributo(item.nombre)}', -1)">−</button>
+        <button
+          type="button"
+          onclick="modificarCantidad('${escaparAtributo(item.nombre)}', -1)"
+        >−</button>
         <strong>${item.cantidad}</strong>
-        <button type="button" onclick="modificarCantidad('${escaparAtributo(item.nombre)}', 1)">+</button>
+        <button
+          type="button"
+          onclick="modificarCantidad('${escaparAtributo(item.nombre)}', 1)"
+        >+</button>
       </div>
     `;
 
     contenedor.appendChild(fila);
   });
 
-  totalContenedor.textContent = `Total: ${formatearNumero(calcularTotalCarrito())} puntos`;
+  totalContenedor.textContent =
+    `Total: ${formatearNumero(calcularTotalCarrito())} puntos`;
 }
 
 function calcularTotalCarrito() {
-  return carrito.reduce((total, item) => total + item.puntos * item.cantidad, 0);
+  return carrito.reduce(
+    (total, item) => total + item.puntos * item.cantidad,
+    0
+  );
 }
 
 function calcularCantidadBoosters() {
-  return carrito.reduce((total, item) => total + item.cantidad, 0);
+  return carrito.reduce(
+    (total, item) => total + item.cantidad,
+    0
+  );
 }
 
 /* =========================================================
@@ -1474,20 +1474,51 @@ function continuarEntrega() {
 async function cargarTarifasMoto() {
   try {
     const respuesta = await llamarAPI({
-      accion: "obtenerTarifasMoto"
+      action: "obtenerTarifasMoto"
     });
 
-    if (Array.isArray(respuesta)) {
-      tarifasMoto = respuesta;
-    } else if (Array.isArray(respuesta.tarifas)) {
+    if (respuesta && Array.isArray(respuesta.tarifas)) {
       tarifasMoto = respuesta.tarifas;
     } else {
       tarifasMoto = [];
     }
+
   } catch (error) {
     console.warn("No se pudieron cargar las tarifas de moto:", error);
     tarifasMoto = [];
   }
+}
+
+function obtenerZonasMoto() {
+  return [...new Set(
+    tarifasMoto
+      .map(t => String(t.zona || "").trim())
+      .filter(Boolean)
+  )].sort((a, b) => a.localeCompare(b, "es"));
+}
+
+function obtenerLocalidadesMoto(zona) {
+  return [...new Set(
+    tarifasMoto
+      .filter(t => normalizar(t.zona) === normalizar(zona))
+      .map(t => String(t.localidad || "").trim())
+      .filter(Boolean)
+  )].sort((a, b) => a.localeCompare(b, "es"));
+}
+
+function cambiarZonaMoto() {
+  const zona = valor("motoZona");
+  const localidad = document.getElementById("motoLocalidad");
+
+  if (!localidad) return;
+
+  const localidades = obtenerLocalidadesMoto(zona);
+
+  localidad.innerHTML =
+    '<option value="">Seleccioná una localidad</option>' +
+    localidades.map(item =>
+      `<option value="${escaparAtributo(item)}">${escaparHTML(item)}</option>`
+    ).join("");
 }
 
 /* =========================================================
@@ -1495,14 +1526,21 @@ async function cargarTarifasMoto() {
 ========================================================= */
 
 function cambiarMetodoEntrega() {
-  const seleccionado = document.querySelector('input[name="metodoEntrega"]:checked');
+  const seleccionado = document.querySelector(
+    'input[name="metodoEntrega"]:checked'
+  );
 
   if (!seleccionado) return;
 
   metodoEntregaSeleccionado = seleccionado.value;
+  datosEntrega = {};
 
   const formulario = document.getElementById("formularioEntrega");
+  const mensaje = document.getElementById("mensajeEntrega");
   const cantidad = calcularCantidadBoosters();
+
+  formulario.innerHTML = "";
+  mensaje.innerHTML = "";
 
   if (metodoEntregaSeleccionado !== "RETIRO" && cantidad < 10) {
     formulario.innerHTML = `
@@ -1527,10 +1565,34 @@ function cambiarMetodoEntrega() {
 
 function formularioRetiro() {
   document.getElementById("formularioEntrega").innerHTML = `
+    <h3>Datos de contacto para el retiro</h3>
+
+    <div class="form-grid">
+      <div class="campo">
+        <label for="retiroEmail">Correo electrónico</label>
+        <input
+          id="retiroEmail"
+          type="email"
+          placeholder="Tu correo electrónico"
+          autocomplete="email"
+        >
+      </div>
+
+      <div class="campo">
+        <label for="retiroTelefono">Teléfono</label>
+        <input
+          id="retiroTelefono"
+          type="tel"
+          placeholder="Tu número de teléfono"
+          autocomplete="tel"
+        >
+      </div>
+    </div>
+
     <div class="mensaje info">
       <strong>Retiro personal</strong><br>
       Dirección: ${escaparHTML(DIRECCION_RETIRO)}<br>
-      Una vez que tu pedido esté listo, recibirás el aviso correspondiente.
+      Una vez que tu pedido esté listo, recibirás un aviso por correo electrónico.
       Recordá que tenés 60 días para retirarlo.
     </div>
   `;
@@ -1541,44 +1603,92 @@ function formularioRetiro() {
 ========================================================= */
 
 function formularioMoto() {
+  const zonas = obtenerZonasMoto();
+
+  const opcionesZonas = zonas.map(zona =>
+    `<option value="${escaparAtributo(zona)}">${escaparHTML(zona)}</option>`
+  ).join("");
+
   document.getElementById("formularioEntrega").innerHTML = `
     <h3>Datos para el envío por moto</h3>
 
     <div class="form-grid">
+
       <div class="campo">
-        <label for="motoNombre">Nombre y apellido</label>
-        <input id="motoNombre" type="text" placeholder="Nombre y apellido">
+        <label for="motoEmail">Correo electrónico</label>
+        <input
+          id="motoEmail"
+          type="email"
+          placeholder="Tu correo electrónico"
+          autocomplete="email"
+        >
       </div>
 
       <div class="campo">
         <label for="motoTelefono">Teléfono</label>
-        <input id="motoTelefono" type="tel" placeholder="Teléfono">
+        <input
+          id="motoTelefono"
+          type="tel"
+          placeholder="Teléfono"
+          autocomplete="tel"
+        >
       </div>
 
       <div class="campo completo">
         <label for="motoDireccion">Dirección</label>
-        <input id="motoDireccion" type="text" placeholder="Calle y altura">
+        <input
+          id="motoDireccion"
+          type="text"
+          placeholder="Calle y altura"
+          autocomplete="street-address"
+        >
+      </div>
+
+      <div class="campo">
+        <label for="motoZona">Zona</label>
+        <select id="motoZona" onchange="cambiarZonaMoto()">
+          <option value="">Seleccioná una zona</option>
+          ${opcionesZonas}
+        </select>
       </div>
 
       <div class="campo">
         <label for="motoLocalidad">Localidad</label>
-        <input id="motoLocalidad" type="text" placeholder="Localidad">
+        <select id="motoLocalidad">
+          <option value="">Primero seleccioná una zona</option>
+        </select>
       </div>
 
       <div class="campo">
         <label for="motoCodigoPostal">Código postal</label>
-        <input id="motoCodigoPostal" type="text" placeholder="Código postal">
+        <input
+          id="motoCodigoPostal"
+          type="text"
+          placeholder="Código postal"
+        >
       </div>
 
       <div class="campo completo">
         <label for="motoReferencia">Referencias (opcional)</label>
-        <textarea id="motoReferencia" rows="2" placeholder="Indicaciones para encontrar el domicilio"></textarea>
+        <textarea
+          id="motoReferencia"
+          rows="2"
+          placeholder="Indicaciones para encontrar el domicilio"
+        ></textarea>
       </div>
     </div>
 
-    <div class="mensaje info">
-      El costo del envío se informará según la tarifa correspondiente.
-    </div>
+    ${
+      zonas.length
+        ? `<div class="mensaje info">
+             Seleccioná la zona y la localidad para consultar la tarifa correspondiente.
+             El costo se calcula desde la tabla de tarifas de Charmarket.
+           </div>`
+        : `<div class="mensaje error">
+             No se pudieron cargar las zonas de envío por moto.
+             Por el momento no es posible seleccionar esta modalidad.
+           </div>`
+    }
   `;
 }
 
@@ -1620,14 +1730,22 @@ function formularioCorreoArgentino() {
         </select>
       </div>
 
-      <div class="campo completo" id="caSucursalContenedor">
+      <div class="campo completo oculto" id="caSucursalContenedor">
         <label for="caSucursal">Sucursal de destino</label>
-        <input id="caSucursal" type="text" placeholder="Nombre o dirección de la sucursal">
+        <input
+          id="caSucursal"
+          type="text"
+          placeholder="Nombre o dirección de la sucursal"
+        >
       </div>
 
       <div class="campo completo oculto" id="caDomicilioContenedor">
         <label for="caDireccion">Dirección de entrega</label>
-        <input id="caDireccion" type="text" placeholder="Calle y altura">
+        <input
+          id="caDireccion"
+          type="text"
+          placeholder="Calle y altura"
+        >
       </div>
 
       <div class="campo">
@@ -1647,13 +1765,14 @@ function formularioCorreoArgentino() {
     </div>
 
     <div class="mensaje info">
-      El envío se coordinará según los datos proporcionados.
+      El pedido quedará pendiente de cotización del envío.
+      El costo se informará una vez coordinado el despacho.
     </div>
   `;
 }
 
 function cambiarDestinoCorreo() {
-  const destino = document.getElementById("caDestino").value;
+  const destino = valor("caDestino");
   const sucursal = document.getElementById("caSucursalContenedor");
   const domicilio = document.getElementById("caDomicilioContenedor");
 
@@ -1701,7 +1820,11 @@ function formularioAndreani() {
 
       <div class="campo completo">
         <label for="anDireccion">Dirección o sucursal de destino</label>
-        <input id="anDireccion" type="text" placeholder="Dirección o sucursal">
+        <input
+          id="anDireccion"
+          type="text"
+          placeholder="Dirección o sucursal"
+        >
       </div>
 
       <div class="campo">
@@ -1721,36 +1844,61 @@ function formularioAndreani() {
     </div>
 
     <div class="mensaje info">
-      Una vez confirmado el pedido, se coordinará el envío por Andreani.
+      El pedido quedará pendiente de cotización del envío.
+      Una vez confirmado, se coordinará el despacho por Andreani.
     </div>
   `;
 }
 
 /* =========================================================
-   VALIDACIÓN DE ENTREGA
+   DATOS DE ENTREGA
 ========================================================= */
 
 function obtenerDatosFormularioEntrega() {
+  if (!usuarioActual) {
+    throw new Error("La sesión no está activa. Volvé a ingresar tus datos.");
+  }
+
   if (metodoEntregaSeleccionado === "RETIRO") {
+    const email = valor("retiroEmail");
+    const telefono = valor("retiroTelefono");
+
+    if (!email || !telefono) {
+      throw new Error("Completá tu correo electrónico y teléfono para el retiro.");
+    }
+
     return {
       metodo: "RETIRO",
-      direccion: DIRECCION_RETIRO
+      email: email,
+      telefono: telefono
     };
   }
 
   if (metodoEntregaSeleccionado === "MOTO") {
     const datos = {
       metodo: "MOTO",
-      nombre: valor("motoNombre"),
+      email: valor("motoEmail"),
       telefono: valor("motoTelefono"),
       direccion: valor("motoDireccion"),
+      zona: valor("motoZona"),
       localidad: valor("motoLocalidad"),
       codigoPostal: valor("motoCodigoPostal"),
       referencia: valor("motoReferencia")
     };
 
-    if (!datos.nombre || !datos.telefono || !datos.direccion || !datos.localidad) {
-      throw new Error("Completá los datos obligatorios del envío por moto.");
+    if (
+      !datos.email ||
+      !datos.telefono ||
+      !datos.direccion ||
+      !datos.zona ||
+      !datos.localidad ||
+      !datos.codigoPostal
+    ) {
+      throw new Error("Completá todos los datos obligatorios del envío por moto.");
+    }
+
+    if (datos.referencia) {
+      datos.direccion += " - Referencia: " + datos.referencia;
     }
 
     return datos;
@@ -1771,16 +1919,33 @@ function obtenerDatosFormularioEntrega() {
       codigoPostal: valor("caCP")
     };
 
-    if (!datos.nombre || !datos.dni || !datos.telefono || !datos.email || !datos.destino || !datos.localidad || !datos.provincia || !datos.codigoPostal) {
+    if (
+      !datos.nombre ||
+      !datos.dni ||
+      !datos.telefono ||
+      !datos.email ||
+      !datos.destino ||
+      !datos.localidad ||
+      !datos.provincia ||
+      !datos.codigoPostal
+    ) {
       throw new Error("Completá todos los datos obligatorios de Correo Argentino.");
     }
 
-    if (datos.destino === "SUCURSAL" && !datos.sucursal) {
-      throw new Error("Ingresá la sucursal de destino.");
-    }
+    if (datos.destino === "SUCURSAL") {
+      if (!datos.sucursal) {
+        throw new Error("Ingresá la sucursal de destino.");
+      }
 
-    if (datos.destino === "DOMICILIO" && !datos.direccion) {
-      throw new Error("Ingresá la dirección de entrega.");
+      datos.direccion = "Sucursal Correo Argentino: " + datos.sucursal;
+
+    } else if (datos.destino === "DOMICILIO") {
+      if (!datos.direccion) {
+        throw new Error("Ingresá la dirección de entrega.");
+      }
+
+    } else {
+      throw new Error("Seleccioná el tipo de entrega de Correo Argentino.");
     }
 
     return datos;
@@ -1800,8 +1965,24 @@ function obtenerDatosFormularioEntrega() {
       codigoPostal: valor("anCP")
     };
 
-    if (!datos.nombre || !datos.dni || !datos.telefono || !datos.email || !datos.destino || !datos.direccion || !datos.localidad || !datos.provincia || !datos.codigoPostal) {
+    if (
+      !datos.nombre ||
+      !datos.dni ||
+      !datos.telefono ||
+      !datos.email ||
+      !datos.destino ||
+      !datos.direccion ||
+      !datos.localidad ||
+      !datos.provincia ||
+      !datos.codigoPostal
+    ) {
       throw new Error("Completá todos los datos obligatorios de Andreani.");
+    }
+
+    if (datos.destino === "SUCURSAL") {
+      datos.direccion = "Sucursal Andreani: " + datos.direccion;
+    } else if (datos.destino !== "DOMICILIO") {
+      throw new Error("Seleccioná el tipo de entrega de Andreani.");
     }
 
     return datos;
@@ -1818,15 +1999,30 @@ async function confirmarPedido() {
   if (pedidoEnProceso) return;
 
   const mensaje = document.getElementById("mensajeEntrega");
+  const boton = document.getElementById("btnConfirmarPedido");
+
   mensaje.innerHTML = "";
 
   try {
+    if (!usuarioActual) {
+      throw new Error("La sesión no está activa. Volvé a ingresar tus datos.");
+    }
+
     if (!metodoEntregaSeleccionado) {
       throw new Error("Seleccioná un método de entrega.");
     }
 
-    if (metodoEntregaSeleccionado !== "RETIRO" && calcularCantidadBoosters() < 10) {
-      throw new Error("Para realizar un envío necesitás seleccionar al menos 10 boosters.");
+    if (!carrito.length) {
+      throw new Error("El carrito está vacío.");
+    }
+
+    if (
+      metodoEntregaSeleccionado !== "RETIRO" &&
+      calcularCantidadBoosters() < 10
+    ) {
+      throw new Error(
+        "Para realizar un envío necesitás seleccionar al menos 10 boosters."
+      );
     }
 
     const entrega = obtenerDatosFormularioEntrega();
@@ -1837,70 +2033,134 @@ async function confirmarPedido() {
 
     datosEntrega = entrega;
 
+    // El backend espera estos campos directamente en el cuerpo del POST.
+    // No espera un objeto anidado llamado "pedido".
+    const payload = {
+      action: "crearPedido",
+      nombre: usuarioActual.nombre,
+      apellido: usuarioActual.apellido,
+      email: entrega.email,
+      telefono: entrega.telefono,
+      metodo: metodoEntregaSeleccionado,
+      carrito: carrito.map(item => ({
+        booster: item.nombre,
+        cantidad: item.cantidad
+      }))
+    };
+
+    // Agregar únicamente los campos que corresponden a cada método.
+    if (metodoEntregaSeleccionado === "MOTO") {
+      payload.direccion = entrega.direccion;
+      payload.codigoPostal = entrega.codigoPostal;
+      payload.zona = entrega.zona;
+      payload.localidad = entrega.localidad;
+    }
+
+    if (
+      metodoEntregaSeleccionado === "CORREO_ARGENTINO" ||
+      metodoEntregaSeleccionado === "ANDREANI"
+    ) {
+      payload.direccion = entrega.direccion;
+      payload.codigoPostal = entrega.codigoPostal;
+      payload.localidad = entrega.localidad;
+      payload.provincia = entrega.provincia;
+    }
+
     pedidoEnProceso = true;
-    const boton = document.getElementById("btnConfirmarPedido");
     boton.disabled = true;
     boton.textContent = "Registrando pedido...";
 
-    const pedido = {
-      nombre: usuarioActual.nombre,
-      apellido: usuarioActual.apellido,
-      usuario: usuarioActual.usuario || "",
-      email: usuarioActual.email || "",
-      puntos: calcularTotalCarrito(),
-      totalPuntos: calcularTotalCarrito(),
-      boosters: carrito.map(item => ({
-        nombre: item.nombre,
-        cantidad: item.cantidad,
-        puntos: item.puntos
-      })),
-      productos: carrito.map(item => ({
-        nombre: item.nombre,
-        cantidad: item.cantidad,
-        puntos: item.puntos
-      })),
-      cantidadBoosters: calcularCantidadBoosters(),
-      metodoEntrega: metodoEntregaSeleccionado,
-      entrega: entrega,
-      datosEntrega: entrega
-    };
+    const respuesta = await enviarPedido(payload);
 
-    const respuesta = await llamarAPI({
-      accion: "crearPedido",
-      pedido: pedido
-    });
-
-    if (!respuesta || respuesta.error || respuesta.exito === false) {
-      throw new Error(respuesta?.mensaje || respuesta?.error || "No se pudo registrar el pedido.");
+    if (!respuesta || respuesta.ok !== true) {
+      throw new Error(
+        respuesta?.error ||
+        respuesta?.mensaje ||
+        "No se pudo registrar el pedido."
+      );
     }
 
-    const numeroPedido =
-      respuesta.numeroPedido ||
-      respuesta.idPedido ||
-      respuesta.pedidoId ||
-      respuesta.id ||
-      "";
-
-    document.getElementById("mensajeConfirmacion").textContent =
-      respuesta.mensaje || "Tu pedido fue registrado correctamente.";
-
-    document.getElementById("datosPedidoConfirmado").innerHTML = `
-      ${numeroPedido ? `<p><strong>Número de pedido:</strong> ${escaparHTML(numeroPedido)}</p>` : ""}
-      <p><strong>Método de entrega:</strong> ${escaparHTML(metodoEntregaSeleccionado.replaceAll("_", " "))}</p>
-      <p><strong>Boosters:</strong> ${calcularCantidadBoosters()}</p>
-      <p><strong>Puntos utilizados:</strong> ${formatearNumero(calcularTotalCarrito())}</p>
-    `;
+    mostrarConfirmacionPedido(respuesta);
 
     mostrarSeccion("seccionConfirmacion");
 
   } catch (error) {
-    mostrarMensaje(mensaje, error.message || "Ocurrió un error al confirmar el pedido.", "error");
+    mostrarMensaje(
+      mensaje,
+      error.message || "Ocurrió un error al confirmar el pedido.",
+      "error"
+    );
   } finally {
     pedidoEnProceso = false;
-    const boton = document.getElementById("btnConfirmarPedido");
     boton.disabled = false;
     boton.textContent = "Confirmar pedido";
   }
+}
+
+function mostrarConfirmacionPedido(respuesta) {
+  const numeroPedido = respuesta.idPedido || "";
+  const metodo = respuesta.metodo || metodoEntregaSeleccionado;
+  const totalPuntos = Number(respuesta.totalPuntos || calcularTotalCarrito());
+  const cantidad = Number(respuesta.cantidad || calcularCantidadBoosters());
+
+  document.getElementById("mensajeConfirmacion").textContent =
+    "Tu pedido fue registrado correctamente. Guardá el número de pedido para cualquier consulta.";
+
+  let contenido = `
+    ${numeroPedido
+      ? `<p><strong>Número de pedido:</strong> ${escaparHTML(numeroPedido)}</p>`
+      : ""}
+    <p><strong>Método de entrega:</strong> ${escaparHTML(metodo.replace(/_/g, " "))}</p>
+    <p><strong>Boosters:</strong> ${formatearNumero(cantidad)}</p>
+    <p><strong>Puntos utilizados:</strong> ${formatearNumero(totalPuntos)}</p>
+    <p><strong>Estado del pedido:</strong> ${escaparHTML(respuesta.estadoPedido || "PENDIENTE")}</p>
+  `;
+
+  if (metodo === "RETIRO") {
+    contenido += `
+      <div class="datos-transferencia">
+        <strong>Retiro personal</strong><br>
+        Dirección: ${escaparHTML(respuesta.direccionRetiro || DIRECCION_RETIRO)}<br>
+        Recibirás un correo electrónico cuando el pedido esté listo.
+        Desde ese momento tendrás 60 días para retirarlo.
+      </div>
+    `;
+  }
+
+  if (metodo === "MOTO") {
+    const transferencia = respuesta.transferencia || {};
+
+    contenido += `
+      <div class="datos-transferencia">
+        <strong>Envío por moto</strong><br>
+        <strong>Costo del envío:</strong> ${formatearMoneda(respuesta.costoEnvio)}<br>
+        <strong>Estado del pago:</strong> ${escaparHTML(respuesta.estadoPago || "PENDIENTE DE PAGO")}<br>
+        <hr>
+        <strong>Datos para la transferencia</strong><br>
+        Banco: ${escaparHTML(transferencia.banco || "")}<br>
+        Titular: ${escaparHTML(transferencia.titular || "")}<br>
+        Alias: <strong>${escaparHTML(transferencia.alias || "")}</strong><br>
+        CBU: ${escaparHTML(transferencia.cbu || "")}<br>
+        CUIT: ${escaparHTML(transferencia.cuit || "")}<br>
+        WhatsApp: ${escaparHTML(transferencia.whatsapp || "")}
+      </div>
+    `;
+  }
+
+  if (
+    metodo === "CORREO_ARGENTINO" ||
+    metodo === "ANDREANI"
+  ) {
+    contenido += `
+      <div class="datos-transferencia">
+        <strong>Envío pendiente de cotización</strong><br>
+        Estado del pago: ${escaparHTML(respuesta.estadoPago || "PENDIENTE DE COTIZACIÓN")}<br>
+        El costo del envío se informará una vez coordinado.
+      </div>
+    `;
+  }
+
+  document.getElementById("datosPedidoConfirmado").innerHTML = contenido;
 }
 
 /* =========================================================
@@ -1908,6 +2168,11 @@ async function confirmarPedido() {
 ========================================================= */
 
 async function consultarHistorial() {
+  if (!usuarioActual) {
+    alert("Primero tenés que ingresar tus datos.");
+    return;
+  }
+
   mostrarSeccion("seccionHistorial");
 
   const contenedor = document.getElementById("contenidoHistorial");
@@ -1915,29 +2180,18 @@ async function consultarHistorial() {
 
   try {
     const respuesta = await llamarAPI({
-      accion: "obtenerHistorial",
+      action: "obtenerHistorial",
       nombre: usuarioActual.nombre,
-      apellido: usuarioActual.apellido,
-      usuario: usuarioActual.usuario || ""
+      apellido: usuarioActual.apellido
     });
 
-    if (!respuesta || respuesta.error) {
-      throw new Error(respuesta?.mensaje || "No se pudo consultar tu historial.");
+    if (!respuesta || respuesta.error || respuesta.ok !== true) {
+      throw new Error(
+        respuesta?.error || "No se pudo consultar tu historial."
+      );
     }
 
-    let historial = [];
-
-    if (Array.isArray(respuesta)) {
-      historial = respuesta;
-    } else if (Array.isArray(respuesta.historial)) {
-      historial = respuesta.historial;
-    } else if (Array.isArray(respuesta.pedidos)) {
-      historial = respuesta.pedidos;
-    } else if (Array.isArray(respuesta.registros)) {
-      historial = respuesta.registros;
-    }
-
-    renderizarHistorial(historial);
+    renderizarHistorial(respuesta);
 
   } catch (error) {
     contenedor.innerHTML = `
@@ -1948,39 +2202,103 @@ async function consultarHistorial() {
   }
 }
 
-function renderizarHistorial(historial) {
+function renderizarHistorial(respuesta) {
   const contenedor = document.getElementById("contenidoHistorial");
+  const pedidos = Array.isArray(respuesta.pedidos) ? respuesta.pedidos : [];
+  const usuario = respuesta.usuario || {};
+  const boosters = Array.isArray(respuesta.boosters) ? respuesta.boosters : [];
 
-  if (!historial || !historial.length) {
-    contenedor.innerHTML = "<p>Todavía no tenés pedidos registrados.</p>";
+  let html = `
+    <div class="barra-puntos">
+      <div>
+        Puntos disponibles:
+        <strong>${formatearNumero(usuario.puntosDisponibles || 0)}</strong>
+      </div>
+      <div>
+        Puntos canjeados:
+        <strong>${formatearNumero(usuario.puntosCanjeados || 0)}</strong>
+      </div>
+    </div>
+  `;
+
+  if (boosters.length) {
+    html += `
+      <h3>Boosters canjeados</h3>
+      <div class="historial-item">
+        ${boosters.map(item => `
+          <p>
+            <strong>${escaparHTML(item.nombre)}</strong>
+            — ${formatearNumero(item.cantidad)} unidad(es)
+          </p>
+        `).join("")}
+      </div>
+    `;
+  }
+
+  html += "<h3>Mis pedidos</h3>";
+
+  if (!pedidos.length) {
+    html += "<p>Todavía no tenés pedidos registrados.</p>";
+    contenedor.innerHTML = html;
     return;
   }
 
-  contenedor.innerHTML = "";
+  pedidos.forEach(pedido => {
+    const numero = pedido.idPedido || "Pedido";
+    const fecha = pedido.fecha || "";
+    const estado = pedido.estadoVisual || pedido.estado || "Sin estado";
+    const claseEstado = pedido.claseEstado || "";
+    const metodo = pedido.metodo || "";
+    const total = Number(pedido.totalPuntos || 0);
+    const cantidad = Number(pedido.cantidadBoosters || 0);
 
-  historial.forEach(pedido => {
-    const elemento = document.createElement("div");
-    elemento.className = "historial-item";
+    let detalleBoosters = "";
 
-    const numero = pedido.numeroPedido || pedido.idPedido || pedido.id || "Pedido";
-    const fecha = pedido.fecha || pedido.fechaPedido || "";
-    const estado = pedido.estado || pedido.estadoPedido || pedido.estado_de_pedido || "En proceso";
-    const entrega = pedido.metodoEntrega || pedido.entrega || "";
-    const total = pedido.puntos || pedido.totalPuntos || pedido.costo || "";
+    if (Array.isArray(pedido.boosters) && pedido.boosters.length) {
+      detalleBoosters = pedido.boosters.map(item =>
+        `${formatearNumero(item.cantidad)} x ${escaparHTML(item.nombre)}`
+      ).join("<br>");
+    } else if (pedido.detalle) {
+      detalleBoosters = escaparHTML(pedido.detalle);
+    }
 
-    elemento.innerHTML = `
-      <div class="historial-cabecera">
-        <strong>${escaparHTML(String(numero))}</strong>
-        <span class="estado-pedido">${escaparHTML(String(estado))}</span>
+    html += `
+      <div class="historial-item">
+        <div class="historial-cabecera">
+          <strong>${escaparHTML(numero)}</strong>
+          <span class="estado-pedido ${escaparAtributo(claseEstado)}">
+            ${escaparHTML(estado)}
+          </span>
+        </div>
+
+        ${fecha ? `<p><strong>Fecha:</strong> ${escaparHTML(fecha)}</p>` : ""}
+        ${metodo ? `<p><strong>Entrega:</strong> ${escaparHTML(metodo.replace(/_/g, " "))}</p>` : ""}
+        ${pedido.localidad ? `<p><strong>Localidad:</strong> ${escaparHTML(pedido.localidad)}</p>` : ""}
+        <p><strong>Boosters:</strong> ${formatearNumero(cantidad)}</p>
+        <p><strong>Puntos utilizados:</strong> ${formatearNumero(total)}</p>
+
+        ${detalleBoosters ? `<p><strong>Detalle:</strong><br>${detalleBoosters}</p>` : ""}
+
+        ${
+          pedido.mostrarPlazoRetiro
+            ? `<div class="mensaje info">
+                 <strong>Plazo para retirar:</strong>
+                 ${formatearNumero(pedido.diasRestantes)} días restantes.<br>
+                 Fecha límite: ${escaparHTML(pedido.fechaVencimiento || "")}
+               </div>`
+            : ""
+        }
+
+        ${
+          pedido.fechaListo
+            ? `<p><strong>Listo desde:</strong> ${escaparHTML(pedido.fechaListo)}</p>`
+            : ""
+        }
       </div>
-      ${fecha ? `<p><strong>Fecha:</strong> ${escaparHTML(String(fecha))}</p>` : ""}
-      ${entrega ? `<p><strong>Entrega:</strong> ${escaparHTML(String(entrega))}</p>` : ""}
-      ${total !== "" ? `<p><strong>Puntos:</strong> ${escaparHTML(String(total))}</p>` : ""}
-      ${pedido.detalle ? `<p>${escaparHTML(String(pedido.detalle))}</p>` : ""}
     `;
-
-    contenedor.appendChild(elemento);
   });
+
+  contenedor.innerHTML = html;
 }
 
 function cerrarHistorial() {
@@ -1991,6 +2309,7 @@ function cerrarHistorial() {
    COMUNICACIÓN CON APPS SCRIPT
 ========================================================= */
 
+// GET: consultas de puntos, productos, tarifas e historial.
 async function llamarAPI(datos) {
   const parametros = new URLSearchParams();
 
@@ -1998,10 +2317,7 @@ async function llamarAPI(datos) {
     const valor = datos[clave];
 
     if (valor !== undefined && valor !== null) {
-      parametros.append(
-        clave,
-        typeof valor === "object" ? JSON.stringify(valor) : String(valor)
-      );
+      parametros.append(clave, String(valor));
     }
   });
 
@@ -2013,7 +2329,9 @@ async function llamarAPI(datos) {
   });
 
   if (!respuesta.ok) {
-    throw new Error("No se pudo conectar con el servidor. Intentá nuevamente.");
+    throw new Error(
+      "No se pudo conectar con el servidor. Intentá nuevamente."
+    );
   }
 
   const texto = await respuesta.text();
@@ -2022,7 +2340,39 @@ async function llamarAPI(datos) {
     return JSON.parse(texto);
   } catch (error) {
     console.error("Respuesta no válida del servidor:", texto);
-    throw new Error("El servidor devolvió una respuesta que no se pudo interpretar.");
+    throw new Error(
+      "El servidor devolvió una respuesta que no se pudo interpretar."
+    );
+  }
+}
+
+// POST: creación del pedido.
+// Se envía el objeto plano que espera doPost() en Code.gs.
+async function enviarPedido(payload) {
+  const respuesta = await fetch(API_URL, {
+    method: "POST",
+    redirect: "follow",
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
+    },
+    body: JSON.stringify(payload)
+  });
+
+  if (!respuesta.ok) {
+    throw new Error(
+      "No se pudo conectar con el servidor para registrar el pedido."
+    );
+  }
+
+  const texto = await respuesta.text();
+
+  try {
+    return JSON.parse(texto);
+  } catch (error) {
+    console.error("Respuesta no válida al registrar el pedido:", texto);
+    throw new Error(
+      "El servidor devolvió una respuesta que no se pudo interpretar."
+    );
   }
 }
 
@@ -2035,6 +2385,10 @@ function valor(id) {
   return elemento ? elemento.value.trim() : "";
 }
 
+function normalizar(valor) {
+  return String(valor || "").trim().toLowerCase();
+}
+
 function mostrarMensaje(contenedor, texto, tipo = "info") {
   contenedor.innerHTML = `
     <div class="mensaje ${tipo}">
@@ -2045,6 +2399,14 @@ function mostrarMensaje(contenedor, texto, tipo = "info") {
 
 function formatearNumero(numero) {
   return Number(numero || 0).toLocaleString("es-AR");
+}
+
+function formatearMoneda(numero) {
+  return Number(numero || 0).toLocaleString("es-AR", {
+    style: "currency",
+    currency: "ARS",
+    maximumFractionDigits: 2
+  });
 }
 
 function escaparHTML(valor) {
