@@ -7,2837 +7,2070 @@
   <title>Charmarket | Canje de Boosters Pokémon</title>
 
   <style>
-    :root {
-      --naranja: #f47721;
-      --naranja-oscuro: #d95c0b;
-      --fondo: #fff8f1;
-      --texto: #292522;
-      --gris: #777;
-      --borde: #f0dfd0;
-      --blanco: #fff;
-      --verde: #218838;
-      --rojo: #c62828;
+  :root {
+    --naranja: #f47721;
+    --naranja-oscuro: #d95c0b;
+    --fondo: #fff8f1;
+    --texto: #292929;
+    --gris: #6b7280;
+    --borde: #eadfd5;
+    --blanco: #ffffff;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--fondo);
+    color: var(--texto);
+  }
+
+  /* =====================================================
+     ESTILOS GENERALES
+  ===================================================== */
+
+  .contenedor {
+    width: min(1180px, 94%);
+    margin: 0 auto;
+  }
+
+  .oculto {
+    display: none !important;
+  }
+
+  button {
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .btn-principal {
+    border: 0;
+    border-radius: 10px;
+    padding: 13px 22px;
+    background: var(--naranja);
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+    transition: background .2s, transform .2s;
+  }
+
+  .btn-principal:hover {
+    background: var(--naranja-oscuro);
+    transform: translateY(-1px);
+  }
+
+  .btn-secundario {
+    border: 1px solid var(--naranja);
+    border-radius: 10px;
+    padding: 11px 18px;
+    background: white;
+    color: var(--naranja-oscuro);
+    font-weight: 700;
+  }
+
+  .btn-secundario:hover {
+    background: #fff0e4;
+  }
+
+  /* =====================================================
+     ENCABEZADO
+  ===================================================== */
+
+  header {
+    background: white;
+    border-bottom: 1px solid var(--borde);
+    padding: 18px 0;
+  }
+
+  .encabezado {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    text-align: left;
+  }
+
+  .logo {
+    width: 76px;
+    height: 76px;
+    object-fit: contain;
+  }
+
+  .marca h1 {
+    margin: 0;
+    color: var(--naranja-oscuro);
+    font-size: 30px;
+    letter-spacing: 1px;
+  }
+
+  .marca p {
+    margin: 5px 0 0;
+    color: #555;
+    font-size: 14px;
+  }
+
+  /* =====================================================
+     INDICADOR DE PASOS
+  ===================================================== */
+
+  .progreso {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 20px 10px;
+  }
+
+  .paso {
+    padding: 10px 17px;
+    border-radius: 30px;
+    background: #eee8e2;
+    color: #777;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .paso.activo {
+    background: var(--naranja);
+    color: white;
+  }
+
+  .paso.completado {
+    background: #e5f5e9;
+    color: #247a3d;
+  }
+
+  /* =====================================================
+     PANELES
+  ===================================================== */
+
+  .panel {
+    background: white;
+    border: 1px solid var(--borde);
+    border-radius: 18px;
+    padding: 28px;
+    margin: 20px auto;
+    box-shadow: 0 5px 20px rgba(60, 35, 15, .05);
+  }
+
+  .titulo-seccion {
+    text-align: center;
+    margin: 15px 0 8px;
+    font-size: 30px;
+    color: #292929;
+  }
+
+  .subtitulo-seccion {
+    text-align: center;
+    color: var(--gris);
+    margin: 0 0 25px;
+    line-height: 1.5;
+  }
+
+  /* =====================================================
+     NUEVA PÁGINA DE INICIO
+  ===================================================== */
+
+  .bienvenida-titulo {
+    text-align: center;
+    font-size: clamp(25px, 4vw, 36px);
+    margin: 24px 0 25px;
+    color: #292929;
+    font-weight: 800;
+  }
+
+  .inicio-columnas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    align-items: stretch;
+  }
+
+  .inicio-tarjeta {
+    background: white;
+    border: 1px solid var(--borde);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 18px rgba(60, 35, 15, .05);
+  }
+
+  .inicio-tarjeta-cabecera {
+    background: var(--naranja);
+    color: white;
+    padding: 16px 20px;
+    font-weight: 800;
+    font-size: 18px;
+  }
+
+  .inicio-tarjeta-contenido {
+    padding: 23px;
+  }
+
+  .inicio-tarjeta-contenido p {
+    color: #626262;
+    line-height: 1.55;
+    margin-top: 0;
+  }
+
+  .campo {
+    margin-bottom: 16px;
+  }
+
+  .campo label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 7px;
+    font-size: 14px;
+  }
+
+  .campo input,
+  .campo select,
+  .campo textarea {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid #d8d8d8;
+    border-radius: 9px;
+    background: white;
+    font-size: 15px;
+    outline: none;
+  }
+
+  .campo input:focus,
+  .campo select:focus,
+  .campo textarea:focus {
+    border-color: var(--naranja);
+    box-shadow: 0 0 0 3px rgba(244, 119, 33, .12);
+  }
+
+  .inicio-imagen {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 430px;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+
+  .aviso-vigencia {
+    margin: 22px 0;
+    padding: 17px 20px;
+    border: 1px solid #f2d77a;
+    border-radius: 12px;
+    background: #fff6cf;
+    text-align: center;
+    color: #644d00;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  .enlace-reglamento {
+    display: block;
+    border: 0;
+    background: transparent;
+    color: #a64a08;
+    text-decoration: underline;
+    font-size: 15px;
+    font-weight: 700;
+    margin: 10px auto 0;
+    padding: 5px;
+  }
+
+  .enlace-reglamento:hover {
+    color: var(--naranja-oscuro);
+  }
+
+  /* =====================================================
+     RANKING DE SORTEOS
+  ===================================================== */
+
+  .ranking-seccion {
+    margin: 42px auto 30px;
+  }
+
+  .ranking-titulo {
+    text-align: center;
+    font-size: 32px;
+    margin: 0 0 8px;
+    color: #292929;
+  }
+
+  .ranking-subtitulo {
+    text-align: center;
+    color: var(--gris);
+    margin: 0 0 25px;
+  }
+
+  .ranking-columnas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+
+  .ranking-tarjeta {
+    background: white;
+    border: 1px solid var(--borde);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 18px rgba(60, 35, 15, .05);
+  }
+
+  .ranking-cabecera {
+    background: var(--naranja);
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 19px;
+    font-weight: 800;
+  }
+
+  .ranking-contenido {
+    padding: 18px;
+    text-align: center;
+  }
+
+  .ranking-imagen {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 520px;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+
+  .ranking-boton {
+    margin-top: 16px;
+    width: 100%;
+  }
+
+  /* =====================================================
+     VISOR DE REGLAMENTO
+  ===================================================== */
+
+  .modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, .78);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+  }
+
+  .modal-contenido {
+    background: white;
+    width: min(1000px, 100%);
+    max-height: 94vh;
+    overflow: auto;
+    border-radius: 14px;
+    padding: 18px;
+    position: relative;
+  }
+
+  .modal-cerrar {
+    position: sticky;
+    top: 0;
+    float: right;
+    border: 0;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    background: #333;
+    color: white;
+    font-size: 22px;
+    z-index: 2;
+  }
+
+  .modal-imagen {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 8px;
+  }
+
+  /* =====================================================
+     MENSAJES
+  ===================================================== */
+
+  .mensaje {
+    margin-top: 14px;
+    padding: 12px;
+    border-radius: 9px;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .mensaje.error {
+    background: #fde8e8;
+    color: #a51f1f;
+  }
+
+  .mensaje.exito {
+    background: #e7f7eb;
+    color: #216b35;
+  }
+
+  .mensaje.info {
+    background: #eaf3ff;
+    color: #20538b;
+  }
+
+  /* =====================================================
+     PRODUCTOS
+  ===================================================== */
+
+  .productos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 18px;
+  }
+
+  .producto {
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+    overflow: hidden;
+    background: white;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .producto img {
+    width: 100%;
+    height: 190px;
+    object-fit: contain;
+    background: #fff;
+    padding: 10px;
+  }
+
+  .producto-info {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .producto-info h3 {
+    font-size: 16px;
+    margin: 0 0 8px;
+  }
+
+  .producto-precio {
+    color: var(--naranja-oscuro);
+    font-weight: 800;
+    margin: 5px 0;
+  }
+
+  .producto-stock {
+    color: var(--gris);
+    font-size: 13px;
+    margin: 5px 0 12px;
+  }
+
+  .producto-info button {
+    margin-top: auto;
+  }
+
+  .barra-puntos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 17px;
+    background: #fff2e7;
+    border-radius: 12px;
+    margin-bottom: 20px;
+  }
+
+  .barra-puntos strong {
+    color: var(--naranja-oscuro);
+    font-size: 20px;
+  }
+
+  /* =====================================================
+     CARRITO
+  ===================================================== */
+
+  .carrito-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #eee;
+    padding: 12px 0;
+  }
+
+  .carrito-item:last-child {
+    border-bottom: 0;
+  }
+
+  .carrito-controles {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .carrito-controles button {
+    border: 1px solid var(--borde);
+    background: white;
+    border-radius: 7px;
+    padding: 5px 10px;
+    font-weight: 700;
+  }
+
+  .carrito-total {
+    text-align: right;
+    font-size: 19px;
+    font-weight: 800;
+    color: var(--naranja-oscuro);
+    margin-top: 15px;
+  }
+
+  /* =====================================================
+     ENTREGA Y FORMULARIOS
+  ===================================================== */
+
+  .opciones-entrega {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 12px;
+  }
+
+  .opcion-entrega {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 15px;
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    background: white;
+  }
+
+  .opcion-entrega:has(input:checked) {
+    border-color: var(--naranja);
+    background: #fff5ed;
+  }
+
+  .opcion-entrega input {
+    margin-top: 3px;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+
+  .form-grid .campo {
+    margin-bottom: 0;
+  }
+
+  .form-grid .campo.completo {
+    grid-column: 1 / -1;
+  }
+
+  /* =====================================================
+     HISTORIAL
+  ===================================================== */
+
+  .historial-item {
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    padding: 15px;
+    margin: 12px 0;
+    background: white;
+  }
+
+  .historial-cabecera {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .estado-pedido {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #fff0df;
+    color: #9b4b0a;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  /* =====================================================
+     CONFIRMACIÓN
+  ===================================================== */
+
+  .confirmacion {
+    text-align: center;
+    padding: 30px 15px;
+  }
+
+  .confirmacion-icono {
+    font-size: 58px;
+    margin-bottom: 12px;
+  }
+
+  .confirmacion h2 {
+    color: #237b3d;
+  }
+
+  /* =====================================================
+     PIE DE PÁGINA
+  ===================================================== */
+
+  footer {
+    text-align: center;
+    color: #888;
+    padding: 30px 12px;
+    font-size: 13px;
+  }
+
+  /* =====================================================
+     RESPONSIVE
+  ===================================================== */
+
+  @media (max-width: 760px) {
+    .encabezado {
+      gap: 10px;
     }
 
-    * {
-      box-sizing: border-box;
+    .logo {
+      width: 58px;
+      height: 58px;
     }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--texto);
-      background:
-        linear-gradient(rgba(255,248,241,.90), rgba(255,248,241,.94)),
-        url("https://drive.google.com/thumbnail?id=1WdB_N_o50RRWUVba7fKzr0Tew4bJ3pKd&sz=w2000")
-        center / cover fixed;
+    .marca h1 {
+      font-size: 23px;
     }
 
-    header {
-      background: linear-gradient(135deg, #ff922e, #ed6815);
-      padding: 24px 15px 28px;
-      text-align: center;
-      color: white;
-      box-shadow: 0 4px 14px rgba(0,0,0,.15);
+    .marca p {
+      font-size: 12px;
     }
 
-    header img {
-      width: 150px;
-      max-width: 45vw;
-      height: auto;
-      object-fit: contain;
-      display: block;
-      margin: 0 auto 10px;
-      filter: drop-shadow(0 3px 5px rgba(0,0,0,.15));
-    }
-
-    header h1 {
-      margin: 8px 0 5px;
-      font-size: 29px;
-      letter-spacing: .5px;
-    }
-
-    header p {
-      margin: 0;
-      font-size: 15px;
-    }
-
-    main {
-      width: min(1100px, 94%);
-      margin: 25px auto 50px;
+    .inicio-columnas,
+    .ranking-columnas {
+      grid-template-columns: 1fr;
     }
 
     .panel {
-      background: rgba(255,255,255,.96);
-      border: 1px solid var(--borde);
-      border-radius: 17px;
-      padding: 22px;
-      margin-bottom: 20px;
-      box-shadow: 0 5px 18px rgba(90,50,20,.08);
+      padding: 18px;
     }
 
-    h2 {
-      margin: 0 0 15px;
-      color: var(--naranja-oscuro);
-      font-size: 22px;
+    .titulo-seccion {
+      font-size: 25px;
     }
 
-    h3 {
-      margin: 0 0 12px;
-      font-size: 18px;
+    .ranking-titulo {
+      font-size: 27px;
     }
 
-    .subtitulo {
-      color: var(--gris);
-      margin: -7px 0 18px;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .fila {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .campo {
-      flex: 1 1 200px;
-      min-width: 0;
-      margin-bottom: 13px;
-    }
-
-    label {
-      display: block;
-      font-weight: bold;
-      font-size: 13px;
-      margin-bottom: 6px;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #d9d9d9;
-      border-radius: 9px;
-      font-size: 15px;
-      background: white;
-      color: var(--texto);
-      outline: none;
-    }
-
-    input:focus, select:focus {
-      border-color: var(--naranja);
-      box-shadow: 0 0 0 2px rgba(244,119,33,.12);
-    }
-
-    button {
-      border: 0;
-      border-radius: 10px;
-      padding: 12px 19px;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: .15s;
-    }
-
-    button:disabled {
-      opacity: .55;
-      cursor: not-allowed;
-    }
-
-    .btn-principal {
-      color: white;
-      background: var(--naranja);
-    }
-
-    .btn-principal:hover:not(:disabled) {
-      background: var(--naranja-oscuro);
-      transform: translateY(-1px);
-    }
-
-    .btn-secundario {
-      color: var(--naranja-oscuro);
-      background: #fff0e3;
-      border: 1px solid #f6d4b8;
-    }
-
-    .btn-secundario:hover:not(:disabled) {
-      background: #ffe3cc;
-    }
-
-    .btn-chico {
-      padding: 7px 11px;
-      font-size: 14px;
-    }
-
-    .mensaje {
-      display: none;
-      padding: 12px 14px;
-      border-radius: 9px;
-      margin: 12px 0;
-      line-height: 1.45;
-      font-size: 14px;
-    }
-
-    .mensaje.error {
-      display: block;
-      color: #8d1717;
-      background: #ffebeb;
-      border: 1px solid #f3c3c3;
-    }
-
-    .mensaje.ok {
-      display: block;
-      color: #17652a;
-      background: #e9f8ec;
-      border: 1px solid #c2e9ca;
-    }
-
-    .mensaje.info {
-      display: block;
-      color: #80500d;
-      background: #fff6df;
-      border: 1px solid #f4dfaa;
-    }
-
-    .oculto {
-      display: none !important;
-    }
-
-    .puntos {
-      display: inline-block;
-      background: #fff0df;
-      color: #a94706;
-      padding: 9px 15px;
-      border-radius: 20px;
-      font-weight: bold;
-      margin: 8px 0 15px;
-    }
-
-    .grilla {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .producto {
-      border: 1px solid var(--borde);
-      background: white;
-      border-radius: 13px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-      transition: .15s;
-    }
-
-    .producto:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 14px rgba(0,0,0,.08);
-    }
-
-    .producto img {
-      width: 100%;
-      height: 145px;
-      object-fit: contain;
-      padding: 8px;
-      background: #fffaf5;
-    }
-
-    .producto-info {
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .producto-nombre {
-      font-size: 14px;
-      font-weight: bold;
-      min-height: 35px;
-      line-height: 1.3;
-    }
-
-    .producto-precio {
-      color: var(--naranja-oscuro);
-      font-weight: bold;
-      margin: 7px 0 4px;
-      font-size: 14px;
-    }
-
-    .producto-stock {
-      color: var(--gris);
-      font-size: 12px;
-      margin-bottom: 10px;
-    }
-
-    .producto-controles {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      margin-top: auto;
-    }
-
-    .producto-controles button {
-      width: 31px;
-      height: 31px;
-      padding: 0;
-      flex-shrink: 0;
-      font-size: 18px;
-    }
-
-    .producto-controles input {
-      padding: 6px 3px;
-      text-align: center;
-      min-width: 0;
-      height: 31px;
-      font-size: 14px;
-    }
-
-    .resumen-total {
-      margin-top: 18px;
-      padding: 15px;
-      background: #fff5eb;
-      border-radius: 11px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      font-weight: bold;
-    }
-
-    .total-grande {
-      color: var(--naranja-oscuro);
-      font-size: 21px;
-    }
-
-    .metodos {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .metodo {
-      border: 2px solid var(--borde);
-      border-radius: 12px;
-      padding: 15px;
-      cursor: pointer;
-      background: white;
-      transition: .15s;
-    }
-
-    .metodo:hover {
-      border-color: #f5ad75;
-    }
-
-    .metodo.seleccionado {
-      border-color: var(--naranja);
-      background: #fff5eb;
-    }
-
-    .metodo strong {
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .metodo small {
-      color: var(--gris);
-      line-height: 1.4;
-    }
-
-    .andreani-opciones {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      margin: 14px 0 18px;
-    }
-
-    .andreani-opcion {
-      border: 2px solid var(--borde);
-      border-radius: 12px;
-      padding: 15px;
-      background: white;
-      color: var(--texto);
-      text-align: left;
-      cursor: pointer;
-    }
-
-    .andreani-opcion.seleccionado {
-      border-color: var(--naranja);
-      background: #fff5eb;
-    }
-
-    .andreani-opcion strong {
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .andreani-opcion small {
-      color: var(--gris);
-      line-height: 1.4;
-    }
-
-    .andreani-formulario {
-      border: 1px solid var(--borde);
-      border-radius: 12px;
-      padding: 16px;
-      margin: 14px 0;
-      background: #fffdfb;
-    }
-
-    .andreani-formulario h3 {
-      color: var(--naranja-oscuro);
-      margin-bottom: 14px;
-    }
-
-    .andreani-ayuda {
-      color: var(--gris);
-      font-size: 13px;
-      line-height: 1.5;
-      margin: -5px 0 14px;
-    }
-
-    .btn-whatsapp {
-      background: #168c4a;
-      color: white;
-      width: 100%;
-      margin-top: 8px;
-    }
-
-    .btn-whatsapp:hover:not(:disabled) {
-      background: #11743d;
-    }
-
-    @media (max-width: 560px) {
-      .andreani-opciones {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .direccion-retiro {
-      background: #fff5eb;
-      padding: 15px;
-      border-radius: 10px;
-      line-height: 1.6;
-      margin: 10px 0;
-    }
-
-    .transferencia {
-      background: #fff8e8;
-      border: 1px solid #f2dba4;
-      padding: 16px;
-      border-radius: 12px;
-      margin-top: 15px;
-      line-height: 1.7;
-      overflow-wrap: anywhere;
-    }
-
-    .transferencia strong {
-      color: #8a4a00;
-    }
-
-    .resumen-linea {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 9px 0;
-      border-bottom: 1px solid #eee;
-      font-size: 14px;
-    }
-
-    .resumen-linea:last-child {
-      border-bottom: 0;
-    }
-
-    .pasos {
-      display: flex;
-      gap: 7px;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
+    .progreso {
+      gap: 6px;
     }
 
     .paso {
-      padding: 7px 12px;
-      border-radius: 20px;
-      background: #f1eee9;
-      color: #777;
-      font-size: 12px;
-      font-weight: bold;
+      font-size: 11px;
+      padding: 8px 11px;
     }
 
-    .paso.activo {
-      background: var(--naranja);
-      color: white;
+    .form-grid {
+      grid-template-columns: 1fr;
     }
 
-    .acciones {
-      display: flex;
-      gap: 10px;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      margin-top: 18px;
+    .form-grid .campo.completo {
+      grid-column: auto;
     }
 
-    .centrado {
-      text-align: center;
-    }
-
-    .pedido-exito {
-      font-size: 17px;
-      line-height: 1.7;
-    }
-
-    /* --------------------------------------------------
-       HISTORIAL DE RECOMPENSAS
-    -------------------------------------------------- */
-
-    .boton-historial {
-      display: block;
-      width: 100%;
-      margin: 0 0 18px;
-      padding: 14px 18px;
-      font-size: 15px;
-      text-align: center;
-    }
-
-    .historial-resumen {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin: 18px 0 22px;
-    }
-
-    .historial-indicador {
-      background: #fff5eb;
-      border: 1px solid #f3dfce;
-      border-radius: 12px;
-      padding: 16px;
-      text-align: center;
-      min-width: 0;
-    }
-
-    .historial-indicador strong {
-      display: block;
-      color: var(--naranja-oscuro);
-      font-size: 23px;
-      margin-bottom: 5px;
-      overflow-wrap: anywhere;
-    }
-
-    .historial-indicador span {
-      color: var(--gris);
-      font-size: 13px;
-    }
-
-    .historial-seccion {
-      margin-top: 24px;
-    }
-
-    .historial-seccion h3 {
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--borde);
-    }
-
-    .historial-boosters {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .historial-booster {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 14px;
-      border: 1px solid var(--borde);
-      border-radius: 10px;
-      background: white;
-      font-size: 14px;
-    }
-
-    .historial-booster strong {
-      color: var(--naranja-oscuro);
-      white-space: nowrap;
-    }
-
-    .historial-pedido {
-      border: 1px solid var(--borde);
-      border-radius: 13px;
-      padding: 16px;
-      margin-bottom: 13px;
-      background: white;
-    }
-
-    .historial-pedido-cabecera {
-      display: flex;
-      justify-content: space-between;
+    .barra-puntos {
       align-items: flex-start;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 12px;
+      flex-direction: column;
     }
-
-    .historial-pedido-cabecera strong {
-      font-size: 16px;
-    }
-
-    .historial-fecha {
-      display: block;
-      color: var(--gris);
-      font-size: 12px;
-      margin-top: 4px;
-    }
-
-    .historial-estado {
-      display: inline-block;
-      border-radius: 20px;
-      padding: 7px 11px;
-      font-size: 12px;
-      font-weight: bold;
-      background: #f1eee9;
-      color: #555;
-    }
-
-    .estado-retirado,
-    .estado-entregado {
-      background: #e7f6eb;
-      color: #17652a;
-    }
-
-    .estado-vencido {
-      background: #ffebeb;
-      color: #a51e1e;
-    }
-
-    .estado-pendiente {
-      background: #fff4d9;
-      color: #80500d;
-    }
-
-    .estado-listo {
-      background: #fff0df;
-      color: #a94706;
-    }
-
-    .estado-enviado {
-      background: #e8f1ff;
-      color: #24558e;
-    }
-
-    .estado-otro {
-      background: #f1eee9;
-      color: #555;
-    }
-
-    .historial-datos {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 9px 18px;
-      margin-top: 12px;
-      font-size: 14px;
-    }
-
-    .historial-dato {
-      min-width: 0;
-      line-height: 1.5;
-      overflow-wrap: anywhere;
-    }
-
-    .historial-dato span {
-      display: block;
-      color: var(--gris);
-      font-size: 12px;
-      margin-bottom: 2px;
-    }
-
-    .historial-detalle {
-      background: #fffaf5;
-      border-radius: 9px;
-      padding: 11px 12px;
-      margin-top: 10px;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .historial-plazo {
-      background: #fff5eb;
-      border: 1px solid #f3dfce;
-      border-radius: 9px;
-      padding: 12px;
-      margin-top: 12px;
-      color: #80500d;
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    .historial-vacio {
-      text-align: center;
-      background: #fffaf5;
-      border: 1px dashed #e9cdb6;
-      border-radius: 12px;
-      padding: 22px 15px;
-      color: var(--gris);
-      line-height: 1.6;
-    }
-
-    footer {
-      text-align: center;
-      color: #777;
-      font-size: 12px;
-      padding: 20px;
-    }
-
-    @media (max-width: 850px) {
-      .grilla {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 560px) {
-      header {
-        padding: 18px 10px 22px;
-      }
-
-      header h1 {
-        font-size: 24px;
-      }
-
-      main {
-        width: 94%;
-        margin-top: 15px;
-      }
-
-      .panel {
-        padding: 16px;
-      }
-
-      .grilla {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
-      }
-
-      .producto img {
-        height: 125px;
-      }
-
-      .metodos {
-        grid-template-columns: 1fr;
-      }
-
-      .acciones button {
-        flex: 1;
-      }
-
-      .historial-resumen {
-        grid-template-columns: 1fr;
-      }
-
-      .historial-boosters {
-        grid-template-columns: 1fr;
-      }
-
-      .historial-datos {
-        grid-template-columns: 1fr;
-      }
-    }
+  }
   </style>
 </head>
 
 <body>
 
 <header>
-  <img
-    src="https://lh3.googleusercontent.com/d/1kdUUypk6s558Qmu5ocRPCK7isohJ8kTy"
-    alt="Charmarket"
-    onerror="this.style.display='none'"
-  >
-  <h1>CHARMARKET</h1>
-  <p>Canjeá tus puntos por boosters de Pokémon</p>
+  <div class="contenedor encabezado">
+    <img
+      class="logo"
+      src="https://lh3.googleusercontent.com/d/1kdUUypk6s558Qmu5ocRPCK7isohJ8kTy"
+      alt="Logo Charmarket"
+    >
+    <div class="marca">
+      <h1>CHARMARKET</h1>
+      <p>Canjeá tus puntos por boosters de Pokémon</p>
+    </div>
+  </div>
 </header>
 
-<main>
+<main class="contenedor">
 
-  <div class="pasos" id="barraPasos">
-    <span class="paso activo" id="paso1">1. Tus puntos</span>
-    <span class="paso" id="paso2">2. Boosters</span>
+  <div class="progreso">
+    <span class="paso activo" id="paso1">1. Iniciar sesión</span>
+    <span class="paso" id="paso2">2. Selección de boosters</span>
     <span class="paso" id="paso3">3. Entrega</span>
     <span class="paso" id="paso4">4. Confirmación</span>
   </div>
 
-  <!-- PASO 1: INGRESO -->
-  <section class="panel" id="seccionIngreso">
-    <h2>Bienvenido al Sistema de Recompensa</h2>
-    <p class="subtitulo">
-      Ingresá tu nombre y apellido para consultar tus puntos disponibles.
-    </p>
+  <!-- ===================================================
+       INICIO / INGRESO
+  ==================================================== -->
 
-    <div class="fila">
-      <div class="campo">
-        <label for="nombre">Nombre</label>
-        <input id="nombre" type="text" placeholder="Tu nombre" autocomplete="given-name">
+  <section id="seccionIngreso">
+
+    <h2 class="bienvenida-titulo">
+      Bienvenido al sistema de recompensas
+    </h2>
+
+    <div class="inicio-columnas">
+
+      <div class="inicio-tarjeta">
+        <div class="inicio-tarjeta-cabecera">
+          Ingresá tus datos
+        </div>
+
+        <div class="inicio-tarjeta-contenido">
+          <p>
+            Ingresá tu nombre y apellido para consultar tus puntos disponibles.
+          </p>
+
+          <div class="campo">
+            <label for="nombre">Nombre</label>
+            <input
+              type="text"
+              id="nombre"
+              placeholder="Ingresá tu nombre"
+              autocomplete="given-name"
+            >
+          </div>
+
+          <div class="campo">
+            <label for="apellido">Apellido</label>
+            <input
+              type="text"
+              id="apellido"
+              placeholder="Ingresá tu apellido"
+              autocomplete="family-name"
+            >
+          </div>
+
+          <button
+            class="btn-principal"
+            id="btnConsultar"
+            type="button"
+            onclick="consultarPuntos()"
+          >
+            Consultar mis puntos
+          </button>
+
+          <div id="mensajeIngreso"></div>
+        </div>
       </div>
 
-      <div class="campo">
-        <label for="apellido">Apellido</label>
-        <input id="apellido" type="text" placeholder="Tu apellido" autocomplete="family-name">
+      <div class="inicio-tarjeta">
+        <div class="inicio-tarjeta-cabecera">
+          Selección de boosters
+        </div>
+
+        <div class="inicio-tarjeta-contenido">
+          <img
+            class="inicio-imagen"
+            src="https://lh3.googleusercontent.com/d/1vde2AAd5d6L17wXmhOzKU-yYLB3TsyKw"
+            alt="Información sobre la selección de boosters"
+            loading="lazy"
+          >
+        </div>
       </div>
+
     </div>
 
-    <button class="btn-principal" id="btnConsultar" onclick="consultarPuntos()">
-      Consultar mis puntos
-    </button>
+    <div class="aviso-vigencia">
+      Los boosters seleccionados tienen 60 días de vigencia.
+      <button
+        class="enlace-reglamento"
+        type="button"
+        onclick="abrirReglamento()"
+      >
+        Leer reglamento completo
+      </button>
+    </div>
 
-    <div id="mensajeIngreso" class="mensaje"></div>
+    <section class="ranking-seccion">
+
+      <h2 class="ranking-titulo">Ranking de Sorteos</h2>
+      <p class="ranking-subtitulo">
+        Mirá cómo vienen las posiciones de este mes
+      </p>
+
+      <div class="ranking-columnas">
+
+        <div class="ranking-tarjeta">
+          <div class="ranking-cabecera">
+            TOP 10 · Ranking semanal
+          </div>
+          <div class="ranking-contenido">
+            <img
+              class="ranking-imagen"
+              src="https://lh3.googleusercontent.com/d/1loYR8QVkOcNcHv4tLcm-h14hAlGkuVpx"
+              alt="Ranking semanal TOP 10"
+              loading="lazy"
+            >
+          </div>
+        </div>
+
+        <div class="ranking-tarjeta">
+          <div class="ranking-cabecera">
+            TOP 100 · Ranking mensual
+          </div>
+          <div class="ranking-contenido">
+            <img
+              class="ranking-imagen"
+              src="https://lh3.googleusercontent.com/d/1acxg6QYrXS1sCsrhlkr91dCZlsFw3-C_"
+              alt="Ranking mensual TOP 100"
+              loading="lazy"
+            >
+
+            <button
+              class="btn-principal ranking-boton"
+              type="button"
+              onclick="abrirTop100()"
+            >
+              Ver TOP 100 completo
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
   </section>
 
-  <!-- PASO 2: SELECCIÓN DE BOOSTERS -->
+  <!-- ===================================================
+       SECCIÓN DE PRODUCTOS
+  ==================================================== -->
+
   <section class="panel oculto" id="seccionProductos">
-    <h2>Elegí tus boosters</h2>
-    <p class="subtitulo">
-      Seleccioná las cantidades que querés canjear.
+
+    <h2 class="titulo-seccion">Elegí tus boosters</h2>
+    <p class="subtitulo-seccion">
+      Seleccioná los productos que querés canjear con tus puntos.
     </p>
 
-    <div class="puntos">
-      Puntos disponibles: <span id="puntosDisponibles">0</span>
-    </div>
-
-    <button
-      class="btn-secundario boton-historial"
-      type="button"
-      onclick="abrirHistorial()"
-    >
-      📋 Mi historial de recompensas
-    </button>
-
-    <div id="grillaProductos" class="grilla"></div>
-
-    <div class="resumen-total">
-      <span>Total de puntos del carrito</span>
-      <span class="total-grande" id="totalPuntos">0 puntos</span>
-    </div>
-
-    <div id="mensajeProductos" class="mensaje"></div>
-
-    <div class="acciones">
-      <button class="btn-secundario" onclick="volverIngreso()">
-        Volver
-      </button>
-      <button class="btn-principal" onclick="irAEntrega()">
-        Siguiente
-      </button>
-    </div>
-  </section>
-
-  <!-- HISTORIAL DE RECOMPENSAS -->
-  <section class="panel oculto" id="seccionHistorial">
-    <h2>Mi historial de recompensas</h2>
-    <p class="subtitulo">
-      Consultá tus puntos, los boosters que obtuviste y el estado de tus pedidos.
-    </p>
-
-    <div id="contenidoHistorial">
-      <div class="historial-vacio">
-        Cargando tu historial...
+    <div class="barra-puntos">
+      <div>
+        Tus puntos disponibles:
+        <strong id="puntosDisponibles">0</strong>
       </div>
-    </div>
 
-    <div id="mensajeHistorial" class="mensaje"></div>
-
-    <div class="acciones">
       <button
         class="btn-secundario"
         type="button"
-        onclick="volverDesdeHistorial()"
+        onclick="consultarHistorial()"
       >
-        Volver a mis boosters
+        Mi historial de recompensas
       </button>
     </div>
+
+    <div id="mensajeProductos"></div>
+
+    <div class="productos-grid" id="productosGrid"></div>
+
+    <div class="panel">
+      <h3>Mi selección</h3>
+      <div id="carritoContenido">
+        Todavía no seleccionaste boosters.
+      </div>
+      <div id="carritoTotal" class="carrito-total"></div>
+
+      <div style="display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:20px">
+        <button
+          class="btn-secundario"
+          type="button"
+          onclick="volverAlInicio()"
+        >
+          Volver
+        </button>
+
+        <button
+          class="btn-principal"
+          type="button"
+          onclick="continuarEntrega()"
+          id="btnContinuarEntrega"
+        >
+          Continuar
+        </button>
+      </div>
+    </div>
+
   </section>
 
-  <!-- PASO 3: ENTREGA -->
+  <!-- ===================================================
+       SECCIÓN DE ENTREGA
+  ==================================================== -->
+
   <section class="panel oculto" id="seccionEntrega">
-    <h2>¿Cómo querés recibir tu pedido?</h2>
-    <p class="subtitulo">
-      Podés retirar tu pedido o solicitar envío a domicilio.
-      Los envíos están disponibles a partir de 10 boosters.
+
+    <h2 class="titulo-seccion">Método de entrega</h2>
+    <p class="subtitulo-seccion">
+      Elegí cómo querés recibir tu pedido.
     </p>
 
-    <div class="metodos">
-      <div class="metodo" id="metodoRetiro" onclick="seleccionarMetodo('RETIRO')">
-        <strong>📍 Retiro en persona</strong>
-        <small>Retirá tu pedido en nuestro punto de entrega.</small>
-      </div>
+    <div id="resumenEntrega"></div>
 
-      <div class="metodo" id="metodoMoto" onclick="seleccionarMetodo('MOTO')">
-        <strong>🛵 Moto Envío</strong>
-        <small>Envío por moto. El costo depende de la zona y localidad.</small>
-      </div>
+    <div class="opciones-entrega">
 
-      <div class="metodo" id="metodoCorreo" onclick="seleccionarMetodo('CORREO_ARGENTINO')">
-        <strong>📦 Correo Argentino</strong>
-        <small>Envío a cotizar. Te informaremos el costo.</small>
-      </div>
-
-      <div class="metodo" id="metodoAndreani" onclick="seleccionarMetodo('ANDREANI')">
-        <strong>🚚 Andreani</strong>
-        <small>Envío a cotizar. Te informaremos el costo.</small>
-      </div>
-    </div>
-
-    <div id="bloqueRetiro" class="oculto">
-      <div class="direccion-retiro">
-        <strong>Dirección del domicilio:</strong><br>
-        Adolfo Alsina 4327, Villa Martelli, Buenos Aires, CP 1603.
-        <br><br>
-        <a href="https://share.google/B9jcVJEKCJPOdXIsS" target="_blank">
-          Ver ubicación en el mapa
-        </a>
-        <br><br>
-        Una vez que tu pedido esté listo, recibirás un correo electrónico.
-        Tendrás 60 días para retirarlo.
-      </div>
-    </div>
-
-    <div id="bloqueEnvio" class="oculto">
-      <h3>Datos para el envío</h3>
-
-      <div class="campo">
-        <label for="direccion">Dirección y altura</label>
-        <input id="direccion" type="text" placeholder="Calle, número, piso, departamento">
-      </div>
-
-      <div class="fila">
-        <div class="campo">
-          <label for="codigoPostal">Código postal</label>
-          <input id="codigoPostal" type="text" placeholder="Ej. 1603">
-        </div>
-
-        <div class="campo oculto" id="campoProvincia">
-          <label for="provincia">Provincia</label>
-          <input id="provincia" type="text" placeholder="Ej. Buenos Aires">
-        </div>
-      </div>
-    </div>
-
-    <div id="bloqueLocalidad" class="oculto">
-      <div class="campo">
-        <label for="localidad">Localidad</label>
-        <select id="localidad">
-          <option value="">Seleccioná una localidad</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- DATOS ESPECÍFICOS DE ANDREANI -->
-    <div id="bloqueAndreani" class="oculto">
-      <h3>¿Cómo querés recibir tu pedido por Andreani?</h3>
-      <p class="andreani-ayuda">
-        Elegí si preferís retirar el paquete en una sucursal Andreani o recibirlo en tu domicilio.
-      </p>
-
-      <div class="andreani-opciones">
-        <button
-          type="button"
-          class="andreani-opcion"
-          id="andreaniTipoSucursal"
-          onclick="seleccionarAndreaniTipo('SUCURSAL')"
+      <label class="opcion-entrega">
+        <input
+          type="radio"
+          name="metodoEntrega"
+          value="RETIRO"
+          onchange="cambiarMetodoEntrega()"
         >
-          <strong>📍 Retirar en sucursal</strong>
-          <small>Indicá la sucursal Andreani donde querés recibir tu pedido.</small>
-        </button>
+        <span>
+          <strong>Retiro</strong><br>
+          <small>Retirá tu pedido personalmente.</small>
+        </span>
+      </label>
 
-        <button
-          type="button"
-          class="andreani-opcion"
-          id="andreaniTipoDomicilio"
-          onclick="seleccionarAndreaniTipo('DOMICILIO')"
+      <label class="opcion-entrega">
+        <input
+          type="radio"
+          name="metodoEntrega"
+          value="MOTO"
+          onchange="cambiarMetodoEntrega()"
         >
-          <strong>🏠 Envío a domicilio</strong>
-          <small>Completá la dirección donde querés recibir tu pedido.</small>
-        </button>
-      </div>
+        <span>
+          <strong>Envío por moto</strong><br>
+          <small>Envío mediante servicio de moto.</small>
+        </span>
+      </label>
 
-      <div id="andreaniFormularioSucursal" class="andreani-formulario oculto">
-        <h3>Sucursal Andreani</h3>
-        <div class="fila">
-          <div class="campo">
-            <label for="andSucursalLocalidad">Localidad</label>
-            <input id="andSucursalLocalidad" type="text" placeholder="Localidad de la sucursal">
-          </div>
-          <div class="campo">
-            <label for="andSucursalProvincia">Provincia</label>
-            <input id="andSucursalProvincia" type="text" placeholder="Provincia">
-          </div>
-        </div>
-        <div class="fila">
-          <div class="campo">
-            <label for="andSucursalCP">Código postal</label>
-            <input id="andSucursalCP" type="text" placeholder="Código postal de la sucursal">
-          </div>
-          <div class="campo">
-            <label for="andSucursalDireccion">Dirección de la sucursal Andreani</label>
-            <input id="andSucursalDireccion" type="text" placeholder="Calle y altura de la sucursal">
-          </div>
-        </div>
+      <label class="opcion-entrega">
+        <input
+          type="radio"
+          name="metodoEntrega"
+          value="CORREO_ARGENTINO"
+          onchange="cambiarMetodoEntrega()"
+        >
+        <span>
+          <strong>Correo Argentino</strong><br>
+          <small>Envío a domicilio o sucursal.</small>
+        </span>
+      </label>
 
-        <h3 style="margin-top:18px;">Datos del destinatario</h3>
-        <div class="fila">
-          <div class="campo">
-            <label for="andSucNombre">Nombre</label>
-            <input id="andSucNombre" type="text" placeholder="Nombre del destinatario" autocomplete="given-name">
-          </div>
-          <div class="campo">
-            <label for="andSucApellido">Apellido</label>
-            <input id="andSucApellido" type="text" placeholder="Apellido del destinatario" autocomplete="family-name">
-          </div>
-        </div>
-        <div class="fila">
-          <div class="campo">
-            <label for="andSucDni">DNI</label>
-            <input id="andSucDni" type="text" inputmode="numeric" placeholder="DNI del destinatario">
-          </div>
-          <div class="campo">
-            <label for="andSucEmail">Correo electrónico</label>
-            <input id="andSucEmail" type="email" placeholder="tuemail@ejemplo.com" autocomplete="email">
-          </div>
-          <div class="campo">
-            <label for="andSucTelefono">Teléfono / WhatsApp</label>
-            <input id="andSucTelefono" type="tel" placeholder="Tu número de contacto" autocomplete="tel">
-          </div>
-        </div>
-      </div>
+      <label class="opcion-entrega">
+        <input
+          type="radio"
+          name="metodoEntrega"
+          value="ANDREANI"
+          onchange="cambiarMetodoEntrega()"
+        >
+        <span>
+          <strong>Andreani</strong><br>
+          <small>Envío mediante Andreani.</small>
+        </span>
+      </label>
 
-      <div id="andreaniFormularioDomicilio" class="andreani-formulario oculto">
-        <h3>Datos del destinatario</h3>
-        <div class="fila">
-          <div class="campo">
-            <label for="andDomNombre">Nombre y apellido</label>
-            <input id="andDomNombre" type="text" placeholder="Nombre y apellido completos" autocomplete="name">
-          </div>
-          <div class="campo">
-            <label for="andDomDni">DNI</label>
-            <input id="andDomDni" type="text" inputmode="numeric" placeholder="DNI del destinatario">
-          </div>
-        </div>
-        <div class="fila">
-          <div class="campo">
-            <label for="andDomTelefono">Teléfono / WhatsApp</label>
-            <input id="andDomTelefono" type="tel" placeholder="Tu número de contacto" autocomplete="tel">
-          </div>
-          <div class="campo">
-            <label for="andDomEmail">Correo electrónico</label>
-            <input id="andDomEmail" type="email" placeholder="tuemail@ejemplo.com" autocomplete="email">
-          </div>
-        </div>
+    </div>
 
-        <h3 style="margin-top:18px;">Dirección de entrega</h3>
-        <div class="fila">
-          <div class="campo">
-            <label for="andDomCalle">Calle</label>
-            <input id="andDomCalle" type="text" placeholder="Nombre de la calle">
-          </div>
-          <div class="campo">
-            <label for="andDomAltura">Altura / número</label>
-            <input id="andDomAltura" type="text" placeholder="Número">
-          </div>
-        </div>
-        <div class="fila">
-          <div class="campo">
-            <label for="andDomPiso">Piso (opcional)</label>
-            <input id="andDomPiso" type="text" placeholder="Piso">
-          </div>
-          <div class="campo">
-            <label for="andDomDepto">Departamento (opcional)</label>
-            <input id="andDomDepto" type="text" placeholder="Departamento">
-          </div>
-          <div class="campo">
-            <label for="andDomCP">Código postal</label>
-            <input id="andDomCP" type="text" placeholder="Código postal">
-          </div>
-        </div>
-        <div class="fila">
-          <div class="campo">
-            <label for="andDomLocalidad">Localidad</label>
-            <input id="andDomLocalidad" type="text" placeholder="Localidad">
-          </div>
-          <div class="campo">
-            <label for="andDomProvincia">Provincia</label>
-            <input id="andDomProvincia" type="text" placeholder="Provincia">
-          </div>
-        </div>
-      </div>
+    <div id="formularioEntrega" style="margin-top:22px"></div>
+    <div id="mensajeEntrega"></div>
+
+    <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:25px">
+      <button
+        class="btn-secundario"
+        type="button"
+        onclick="volverAProductos()"
+      >
+        Volver a boosters
+      </button>
 
       <button
+        class="btn-principal"
         type="button"
-        class="btn-whatsapp"
-        id="btnEnviarAndreaniWhatsApp"
-        onclick="enviarDatosAndreaniWhatsApp()"
+        onclick="confirmarPedido()"
+        id="btnConfirmarPedido"
       >
-        Enviar datos para el envío por WhatsApp
-      </button>
-
-      <div id="mensajeAndreani" class="mensaje"></div>
-    </div>
-
-    <div id="bloqueZona" class="oculto">
-      <div class="campo">
-        <label for="zona">Zona de entrega</label>
-        <select id="zona" onchange="actualizarLocalidadesMoto()">
-          <option value="">Seleccioná una zona</option>
-        </select>
-      </div>
-
-      <div class="campo">
-        <label for="localidadMoto">Localidad</label>
-        <select id="localidadMoto" onchange="actualizarCostoMoto()">
-          <option value="">Primero seleccioná una zona</option>
-        </select>
-      </div>
-
-      <div class="resumen-total">
-        <span>Costo de envío por moto</span>
-        <span class="total-grande" id="costoMoto">$0</span>
-      </div>
-    </div>
-
-    <div id="avisoCotizacion" class="mensaje info oculto">
-      El envío queda pendiente de cotización. Una vez que revisemos los datos,
-      te informaremos el costo correspondiente. No realices transferencias por
-      el envío hasta recibir la cotización.
-    </div>
-
-    <div id="bloqueContactoGeneral">
-      <h3 style="margin-top:20px;">Datos de contacto</h3>
-
-      <div class="fila">
-        <div class="campo">
-          <label for="email">Correo electrónico</label>
-          <input id="email" type="email" placeholder="tuemail@ejemplo.com" autocomplete="email">
-        </div>
-
-        <div class="campo">
-          <label for="telefono">Teléfono / WhatsApp</label>
-          <input id="telefono" type="tel" placeholder="Tu número de contacto" autocomplete="tel">
-        </div>
-      </div>
-    </div>
-
-    <div id="mensajeEntrega" class="mensaje"></div>
-
-    <div class="acciones">
-      <button class="btn-secundario" onclick="volverProductos()">
-        Volver
-      </button>
-      <button class="btn-principal" onclick="irAResumen()">
-        Continuar
+        Confirmar pedido
       </button>
     </div>
+
   </section>
 
-  <!-- PASO 4: RESUMEN -->
-  <section class="panel oculto" id="seccionResumen">
-    <h2>Revisá tu pedido</h2>
-    <p class="subtitulo">
-      Verificá que todos los datos sean correctos antes de confirmar.
+  <!-- ===================================================
+       SECCIÓN DE CONFIRMACIÓN
+  ==================================================== -->
+
+  <section class="panel oculto" id="seccionConfirmacion">
+
+    <div class="confirmacion">
+      <div class="confirmacion-icono">🎉</div>
+      <h2>¡Pedido registrado!</h2>
+      <p id="mensajeConfirmacion">
+        Tu pedido fue registrado correctamente.
+      </p>
+      <div id="datosPedidoConfirmado"></div>
+
+      <button
+        class="btn-principal"
+        type="button"
+        onclick="volverAlInicio()"
+        style="margin-top:20px"
+      >
+        Ir al inicio
+      </button>
+    </div>
+
+  </section>
+
+  <!-- ===================================================
+       HISTORIAL DE RECOMPENSAS
+  ==================================================== -->
+
+  <section class="panel oculto" id="seccionHistorial">
+
+    <h2 class="titulo-seccion">Mi historial de recompensas</h2>
+    <p class="subtitulo-seccion">
+      Consultá el estado de tus pedidos y canjes.
     </p>
 
-    <div id="resumenPedido"></div>
-
-    <div id="mensajeResumen" class="mensaje"></div>
-
-    <div class="acciones">
-      <button class="btn-secundario" onclick="volverEntrega()">
-        Volver
-      </button>
-      <button class="btn-principal" id="btnConfirmar" onclick="confirmarPedido()">
-        REALIZAR PEDIDO
-      </button>
+    <div id="contenidoHistorial">
+      Consultando tu historial de recompensas...
     </div>
-  </section>
 
-  <!-- RESULTADO -->
-  <section class="panel oculto centrado" id="seccionResultado">
-    <div id="contenidoResultado" class="pedido-exito"></div>
+    <button
+      class="btn-secundario"
+      type="button"
+      onclick="cerrarHistorial()"
+      style="margin-top:20px"
+    >
+      Volver a mis boosters
+    </button>
+
   </section>
 
 </main>
 
 <footer>
-  Charmarket 2026
+  Charmarket 2026 · Sistema de recompensas Pokémon
 </footer>
 
+<!-- =====================================================
+     MODAL REGLAMENTO
+====================================================== -->
+
+<div id="modalReglamento" class="modal oculto" onclick="cerrarReglamento(event)">
+  <div class="modal-contenido" onclick="event.stopPropagation()">
+    <button
+      class="modal-cerrar"
+      type="button"
+      onclick="cerrarReglamento()"
+      aria-label="Cerrar"
+    >
+      ×
+    </button>
+
+    <h2>Reglamento completo</h2>
+
+    <img
+      class="modal-imagen"
+      src="https://lh3.googleusercontent.com/d/1JGZm4TI7P83U3CZ45UTLAO-CiNjw0T-N"
+      alt="Reglamento completo de Charmarket"
+    >
+  </div>
+</div>
+
 <script>
-  // --------------------------------------------------
-  // CONFIGURACIÓN
-  // --------------------------------------------------
+/* =========================================================
+   CONFIGURACIÓN GENERAL
+========================================================= */
 
-  const API_URL =
-    "https://script.google.com/macros/s/AKfycbwQfu9b9kcBZbYfjC2zPykzxnjdBO4wfngrwBr23vEMiWCmi91eAtN7Cx5Zx8hOttnLgQ/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbwQfu9b9kcBZbYfjC2zPykzxnjdBO4wfngrwBr23vEMiWCmi91eAtN7Cx5Zx8hOttnLgQ/exec";
 
-  let usuarioActual = {
-    nombre: "",
-    apellido: "",
-    puntos: 0
-  };
+const URL_TOP100 = "https://drive.google.com/file/d/1Wp4xBSmaHsFjyJ1Y0TLArC1JgB4bNmgW/view";
 
-  let premios = [];
-  let tarifasMoto = [];
-  let carrito = {};
-  let metodoSeleccionado = "";
-  let tipoEntregaAndreani = "";
-  let andreaniDatosEnviados = false;
-  let seccionActual = "seccionIngreso";
-  let restaurandoProgreso = false;
-  let resultadoFinal = null;
+const DIRECCION_RETIRO = "Adolfo Alsina 4327, Villa Martelli, Buenos Aires, CP 1603";
 
-  const CLAVE_PROGRESO = "charmarket_canje_en_curso";
+let usuarioActual = null;
+let puntosActuales = 0;
+let productosDisponibles = [];
+let carrito = [];
+let metodoEntregaSeleccionado = "";
+let tarifasMoto = [];
+let pedidoEnProceso = false;
+let datosEntrega = {};
 
-  // --------------------------------------------------
-  // FUNCIONES GENERALES
-  // --------------------------------------------------
+/* =========================================================
+   FUNCIONES DE NAVEGACIÓN
+========================================================= */
 
-  function mostrarMensaje(id, texto, tipo) {
-    const elemento = document.getElementById(id);
-    elemento.textContent = texto;
-    elemento.className = "mensaje " + (tipo || "info");
+function mostrarSeccion(id) {
+  const secciones = [
+    "seccionIngreso",
+    "seccionProductos",
+    "seccionEntrega",
+    "seccionConfirmacion",
+    "seccionHistorial"
+  ];
+
+  secciones.forEach(seccion => {
+    const elemento = document.getElementById(seccion);
+    if (elemento) elemento.classList.add("oculto");
+  });
+
+  const destino = document.getElementById(id);
+  if (destino) destino.classList.remove("oculto");
+
+  actualizarPasos(id);
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function actualizarPasos(seccion) {
+  const pasos = [
+    document.getElementById("paso1"),
+    document.getElementById("paso2"),
+    document.getElementById("paso3"),
+    document.getElementById("paso4")
+  ];
+
+  pasos.forEach(p => {
+    p.classList.remove("activo", "completado");
+  });
+
+  let actual = 1;
+
+  if (seccion === "seccionProductos" || seccion === "seccionHistorial") actual = 2;
+  if (seccion === "seccionEntrega") actual = 3;
+  if (seccion === "seccionConfirmacion") actual = 4;
+
+  pasos.forEach((p, i) => {
+    if (i + 1 < actual) p.classList.add("completado");
+    if (i + 1 === actual) p.classList.add("activo");
+  });
+}
+
+function volverAlInicio() {
+  usuarioActual = null;
+  puntosActuales = 0;
+  productosDisponibles = [];
+  carrito = [];
+  metodoEntregaSeleccionado = "";
+  tarifasMoto = [];
+  datosEntrega = {};
+  pedidoEnProceso = false;
+
+  document.getElementById("nombre").value = "";
+  document.getElementById("apellido").value = "";
+  document.getElementById("mensajeIngreso").innerHTML = "";
+  document.getElementById("mensajeProductos").innerHTML = "";
+  document.getElementById("mensajeEntrega").innerHTML = "";
+  document.getElementById("formularioEntrega").innerHTML = "";
+  document.getElementById("resumenEntrega").innerHTML = "";
+
+  document.querySelectorAll('input[name="metodoEntrega"]').forEach(r => {
+    r.checked = false;
+  });
+
+  mostrarSeccion("seccionIngreso");
+}
+
+function volverAProductos() {
+  mostrarSeccion("seccionProductos");
+}
+
+function volverAlInicioDesdeHistorial() {
+  mostrarSeccion("seccionIngreso");
+}
+
+/* =========================================================
+   REGLAMENTO Y PDF
+========================================================= */
+
+function abrirReglamento() {
+  document.getElementById("modalReglamento").classList.remove("oculto");
+}
+
+function cerrarReglamento(event) {
+  if (event && event.target !== event.currentTarget) return;
+  document.getElementById("modalReglamento").classList.add("oculto");
+}
+
+function abrirTop100() {
+  window.open(URL_TOP100, "_blank", "noopener,noreferrer");
+}
+
+/* =========================================================
+   CONSULTA DE PUNTOS
+========================================================= */
+
+async function consultarPuntos() {
+  const nombre = document.getElementById("nombre").value.trim();
+  const apellido = document.getElementById("apellido").value.trim();
+  const boton = document.getElementById("btnConsultar");
+  const mensaje = document.getElementById("mensajeIngreso");
+
+  mensaje.innerHTML = "";
+
+  if (!nombre || !apellido) {
+    mostrarMensaje(mensaje, "Por favor, ingresá tu nombre y apellido.", "error");
+    return;
   }
 
-  function ocultarMensaje(id) {
-    const elemento = document.getElementById(id);
-    elemento.textContent = "";
-    elemento.className = "mensaje";
-  }
+  boton.disabled = true;
+  boton.textContent = "Consultando...";
 
-  function mostrarSeccion(id) {
-    const secciones = [
-      "seccionIngreso",
-      "seccionProductos",
-      "seccionEntrega",
-      "seccionResumen",
-      "seccionResultado",
-      "seccionHistorial"
-    ];
-
-    seccionActual = id;
-
-    secciones.forEach(function(nombre) {
-      document.getElementById(nombre).classList.add("oculto");
+  try {
+    const respuesta = await llamarAPI({
+      accion: "obtenerPuntos",
+      nombre: nombre,
+      apellido: apellido
     });
 
-    document.getElementById(id).classList.remove("oculto");
-
-    if (!restaurandoProgreso) {
-      guardarProgreso();
+    if (!respuesta || respuesta.error) {
+      throw new Error(respuesta?.mensaje || respuesta?.error || "No se pudo consultar tus puntos.");
     }
 
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-
-  function guardarProgreso() {
-    if (restaurandoProgreso) return;
-
-    if (seccionActual === "seccionIngreso") {
-      sessionStorage.removeItem(CLAVE_PROGRESO);
-      return;
+    if (respuesta.encontrado === false || respuesta.existe === false) {
+      throw new Error("No encontramos un usuario con ese nombre y apellido. Verificá los datos ingresados.");
     }
 
-    const progreso = {
-      seccion: seccionActual,
-      usuario: usuarioActual,
-      carrito: carrito,
-      metodo: metodoSeleccionado,
-      resultado: resultadoFinal,
-      campos: {
-        nombre: document.getElementById("nombre").value,
-        apellido: document.getElementById("apellido").value,
-        direccion: document.getElementById("direccion").value,
-        codigoPostal: document.getElementById("codigoPostal").value,
-        provincia: document.getElementById("provincia").value,
-        localidad: document.getElementById("localidad").value,
-        zona: document.getElementById("zona").value,
-        localidadMoto: document.getElementById("localidadMoto").value,
-        email: document.getElementById("email").value,
-        telefono: document.getElementById("telefono").value
-      }
-    };
-
-    try {
-      sessionStorage.setItem(
-        CLAVE_PROGRESO,
-        JSON.stringify(progreso)
-      );
-    } catch (error) {
-      console.error("No se pudo guardar el progreso:", error);
-    }
-  }
-
-  // --------------------------------------------------
-  // INICIO
-  // --------------------------------------------------
-
-  function iniciarPagina() {
-    // Eliminar cualquier sesión anterior guardada.
-    sessionStorage.removeItem(CLAVE_PROGRESO);
-
-    // Reiniciar los datos del usuario.
     usuarioActual = {
-      nombre: "",
-      apellido: "",
-      puntos: 0
+      nombre: nombre,
+      apellido: apellido,
+      ...respuesta
     };
 
-    premios = [];
-    tarifasMoto = [];
-    carrito = {};
-    metodoSeleccionado = "";
-    tipoEntregaAndreani = "";
-    andreaniDatosEnviados = false;
-    resultadoFinal = null;
-    seccionActual = "seccionIngreso";
-
-    // Vaciar los campos de ingreso.
-    document.getElementById("nombre").value = "";
-    document.getElementById("apellido").value = "";
-
-    // Mostrar exclusivamente la pantalla de ingreso.
-    const secciones = [
-      "seccionIngreso",
-      "seccionProductos",
-      "seccionEntrega",
-      "seccionResumen",
-      "seccionResultado",
-      "seccionHistorial"
-    ];
-
-    secciones.forEach(function(id) {
-      document.getElementById(id).classList.add("oculto");
-    });
-
-    document.getElementById("seccionIngreso").classList.remove("oculto");
-
-    actualizarPaso(1);
-
-    window.scrollTo({ top: 0, behavior: "auto" });
-  }
-
-  function actualizarPaso(numero) {
-    for (let i = 1; i <= 4; i++) {
-      const elemento = document.getElementById("paso" + i);
-      elemento.classList.toggle("activo", i === numero);
-    }
-  }
-
-  function escaparHTML(valor) {
-    return String(valor == null ? "" : valor)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-  }
-
-  function formatoNumero(valor) {
-    return Number(valor || 0).toLocaleString("es-AR");
-  }
-
-  function normalizar(valor) {
-    return String(valor || "").trim().toLowerCase();
-  }
-
-  // --------------------------------------------------
-  // HISTORIAL DE RECOMPENSAS
-  // --------------------------------------------------
-
-  async function abrirHistorial() {
-    ocultarMensaje("mensajeHistorial");
-
-    const secciones = [
-      "seccionIngreso",
-      "seccionProductos",
-      "seccionEntrega",
-      "seccionResumen",
-      "seccionResultado",
-      "seccionHistorial"
-    ];
-
-    secciones.forEach(function(id) {
-      document.getElementById(id).classList.add("oculto");
-    });
-
-    document.getElementById("seccionHistorial").classList.remove("oculto");
-
-    // No se modifica seccionActual ni el progreso del canje.
-    document.getElementById("contenidoHistorial").innerHTML = `
-      <div class="historial-vacio">
-        Consultando tu historial de recompensas...
-      </div>
-    `;
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
-
-    try {
-      const url = API_URL +
-        "?action=obtenerHistorial" +
-        "&nombre=" + encodeURIComponent(usuarioActual.nombre) +
-        "&apellido=" + encodeURIComponent(usuarioActual.apellido);
-
-      const respuesta = await fetch(url);
-      const datos = await respuesta.json();
-
-      if (!respuesta.ok || datos.error || !datos.ok) {
-        throw new Error(
-          datos.error || "No se pudo consultar tu historial."
-        );
-      }
-
-      dibujarHistorial(datos);
-
-    } catch (error) {
-      document.getElementById("contenidoHistorial").innerHTML = "";
-      mostrarMensaje(
-        "mensajeHistorial",
-        error.message || "No se pudo cargar tu historial. Intentá nuevamente.",
-        "error"
-      );
-    }
-  }
-
-  function volverDesdeHistorial() {
-    ocultarMensaje("mensajeHistorial");
-
-    document.getElementById("seccionHistorial")
-      .classList.add("oculto");
-
-    // Se vuelve a la selección sin cambiar el carrito ni el progreso.
-    document.getElementById("seccionProductos")
-      .classList.remove("oculto");
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-
-  function dibujarHistorial(datos) {
-    const usuario = datos.usuario || {};
-    const boosters = Array.isArray(datos.boosters) ? datos.boosters : [];
-    const pedidos = Array.isArray(datos.pedidos) ? datos.pedidos : [];
-
-    let html = `
-      <div class="historial-resumen">
-        <div class="historial-indicador">
-          <strong>${formatoNumero(usuario.puntosDisponibles)}</strong>
-          <span>Puntos disponibles</span>
-        </div>
-
-        <div class="historial-indicador">
-          <strong>${formatoNumero(usuario.puntosCanjeados)}</strong>
-          <span>Puntos canjeados</span>
-        </div>
-
-        <div class="historial-indicador">
-          <strong>${formatoNumero(
-            boosters.reduce(function(total, item) {
-              return total + Number(item.cantidad || 0);
-            }, 0)
-          )}</strong>
-          <span>Boosters obtenidos</span>
-        </div>
-      </div>
-    `;
-
-    html += `
-      <div class="historial-seccion">
-        <h3>👤 Datos de tu cuenta</h3>
-
-        <div class="historial-datos">
-          <div class="historial-dato">
-            <span>Nombre</span>
-            <strong>${escaparHTML(usuario.nombre)}</strong>
-          </div>
-
-          <div class="historial-dato">
-            <span>Apellido</span>
-            <strong>${escaparHTML(usuario.apellido)}</strong>
-          </div>
-        </div>
-      </div>
-    `;
-
-    html += `
-      <div class="historial-seccion">
-        <h3>🎁 Mis boosters obtenidos</h3>
-    `;
-
-    if (boosters.length) {
-      html += '<div class="historial-boosters">';
-
-      boosters.forEach(function(item) {
-        html += `
-          <div class="historial-booster">
-            <span>${escaparHTML(item.nombre)}</span>
-            <strong>${formatoNumero(item.cantidad)} unidades</strong>
-          </div>
-        `;
-      });
-
-      html += '</div>';
-    } else {
-      html += `
-        <div class="historial-vacio">
-          Todavía no tenés boosters registrados en tu historial.
-        </div>
-      `;
-    }
-
-    html += '</div>';
-
-    html += `
-      <div class="historial-seccion">
-        <h3>📦 Historial de pedidos</h3>
-    `;
-
-    if (pedidos.length) {
-      pedidos.forEach(function(pedido) {
-        const claseEstado = /^[a-z0-9_-]+$/i.test(pedido.claseEstado || "")
-          ? pedido.claseEstado
-          : "estado-otro";
-
-        let detalleBoosters = "";
-
-        if (Array.isArray(pedido.boosters) && pedido.boosters.length) {
-          detalleBoosters = pedido.boosters.map(function(item) {
-            return `
-              <div>
-                ${formatoNumero(item.cantidad)} x ${escaparHTML(item.nombre)}
-              </div>
-            `;
-          }).join("");
-        } else {
-          detalleBoosters = escaparHTML(pedido.detalle || "Sin detalle");
-        }
-
-        let informacionPlazo = "";
-
-        if (
-          pedido.mostrarPlazoRetiro &&
-          pedido.estadoVisual === "Listo para retirar"
-        ) {
-          let textoDias = "";
-
-          if (Number(pedido.diasRestantes) === 0) {
-            textoDias = "<strong>Hoy es el último día para retirar tu pedido.</strong>";
-          } else if (Number(pedido.diasRestantes) === 1) {
-            textoDias = "<strong>Queda 1 día para retirar tu pedido.</strong>";
-          } else {
-            textoDias = "<strong>Quedan " +
-              formatoNumero(pedido.diasRestantes) +
-              " días para retirar tu pedido.</strong>";
-          }
-
-          informacionPlazo = `
-            <div class="historial-plazo">
-              ${textoDias}
-              <br>
-              Fecha en que estuvo listo: ${escaparHTML(pedido.fechaListo || "No informada")}
-              <br>
-              Fecha límite para retirar: ${escaparHTML(pedido.fechaVencimiento || "No informada")}
-            </div>
-          `;
-        }
-
-        html += `
-          <article class="historial-pedido">
-            <div class="historial-pedido-cabecera">
-              <div>
-                <strong>Pedido ${escaparHTML(pedido.idPedido || "")}</strong>
-                <span class="historial-fecha">
-                  Fecha del pedido: ${escaparHTML(pedido.fecha || "No informada")}
-                </span>
-              </div>
-
-              <span class="historial-estado ${claseEstado}">
-                ${escaparHTML(pedido.estadoVisual || pedido.estado || "Sin estado")}
-              </span>
-            </div>
-
-            <div class="historial-detalle">
-              <strong>Boosters del pedido</strong>
-              ${detalleBoosters}
-            </div>
-
-            <div class="historial-datos">
-              <div class="historial-dato">
-                <span>Cantidad total</span>
-                <strong>${formatoNumero(pedido.cantidadBoosters)} boosters</strong>
-              </div>
-
-              <div class="historial-dato">
-                <span>Puntos utilizados</span>
-                <strong>${formatoNumero(pedido.totalPuntos)} puntos</strong>
-              </div>
-
-              <div class="historial-dato">
-                <span>Método de entrega</span>
-                <strong>${escaparHTML(pedido.metodo || "No informado")}</strong>
-              </div>
-
-              ${
-                pedido.localidad
-                  ? `
-                    <div class="historial-dato">
-                      <span>Localidad</span>
-                      <strong>${escaparHTML(pedido.localidad)}</strong>
-                    </div>
-                  `
-                  : ""
-              }
-            </div>
-
-            ${informacionPlazo}
-          </article>
-        `;
-      });
-
-    } else {
-      html += `
-        <div class="historial-vacio">
-          Todavía no registrás pedidos de canje.
-          <br>
-          Cuando realices tu primer pedido, aparecerá acá.
-        </div>
-      `;
-    }
-
-    html += '</div>';
-
-    document.getElementById("contenidoHistorial").innerHTML = html;
-  }
-
-  // --------------------------------------------------
-  // CONSULTA DE PUNTOS Y DATOS
-  // --------------------------------------------------
-
-  async function consultarPuntos() {
-    ocultarMensaje("mensajeIngreso");
-
-    const nombre = document.getElementById("nombre").value.trim();
-    const apellido = document.getElementById("apellido").value.trim();
-    const boton = document.getElementById("btnConsultar");
-
-    if (!nombre || !apellido) {
-      mostrarMensaje(
-        "mensajeIngreso",
-        "Ingresá tu nombre y apellido.",
-        "error"
-      );
-      return;
-    }
-
-    boton.disabled = true;
-    boton.textContent = "Consultando...";
-
-    try {
-      const url = API_URL +
-        "?action=obtenerPuntos" +
-        "&nombre=" + encodeURIComponent(nombre) +
-        "&apellido=" + encodeURIComponent(apellido);
-
-      const respuesta = await fetch(url);
-      const resultado = await respuesta.json();
-
-      if (resultado.error) {
-        throw new Error(resultado.error);
-      }
-
-      if (Number(resultado.puntos) < 0) {
-        throw new Error(
-          "No encontramos un usuario con ese nombre y apellido. Revisá los datos."
-        );
-      }
-
-      usuarioActual.nombre = nombre;
-      usuarioActual.apellido = apellido;
-      usuarioActual.puntos = Number(resultado.puntos);
-
-      const hoy = new Date();
-      const dia = hoy.getDate();
-
-      if (dia < 1 || dia > 30) {
-        mostrarMensaje(
-          "mensajeIngreso",
-          "El período de canje está habilitado únicamente del día 1 al 30 de cada mes.",
-          "error"
-        );
-        return;
-      }
-
-      await cargarDatos();
-      await cargarTarifas();
-
-      document.getElementById("puntosDisponibles").textContent =
-        formatoNumero(usuarioActual.puntos);
-
-      dibujarProductos();
-      actualizarTotal();
-
-      actualizarPaso(2);
-      mostrarSeccion("seccionProductos");
-
-    } catch (error) {
-      mostrarMensaje(
-        "mensajeIngreso",
-        error.message || "No se pudo consultar la información.",
-        "error"
-      );
-    } finally {
-      boton.disabled = false;
-      boton.textContent = "Consultar mis puntos";
-    }
-  }
-
-  async function cargarDatos() {
-    const respuesta = await fetch(API_URL + "?action=obtenerDatos");
-    const datos = await respuesta.json();
-
-    if (datos.error) {
-      throw new Error(datos.error);
-    }
-
-    if (!Array.isArray(datos.premios)) {
-      throw new Error("No se pudieron cargar los boosters.");
-    }
-
-    premios = datos.premios.slice(1).map(function(fila) {
-      return {
-        nombre: String(fila[0] || "").trim(),
-        precio: Number(fila[1]) || 0,
-        stock: Number(fila[2]) || 0,
-        imagen: String(fila[3] || "")
-      };
-    }).filter(function(p) {
-      return p.nombre !== "";
-    });
-  }
-
-  async function cargarTarifas() {
-    const respuesta = await fetch(
-      API_URL + "?action=obtenerTarifasMoto"
+    puntosActuales = Number(
+      respuesta.puntos ??
+      respuesta.puntosDisponibles ??
+      respuesta.saldo ??
+      0
     );
 
-    const datos = await respuesta.json();
+    document.getElementById("puntosDisponibles").textContent = formatearNumero(puntosActuales);
 
-    if (datos.error) {
-      throw new Error(datos.error);
-    }
+    await cargarDatosProductos();
+    await cargarTarifasMoto();
 
-    tarifasMoto = Array.isArray(datos.tarifas)
-      ? datos.tarifas
-      : [];
-  }
-
-  // --------------------------------------------------
-  // BOOSTERS Y CARRITO
-  // --------------------------------------------------
-
-  function dibujarProductos() {
-    const grilla = document.getElementById("grillaProductos");
-    grilla.innerHTML = "";
-
-    const premiosOrdenados = premios
-      .map(function(premio, indiceOriginal) {
-        return {
-          premio: premio,
-          indiceOriginal: indiceOriginal
-        };
-      })
-      .sort(function(a, b) {
-        const diferencia = a.premio.precio - b.premio.precio;
-
-        return diferencia !== 0
-          ? diferencia
-          : a.indiceOriginal - b.indiceOriginal;
-      });
-
-    premiosOrdenados.forEach(function(elemento) {
-      const premio = elemento.premio;
-      const indice = elemento.indiceOriginal;
-
-      const cantidad = Number(carrito[premio.nombre] || 0);
-      const agotado = premio.stock <= 0;
-
-      const tarjeta = document.createElement("div");
-      tarjeta.className = "producto";
-
-      tarjeta.innerHTML = `
-        <img
-          src="${escaparHTML(premio.imagen)}"
-          alt="${escaparHTML(premio.nombre)}"
-          onerror="this.style.display='none'"
-        >
-        <div class="producto-info">
-          <div class="producto-nombre">
-            ${escaparHTML(premio.nombre)}
-          </div>
-          <div class="producto-precio">
-            ${formatoNumero(premio.precio)} ${Number(premio.precio) === 1 ? "punto" : "puntos"}
-          </div>
-          <div class="producto-stock">
-            ${agotado ? "Sin stock" : "Stock: " + formatoNumero(premio.stock)}
-          </div>
-          <div class="producto-controles">
-            <button
-              class="btn-secundario"
-              onclick="cambiarCantidad(${indice}, -1)"
-              ${cantidad <= 0 ? "disabled" : ""}
-            >−</button>
-            <input
-              type="number"
-              min="0"
-              max="${premio.stock}"
-              value="${cantidad}"
-              id="cantidad-${indice}"
-              onchange="establecerCantidad(${indice}, this.value)"
-              ${agotado ? "disabled" : ""}
-            >
-            <button
-              class="btn-principal"
-              onclick="cambiarCantidad(${indice}, 1)"
-              ${agotado || cantidad >= premio.stock ? "disabled" : ""}
-            >+</button>
-          </div>
-        </div>
-      `;
-
-      grilla.appendChild(tarjeta);
-    });
-  }
-
-  function cambiarCantidad(indice, cambio) {
-    const premio = premios[indice];
-    const actual = Number(carrito[premio.nombre] || 0);
-    const nueva = Math.max(
-      0,
-      Math.min(premio.stock, actual + cambio)
-    );
-
-    carrito[premio.nombre] = nueva;
-    dibujarProductos();
-    actualizarTotal();
-  }
-
-  function establecerCantidad(indice, valor) {
-    const premio = premios[indice];
-    let cantidad = Math.floor(Number(valor) || 0);
-
-    cantidad = Math.max(
-      0,
-      Math.min(premio.stock, cantidad)
-    );
-
-    carrito[premio.nombre] = cantidad;
-    dibujarProductos();
-    actualizarTotal();
-  }
-
-  function obtenerItemsCarrito() {
-    return Object.keys(carrito)
-      .filter(function(nombre) {
-        return Number(carrito[nombre]) > 0;
-      })
-      .map(function(nombre) {
-        return {
-          booster: nombre,
-          cantidad: Number(carrito[nombre])
-        };
-      });
-  }
-
-  function calcularTotalPuntos() {
-    return obtenerItemsCarrito().reduce(function(total, item) {
-      const premio = premios.find(function(p) {
-        return p.nombre === item.booster;
-      });
-
-      return total + (premio ? premio.precio * item.cantidad : 0);
-    }, 0);
-  }
-
-  function calcularCantidadBoosters() {
-    return obtenerItemsCarrito().reduce(function(total, item) {
-      return total + item.cantidad;
-    }, 0);
-  }
-
-  function actualizarTotal() {
-    document.getElementById("totalPuntos").textContent =
-      formatoNumero(calcularTotalPuntos()) + " puntos";
-  }
-
-  function irAEntrega() {
-    ocultarMensaje("mensajeProductos");
-
-    const items = obtenerItemsCarrito();
-
-    if (items.length === 0) {
-      mostrarMensaje(
-        "mensajeProductos",
-        "Seleccioná al menos un booster para continuar.",
-        "error"
-      );
-      return;
-    }
-
-    if (calcularTotalPuntos() > usuarioActual.puntos) {
-      mostrarMensaje(
-        "mensajeProductos",
-        "No tenés puntos suficientes para este pedido.",
-        "error"
-      );
-      return;
-    }
-
-    actualizarPaso(3);
-    mostrarSeccion("seccionEntrega");
-  }
-
-  function volverIngreso() {
-    actualizarPaso(1);
-    mostrarSeccion("seccionIngreso");
-  }
-
-  function volverProductos() {
-    actualizarPaso(2);
     mostrarSeccion("seccionProductos");
+
+  } catch (error) {
+    mostrarMensaje(mensaje, error.message || "No se pudo consultar tus puntos.", "error");
+  } finally {
+    boton.disabled = false;
+    boton.textContent = "Consultar mis puntos";
   }
+}
 
-  // --------------------------------------------------
-  // MÉTODOS DE ENTREGA
-  // --------------------------------------------------
+/* =========================================================
+   CARGA DE PRODUCTOS
+========================================================= */
 
-  function seleccionarMetodo(metodo) {
-    metodoSeleccionado = metodo;
+async function cargarDatosProductos() {
+  const grid = document.getElementById("productosGrid");
+  grid.innerHTML = "<p>Cargando boosters...</p>";
 
-    [
-      "metodoRetiro",
-      "metodoMoto",
-      "metodoCorreo",
-      "metodoAndreani"
-    ].forEach(function(id) {
-      document.getElementById(id)
-        .classList.remove("seleccionado");
+  try {
+    const respuesta = await llamarAPI({
+      accion: "obtenerDatos"
     });
 
-    const ids = {
-      RETIRO: "metodoRetiro",
-      MOTO: "metodoMoto",
-      CORREO_ARGENTINO: "metodoCorreo",
-      ANDREANI: "metodoAndreani"
+    if (!respuesta || respuesta.error) {
+      throw new Error(respuesta?.mensaje || "No se pudieron cargar los boosters.");
+    }
+
+    let lista = [];
+
+    if (Array.isArray(respuesta)) {
+      lista = respuesta;
+    } else if (Array.isArray(respuesta.premios)) {
+      lista = respuesta.premios;
+    } else if (Array.isArray(respuesta.productos)) {
+      lista = respuesta.productos;
+    } else if (Array.isArray(respuesta.datos)) {
+      lista = respuesta.datos;
+    }
+
+    productosDisponibles = lista;
+    renderizarProductos();
+
+  } catch (error) {
+    grid.innerHTML = `<div class="mensaje error">${escaparHTML(error.message)}</div>`;
+  }
+}
+
+function renderizarProductos() {
+  const grid = document.getElementById("productosGrid");
+
+  if (!productosDisponibles.length) {
+    grid.innerHTML = "<p>No hay boosters disponibles en este momento.</p>";
+    return;
+  }
+
+  grid.innerHTML = "";
+
+  productosDisponibles.forEach((producto, indice) => {
+    const nombre = producto.nombre || producto.booster || producto.producto || "Booster";
+    const puntos = Number(producto.puntos ?? producto.costo ?? producto.precio ?? 0);
+    const stock = Number(producto.stock ?? producto.cantidad ?? 0);
+    const imagen = producto.imagen || producto.urlImagen || producto.foto || "";
+
+    const tarjeta = document.createElement("div");
+    tarjeta.className = "producto";
+
+    tarjeta.innerHTML = `
+      <img src="${escaparAtributo(imagen)}" alt="${escaparAtributo(nombre)}" loading="lazy">
+      <div class="producto-info">
+        <h3>${escaparHTML(nombre)}</h3>
+        <div class="producto-precio">${formatearNumero(puntos)} puntos</div>
+        <div class="producto-stock">Stock disponible: ${formatearNumero(stock)}</div>
+        <button class="btn-principal" type="button" onclick="agregarAlCarrito(${indice})" ${stock <= 0 ? "disabled" : ""}>
+          ${stock <= 0 ? "Sin stock" : "Agregar"}
+        </button>
+      </div>
+    `;
+
+    grid.appendChild(tarjeta);
+  });
+}
+
+/* =========================================================
+   CARRITO
+========================================================= */
+
+function agregarAlCarrito(indice) {
+  const producto = productosDisponibles[indice];
+  if (!producto) return;
+
+  const nombre = producto.nombre || producto.booster || producto.producto || "Booster";
+  const puntos = Number(producto.puntos ?? producto.costo ?? producto.precio ?? 0);
+  const stock = Number(producto.stock ?? producto.cantidad ?? 0);
+
+  const existente = carrito.find(item => item.nombre === nombre);
+  const cantidadActual = existente ? existente.cantidad : 0;
+
+  if (cantidadActual + 1 > stock) {
+    alert("No hay stock suficiente para agregar otra unidad.");
+    return;
+  }
+
+  if (existente) {
+    existente.cantidad++;
+  } else {
+    carrito.push({
+      nombre: nombre,
+      puntos: puntos,
+      cantidad: 1,
+      stock: stock,
+      id: producto.id || producto.codigo || ""
+    });
+  }
+
+  renderizarCarrito();
+}
+
+function modificarCantidad(nombre, cambio) {
+  const item = carrito.find(p => p.nombre === nombre);
+  if (!item) return;
+
+  const nuevaCantidad = item.cantidad + cambio;
+
+  if (nuevaCantidad <= 0) {
+    carrito = carrito.filter(p => p.nombre !== nombre);
+  } else if (nuevaCantidad > item.stock) {
+    alert("No hay stock suficiente.");
+    return;
+  } else {
+    item.cantidad = nuevaCantidad;
+  }
+
+  renderizarCarrito();
+}
+
+function renderizarCarrito() {
+  const contenedor = document.getElementById("carritoContenido");
+  const totalContenedor = document.getElementById("carritoTotal");
+
+  if (!carrito.length) {
+    contenedor.innerHTML = "Todavía no seleccionaste boosters.";
+    totalContenedor.textContent = "";
+    return;
+  }
+
+  contenedor.innerHTML = "";
+
+  carrito.forEach(item => {
+    const fila = document.createElement("div");
+    fila.className = "carrito-item";
+
+    fila.innerHTML = `
+      <div>
+        <strong>${escaparHTML(item.nombre)}</strong><br>
+        <small>${formatearNumero(item.puntos)} puntos por unidad</small>
+      </div>
+      <div class="carrito-controles">
+        <button type="button" onclick="modificarCantidad('${escaparAtributo(item.nombre)}', -1)">−</button>
+        <strong>${item.cantidad}</strong>
+        <button type="button" onclick="modificarCantidad('${escaparAtributo(item.nombre)}', 1)">+</button>
+      </div>
+    `;
+
+    contenedor.appendChild(fila);
+  });
+
+  totalContenedor.textContent = `Total: ${formatearNumero(calcularTotalCarrito())} puntos`;
+}
+
+function calcularTotalCarrito() {
+  return carrito.reduce((total, item) => total + item.puntos * item.cantidad, 0);
+}
+
+function calcularCantidadBoosters() {
+  return carrito.reduce((total, item) => total + item.cantidad, 0);
+}
+
+/* =========================================================
+   CONTINUAR A ENTREGA
+========================================================= */
+
+function continuarEntrega() {
+  if (!carrito.length) {
+    alert("Primero tenés que seleccionar al menos un booster.");
+    return;
+  }
+
+  const total = calcularTotalCarrito();
+
+  if (total > puntosActuales) {
+    alert("No tenés puntos suficientes para realizar este canje.");
+    return;
+  }
+
+  document.getElementById("resumenEntrega").innerHTML = `
+    <div class="barra-puntos">
+      <div>Boosters seleccionados: <strong>${calcularCantidadBoosters()}</strong></div>
+      <div>Total del canje: <strong>${formatearNumero(total)} puntos</strong></div>
+      <div>Saldo restante: <strong>${formatearNumero(puntosActuales - total)} puntos</strong></div>
+    </div>
+  `;
+
+  mostrarSeccion("seccionEntrega");
+}
+
+/* =========================================================
+   TARIFAS DE MOTO
+========================================================= */
+
+async function cargarTarifasMoto() {
+  try {
+    const respuesta = await llamarAPI({
+      accion: "obtenerTarifasMoto"
+    });
+
+    if (Array.isArray(respuesta)) {
+      tarifasMoto = respuesta;
+    } else if (Array.isArray(respuesta.tarifas)) {
+      tarifasMoto = respuesta.tarifas;
+    } else {
+      tarifasMoto = [];
+    }
+  } catch (error) {
+    console.warn("No se pudieron cargar las tarifas de moto:", error);
+    tarifasMoto = [];
+  }
+}
+
+/* =========================================================
+   MÉTODO DE ENTREGA
+========================================================= */
+
+function cambiarMetodoEntrega() {
+  const seleccionado = document.querySelector('input[name="metodoEntrega"]:checked');
+
+  if (!seleccionado) return;
+
+  metodoEntregaSeleccionado = seleccionado.value;
+
+  const formulario = document.getElementById("formularioEntrega");
+  const cantidad = calcularCantidadBoosters();
+
+  if (metodoEntregaSeleccionado !== "RETIRO" && cantidad < 10) {
+    formulario.innerHTML = `
+      <div class="mensaje error">
+        Para utilizar un método de envío necesitás seleccionar al menos 10 boosters.
+        Podés elegir retiro personalmente.
+      </div>
+    `;
+    return;
+  }
+
+  if (metodoEntregaSeleccionado === "RETIRO") {
+    formularioRetiro();
+  } else if (metodoEntregaSeleccionado === "MOTO") {
+    formularioMoto();
+  } else if (metodoEntregaSeleccionado === "CORREO_ARGENTINO") {
+    formularioCorreoArgentino();
+  } else if (metodoEntregaSeleccionado === "ANDREANI") {
+    formularioAndreani();
+  }
+}
+
+function formularioRetiro() {
+  document.getElementById("formularioEntrega").innerHTML = `
+    <div class="mensaje info">
+      <strong>Retiro personal</strong><br>
+      Dirección: ${escaparHTML(DIRECCION_RETIRO)}<br>
+      Una vez que tu pedido esté listo, recibirás el aviso correspondiente.
+      Recordá que tenés 60 días para retirarlo.
+    </div>
+  `;
+}
+
+/* =========================================================
+   FORMULARIO MOTO
+========================================================= */
+
+function formularioMoto() {
+  document.getElementById("formularioEntrega").innerHTML = `
+    <h3>Datos para el envío por moto</h3>
+
+    <div class="form-grid">
+      <div class="campo">
+        <label for="motoNombre">Nombre y apellido</label>
+        <input id="motoNombre" type="text" placeholder="Nombre y apellido">
+      </div>
+
+      <div class="campo">
+        <label for="motoTelefono">Teléfono</label>
+        <input id="motoTelefono" type="tel" placeholder="Teléfono">
+      </div>
+
+      <div class="campo completo">
+        <label for="motoDireccion">Dirección</label>
+        <input id="motoDireccion" type="text" placeholder="Calle y altura">
+      </div>
+
+      <div class="campo">
+        <label for="motoLocalidad">Localidad</label>
+        <input id="motoLocalidad" type="text" placeholder="Localidad">
+      </div>
+
+      <div class="campo">
+        <label for="motoCodigoPostal">Código postal</label>
+        <input id="motoCodigoPostal" type="text" placeholder="Código postal">
+      </div>
+
+      <div class="campo completo">
+        <label for="motoReferencia">Referencias (opcional)</label>
+        <textarea id="motoReferencia" rows="2" placeholder="Indicaciones para encontrar el domicilio"></textarea>
+      </div>
+    </div>
+
+    <div class="mensaje info">
+      El costo del envío se informará según la tarifa correspondiente.
+    </div>
+  `;
+}
+
+/* =========================================================
+   FORMULARIO CORREO ARGENTINO
+========================================================= */
+
+function formularioCorreoArgentino() {
+  document.getElementById("formularioEntrega").innerHTML = `
+    <h3>Datos para Correo Argentino</h3>
+
+    <div class="form-grid">
+      <div class="campo">
+        <label for="caNombre">Nombre y apellido</label>
+        <input id="caNombre" type="text" placeholder="Nombre y apellido">
+      </div>
+
+      <div class="campo">
+        <label for="caDni">DNI</label>
+        <input id="caDni" type="text" placeholder="DNI">
+      </div>
+
+      <div class="campo">
+        <label for="caTelefono">Teléfono</label>
+        <input id="caTelefono" type="tel" placeholder="Teléfono">
+      </div>
+
+      <div class="campo">
+        <label for="caEmail">Correo electrónico</label>
+        <input id="caEmail" type="email" placeholder="Correo electrónico">
+      </div>
+
+      <div class="campo completo">
+        <label for="caDestino">Tipo de entrega</label>
+        <select id="caDestino" onchange="cambiarDestinoCorreo()">
+          <option value="">Seleccioná una opción</option>
+          <option value="SUCURSAL">Retiro en sucursal</option>
+          <option value="DOMICILIO">Entrega a domicilio</option>
+        </select>
+      </div>
+
+      <div class="campo completo" id="caSucursalContenedor">
+        <label for="caSucursal">Sucursal de destino</label>
+        <input id="caSucursal" type="text" placeholder="Nombre o dirección de la sucursal">
+      </div>
+
+      <div class="campo completo oculto" id="caDomicilioContenedor">
+        <label for="caDireccion">Dirección de entrega</label>
+        <input id="caDireccion" type="text" placeholder="Calle y altura">
+      </div>
+
+      <div class="campo">
+        <label for="caLocalidad">Localidad</label>
+        <input id="caLocalidad" type="text" placeholder="Localidad">
+      </div>
+
+      <div class="campo">
+        <label for="caProvincia">Provincia</label>
+        <input id="caProvincia" type="text" placeholder="Provincia">
+      </div>
+
+      <div class="campo">
+        <label for="caCP">Código postal</label>
+        <input id="caCP" type="text" placeholder="Código postal">
+      </div>
+    </div>
+
+    <div class="mensaje info">
+      El envío se coordinará según los datos proporcionados.
+    </div>
+  `;
+}
+
+function cambiarDestinoCorreo() {
+  const destino = document.getElementById("caDestino").value;
+  const sucursal = document.getElementById("caSucursalContenedor");
+  const domicilio = document.getElementById("caDomicilioContenedor");
+
+  sucursal.classList.toggle("oculto", destino !== "SUCURSAL");
+  domicilio.classList.toggle("oculto", destino !== "DOMICILIO");
+}
+
+/* =========================================================
+   FORMULARIO ANDREANI
+========================================================= */
+
+function formularioAndreani() {
+  document.getElementById("formularioEntrega").innerHTML = `
+    <h3>Datos para envío por Andreani</h3>
+
+    <div class="form-grid">
+      <div class="campo">
+        <label for="anNombre">Nombre y apellido</label>
+        <input id="anNombre" type="text" placeholder="Nombre y apellido">
+      </div>
+
+      <div class="campo">
+        <label for="anDni">DNI</label>
+        <input id="anDni" type="text" placeholder="DNI">
+      </div>
+
+      <div class="campo">
+        <label for="anTelefono">Teléfono</label>
+        <input id="anTelefono" type="tel" placeholder="Teléfono">
+      </div>
+
+      <div class="campo">
+        <label for="anEmail">Correo electrónico</label>
+        <input id="anEmail" type="email" placeholder="Correo electrónico">
+      </div>
+
+      <div class="campo completo">
+        <label for="anTipoEntrega">Tipo de entrega</label>
+        <select id="anTipoEntrega">
+          <option value="">Seleccioná una opción</option>
+          <option value="SUCURSAL">Retiro en sucursal</option>
+          <option value="DOMICILIO">Entrega a domicilio</option>
+        </select>
+      </div>
+
+      <div class="campo completo">
+        <label for="anDireccion">Dirección o sucursal de destino</label>
+        <input id="anDireccion" type="text" placeholder="Dirección o sucursal">
+      </div>
+
+      <div class="campo">
+        <label for="anLocalidad">Localidad</label>
+        <input id="anLocalidad" type="text" placeholder="Localidad">
+      </div>
+
+      <div class="campo">
+        <label for="anProvincia">Provincia</label>
+        <input id="anProvincia" type="text" placeholder="Provincia">
+      </div>
+
+      <div class="campo">
+        <label for="anCP">Código postal</label>
+        <input id="anCP" type="text" placeholder="Código postal">
+      </div>
+    </div>
+
+    <div class="mensaje info">
+      Una vez confirmado el pedido, se coordinará el envío por Andreani.
+    </div>
+  `;
+}
+
+/* =========================================================
+   VALIDACIÓN DE ENTREGA
+========================================================= */
+
+function obtenerDatosFormularioEntrega() {
+  if (metodoEntregaSeleccionado === "RETIRO") {
+    return {
+      metodo: "RETIRO",
+      direccion: DIRECCION_RETIRO
+    };
+  }
+
+  if (metodoEntregaSeleccionado === "MOTO") {
+    const datos = {
+      metodo: "MOTO",
+      nombre: valor("motoNombre"),
+      telefono: valor("motoTelefono"),
+      direccion: valor("motoDireccion"),
+      localidad: valor("motoLocalidad"),
+      codigoPostal: valor("motoCodigoPostal"),
+      referencia: valor("motoReferencia")
     };
 
-    document.getElementById(ids[metodo])
-      .classList.add("seleccionado");
-
-    document.getElementById("bloqueRetiro")
-      .classList.toggle("oculto", metodo !== "RETIRO");
-
-    document.getElementById("bloqueEnvio")
-      .classList.toggle(
-        "oculto",
-        metodo === "RETIRO" || metodo === "ANDREANI"
-      );
-
-    document.getElementById("bloqueAndreani")
-      .classList.toggle("oculto", metodo !== "ANDREANI");
-
-    document.getElementById("bloqueContactoGeneral")
-      .classList.toggle("oculto", metodo === "ANDREANI");
-
-    document.getElementById("bloqueZona")
-      .classList.toggle("oculto", metodo !== "MOTO");
-
-    document.getElementById("bloqueLocalidad")
-      .classList.toggle(
-        "oculto",
-        metodo !== "CORREO_ARGENTINO"
-      );
-
-    document.getElementById("campoProvincia")
-      .classList.toggle(
-        "oculto",
-        metodo !== "CORREO_ARGENTINO"
-      );
-
-    document.getElementById("avisoCotizacion")
-      .classList.toggle(
-        "oculto",
-        metodo !== "CORREO_ARGENTINO" && metodo !== "ANDREANI"
-      );
-
-    if (metodo !== "ANDREANI") {
-      ocultarMensaje("mensajeAndreani");
-    }
-
-    if (metodo === "MOTO") {
-      cargarZonasMoto();
-    }
-  }
-
-  function seleccionarAndreaniTipo(tipo) {
-    tipoEntregaAndreani = tipo;
-    andreaniDatosEnviados = false;
-
-    document.getElementById("andreaniTipoSucursal")
-      .classList.toggle("seleccionado", tipo === "SUCURSAL");
-
-    document.getElementById("andreaniTipoDomicilio")
-      .classList.toggle("seleccionado", tipo === "DOMICILIO");
-
-    document.getElementById("andreaniFormularioSucursal")
-      .classList.toggle("oculto", tipo !== "SUCURSAL");
-
-    document.getElementById("andreaniFormularioDomicilio")
-      .classList.toggle("oculto", tipo !== "DOMICILIO");
-
-    ocultarMensaje("mensajeAndreani");
-    guardarProgreso();
-  }
-
-  function obtenerDatosAndreani() {
-    if (tipoEntregaAndreani === "SUCURSAL") {
-      return {
-        tipo: "Retiro en sucursal Andreani",
-        nombre: document.getElementById("andSucNombre").value.trim(),
-        apellido: document.getElementById("andSucApellido").value.trim(),
-        dni: document.getElementById("andSucDni").value.trim(),
-        email: document.getElementById("andSucEmail").value.trim(),
-        telefono: document.getElementById("andSucTelefono").value.trim(),
-        localidad: document.getElementById("andSucursalLocalidad").value.trim(),
-        provincia: document.getElementById("andSucursalProvincia").value.trim(),
-        codigoPostal: document.getElementById("andSucursalCP").value.trim(),
-        direccion: document.getElementById("andSucursalDireccion").value.trim()
-      };
-    }
-
-    if (tipoEntregaAndreani === "DOMICILIO") {
-      return {
-        tipo: "Envío a domicilio",
-        nombre: document.getElementById("andDomNombre").value.trim(),
-        dni: document.getElementById("andDomDni").value.trim(),
-        telefono: document.getElementById("andDomTelefono").value.trim(),
-        email: document.getElementById("andDomEmail").value.trim(),
-        calle: document.getElementById("andDomCalle").value.trim(),
-        altura: document.getElementById("andDomAltura").value.trim(),
-        piso: document.getElementById("andDomPiso").value.trim(),
-        departamento: document.getElementById("andDomDepto").value.trim(),
-        codigoPostal: document.getElementById("andDomCP").value.trim(),
-        localidad: document.getElementById("andDomLocalidad").value.trim(),
-        provincia: document.getElementById("andDomProvincia").value.trim()
-      };
-    }
-
-    return null;
-  }
-
-  function validarDatosAndreani() {
-    if (!tipoEntregaAndreani) {
-      throw new Error("Elegí retirar en sucursal o recibir el pedido a domicilio.");
-    }
-
-    const datos = obtenerDatosAndreani();
-
-    if (tipoEntregaAndreani === "SUCURSAL") {
-      if (
-        !datos.localidad || !datos.provincia ||
-        !datos.codigoPostal || !datos.direccion
-      ) {
-        throw new Error("Completá todos los datos de la sucursal Andreani.");
-      }
-      if (!datos.nombre || !datos.apellido || !datos.dni ||
-          !datos.email || !datos.email.includes("@") || !datos.telefono) {
-        throw new Error("Completá todos los datos del destinatario con un correo válido.");
-      }
-    } else {
-      if (!datos.nombre || !datos.dni || !datos.telefono ||
-          !datos.email || !datos.email.includes("@")) {
-        throw new Error("Completá los datos del destinatario con un correo válido.");
-      }
-      if (!datos.calle || !datos.altura || !datos.codigoPostal ||
-          !datos.localidad || !datos.provincia) {
-        throw new Error("Completá calle, altura, código postal, localidad y provincia.");
-      }
+    if (!datos.nombre || !datos.telefono || !datos.direccion || !datos.localidad) {
+      throw new Error("Completá los datos obligatorios del envío por moto.");
     }
 
     return datos;
   }
 
-  function enviarDatosAndreaniWhatsApp() {
-    ocultarMensaje("mensajeAndreani");
-
-    try {
-      const datos = validarDatosAndreani();
-      const boosters = obtenerItemsCarrito().map(function(item) {
-        return item.cantidad + " x " + item.booster;
-      }).join("\\n");
-
-      let detalle = "";
-
-      if (tipoEntregaAndreani === "SUCURSAL") {
-        detalle =
-          "SUCURSAL ANDREANI\\n" +
-          "Localidad: " + datos.localidad + "\\n" +
-          "Provincia: " + datos.provincia + "\\n" +
-          "Código postal: " + datos.codigoPostal + "\\n" +
-          "Dirección de sucursal: " + datos.direccion + "\\n\\n" +
-          "DATOS DEL DESTINATARIO\\n" +
-          "Nombre y apellido: " + datos.nombre + " " + datos.apellido + "\\n" +
-          "DNI: " + datos.dni + "\\n" +
-          "Correo electrónico: " + datos.email + "\\n" +
-          "Teléfono/WhatsApp: " + datos.telefono;
-      } else {
-        detalle =
-          "ENVÍO ANDREANI A DOMICILIO\\n" +
-          "Nombre y apellido: " + datos.nombre + "\\n" +
-          "DNI: " + datos.dni + "\\n" +
-          "Teléfono/WhatsApp: " + datos.telefono + "\\n" +
-          "Correo electrónico: " + datos.email + "\\n\\n" +
-          "DIRECCIÓN DE ENTREGA\\n" +
-          "Calle: " + datos.calle + "\\n" +
-          "Altura/número: " + datos.altura + "\\n" +
-          "Piso: " + (datos.piso || "No especificado") + "\\n" +
-          "Departamento: " + (datos.departamento || "No especificado") + "\\n" +
-          "Código postal: " + datos.codigoPostal + "\\n" +
-          "Localidad: " + datos.localidad + "\\n" +
-          "Provincia: " + datos.provincia;
-      }
-
-      const mensaje =
-        "Hola, quiero coordinar un envío por Andreani desde Charmarket.\\n\\n" +
-        "Cuenta del cliente: " + usuarioActual.nombre + " " + usuarioActual.apellido + "\\n" +
-        "Modalidad: " + datos.tipo + "\\n\\n" +
-        detalle + "\\n\\n" +
-        "PEDIDO\\n" +
-        "Boosters: " + (boosters || "No especificados") + "\\n" +
-        "Cantidad total: " + calcularCantidadBoosters() + " boosters\\n" +
-        "Puntos: " + formatoNumero(calcularTotalPuntos());
-
-      const url = "https://wa.me/5491130822897?text=" +
-        encodeURIComponent(mensaje);
-
-      window.open(url, "_blank", "noopener,noreferrer");
-      andreaniDatosEnviados = true;
-
-      mostrarMensaje(
-        "mensajeAndreani",
-        "Se abrió WhatsApp con los datos preparados. Revisá el mensaje y pulsá Enviar. Después volvé a Charmarket y tocá Continuar para registrar tu pedido.",
-        "ok"
-      );
-
-      guardarProgreso();
-
-    } catch (error) {
-      mostrarMensaje("mensajeAndreani", error.message, "error");
-    }
-  }
-
-  function cargarZonasMoto() {
-    const select = document.getElementById("zona");
-    const zonas = [...new Set(
-      tarifasMoto.map(function(t) {
-        return String(t.zona || "").trim();
-      }).filter(Boolean)
-    )];
-
-    select.innerHTML =
-      '<option value="">Seleccioná una zona</option>';
-
-    zonas.forEach(function(zona) {
-      const opcion = document.createElement("option");
-      opcion.value = zona;
-      opcion.textContent = zona;
-      select.appendChild(opcion);
-    });
-
-    actualizarLocalidadesMoto();
-  }
-
-  function actualizarLocalidadesMoto() {
-    const zona = document.getElementById("zona").value;
-    const select = document.getElementById("localidadMoto");
-
-    select.innerHTML =
-      '<option value="">Seleccioná una localidad</option>';
-
-    const localidades = tarifasMoto.filter(function(t) {
-      return normalizar(t.zona) === normalizar(zona);
-    });
-
-    localidades.forEach(function(tarifa) {
-      const opcion = document.createElement("option");
-      opcion.value = tarifa.localidad;
-      opcion.textContent = tarifa.localidad;
-      select.appendChild(opcion);
-    });
-
-    actualizarCostoMoto();
-  }
-
-  function actualizarCostoMoto() {
-    const zona = document.getElementById("zona").value;
-    const localidad = document.getElementById("localidadMoto").value;
-
-    const tarifa = tarifasMoto.find(function(t) {
-      return (
-        normalizar(t.zona) === normalizar(zona) &&
-        normalizar(t.localidad) === normalizar(localidad)
-      );
-    });
-
-    document.getElementById("costoMoto").textContent =
-      tarifa
-        ? "$" + formatoNumero(tarifa.precio)
-        : "Seleccioná localidad";
-  }
-
-  function obtenerCostoMoto() {
-    const zona = document.getElementById("zona").value;
-    const localidad = document.getElementById("localidadMoto").value;
-
-    const tarifa = tarifasMoto.find(function(t) {
-      return (
-        normalizar(t.zona) === normalizar(zona) &&
-        normalizar(t.localidad) === normalizar(localidad)
-      );
-    });
-
-    return tarifa ? Number(tarifa.precio) : null;
-  }
-
-  function validarEntrega() {
-    if (!metodoSeleccionado) {
-      throw new Error("Seleccioná cómo querés recibir tu pedido.");
-    }
-
-    const cantidad = calcularCantidadBoosters();
-
-    if (metodoSeleccionado !== "RETIRO" && cantidad < 10) {
-      throw new Error(
-        "Para solicitar envío necesitás al menos 10 boosters. Podés elegir retiro."
-      );
-    }
-
-    if (metodoSeleccionado === "ANDREANI") {
-      validarDatosAndreani();
-      if (!andreaniDatosEnviados) {
-        throw new Error(
-          "Primero completá los datos y pulsá «Enviar datos para el envío por WhatsApp»."
-        );
-      }
-      return;
-    }
-
-    const email = document.getElementById("email").value.trim();
-    const telefono = document.getElementById("telefono").value.trim();
-
-    if (!email || !email.includes("@")) {
-      throw new Error("Ingresá un correo electrónico válido.");
-    }
-
-    if (!telefono) {
-      throw new Error("Ingresá tu teléfono o WhatsApp.");
-    }
-
-    if (metodoSeleccionado !== "RETIRO") {
-      const direccion = document.getElementById("direccion").value.trim();
-      const cp = document.getElementById("codigoPostal").value.trim();
-
-      if (!direccion || !cp) {
-        throw new Error("Completá la dirección y el código postal.");
-      }
-
-      if (metodoSeleccionado === "MOTO") {
-        if (!document.getElementById("zona").value) {
-          throw new Error("Seleccioná una zona.");
-        }
-
-        if (!document.getElementById("localidadMoto").value) {
-          throw new Error("Seleccioná una localidad para la moto.");
-        }
-
-        if (obtenerCostoMoto() === null) {
-          throw new Error("No encontramos el costo de esa localidad.");
-        }
-      }
-
-      if (metodoSeleccionado === "CORREO_ARGENTINO") {
-        if (!document.getElementById("localidad").value.trim()) {
-          throw new Error("Ingresá la localidad.");
-        }
-
-        if (!document.getElementById("provincia").value.trim()) {
-          throw new Error("Ingresá la provincia.");
-        }
-      }
-    }
-  }
-
-  function irAResumen() {
-    ocultarMensaje("mensajeEntrega");
-
-    try {
-      validarEntrega();
-      dibujarResumen();
-      actualizarPaso(4);
-      mostrarSeccion("seccionResumen");
-
-    } catch (error) {
-      mostrarMensaje(
-        "mensajeEntrega",
-        error.message,
-        "error"
-      );
-    }
-  }
-
-  function volverEntrega() {
-    actualizarPaso(3);
-    mostrarSeccion("seccionEntrega");
-  }
-
-  // --------------------------------------------------
-  // RESUMEN DEL PEDIDO
-  // --------------------------------------------------
-
-  function dibujarResumen() {
-    const items = obtenerItemsCarrito();
-    const total = calcularTotalPuntos();
-    const cantidad = calcularCantidadBoosters();
-
-    let html = `
-      <div class="resumen-linea">
-        <strong>Cliente</strong>
-        <span>${escaparHTML(usuarioActual.nombre)} ${escaparHTML(usuarioActual.apellido)}</span>
-      </div>
-    `;
-
-    items.forEach(function(item) {
-      const premio = premios.find(function(p) {
-        return p.nombre === item.booster;
-      });
-
-      html += `
-        <div class="resumen-linea">
-          <span>${formatoNumero(item.cantidad)} x ${escaparHTML(item.booster)}</span>
-          <strong>${formatoNumero(premio ? premio.precio * item.cantidad : 0)} puntos</strong>
-        </div>
-      `;
-    });
-
-    html += `
-      <div class="resumen-linea">
-        <strong>Cantidad total</strong>
-        <strong>${formatoNumero(cantidad)} boosters</strong>
-      </div>
-
-      <div class="resumen-linea">
-        <strong>Total a descontar</strong>
-        <strong class="total-grande">${formatoNumero(total)} puntos</strong>
-      </div>
-
-      <div class="resumen-linea">
-        <strong>Método de entrega</strong>
-        <span>${escaparHTML(metodoSeleccionado)}</span>
-      </div>
-    `;
-
-    if (metodoSeleccionado === "RETIRO") {
-      html += `
-        <div class="direccion-retiro">
-          <strong>Retiro en persona</strong><br>
-          Adolfo Alsina 4327, Villa Martelli, Buenos Aires, CP 1603.
-        </div>
-      `;
-    }
-
-    if (metodoSeleccionado === "MOTO") {
-      html += `
-        <div class="resumen-linea">
-          <strong>Zona</strong>
-          <span>${escaparHTML(document.getElementById("zona").value)}</span>
-        </div>
-        <div class="resumen-linea">
-          <strong>Localidad</strong>
-          <span>${escaparHTML(document.getElementById("localidadMoto").value)}</span>
-        </div>
-        <div class="resumen-linea">
-          <strong>Dirección</strong>
-          <span>${escaparHTML(document.getElementById("direccion").value)}</span>
-        </div>
-        <div class="resumen-linea">
-          <strong>Costo de envío</strong>
-          <strong>$${formatoNumero(obtenerCostoMoto())}</strong>
-        </div>
-      `;
-    }
-
-    if (metodoSeleccionado === "CORREO_ARGENTINO") {
-      html += `
-        <div class="resumen-linea">
-          <strong>Dirección</strong>
-          <span>${escaparHTML(document.getElementById("direccion").value)}</span>
-        </div>
-        <div class="resumen-linea">
-          <strong>Localidad</strong>
-          <span>${escaparHTML(document.getElementById("localidad").value)}</span>
-        </div>
-        <div class="resumen-linea">
-          <strong>Provincia</strong>
-          <span>${escaparHTML(document.getElementById("provincia").value)}</span>
-        </div>
-        <div class="resumen-linea">
-          <strong>Código postal</strong>
-          <span>${escaparHTML(document.getElementById("codigoPostal").value)}</span>
-        </div>
-        <div class="mensaje info" style="display:block">
-          El costo del envío será informado después de cotizarlo.
-        </div>
-      `;
-    }
-
-    if (metodoSeleccionado === "ANDREANI") {
-      const and = obtenerDatosAndreani();
-
-      html += `
-        <div class="resumen-linea">
-          <strong>Modalidad Andreani</strong>
-          <span>${escaparHTML(and.tipo)}</span>
-        </div>
-      `;
-
-      if (tipoEntregaAndreani === "SUCURSAL") {
-        html += `
-          <div class="resumen-linea">
-            <strong>Sucursal</strong>
-            <span>${escaparHTML(and.direccion)}</span>
-          </div>
-          <div class="resumen-linea">
-            <strong>Localidad</strong>
-            <span>${escaparHTML(and.localidad)}</span>
-          </div>
-          <div class="resumen-linea">
-            <strong>Provincia</strong>
-            <span>${escaparHTML(and.provincia)}</span>
-          </div>
-          <div class="resumen-linea">
-            <strong>Código postal</strong>
-            <span>${escaparHTML(and.codigoPostal)}</span>
-          </div>
-          <div class="resumen-linea">
-            <strong>Destinatario</strong>
-            <span>${escaparHTML(and.nombre)} ${escaparHTML(and.apellido)}</span>
-          </div>
-        `;
-      } else {
-        html += `
-          <div class="resumen-linea">
-            <strong>Destinatario</strong>
-            <span>${escaparHTML(and.nombre)}</span>
-          </div>
-          <div class="resumen-linea">
-            <strong>Dirección</strong>
-            <span>${escaparHTML(and.calle)} ${escaparHTML(and.altura)}</span>
-          </div>
-          <div class="resumen-linea">
-            <strong>Piso / departamento</strong>
-            <span>${escaparHTML(and.piso || "-")} / ${escaparHTML(and.departamento || "-")}</span>
-          </div>
-          <div class="resumen-linea">
-            <strong>Localidad</strong>
-            <span>${escaparHTML(and.localidad)}</span>
-          </div>
-          <div class="resumen-linea">
-            <strong>Provincia</strong>
-            <span>${escaparHTML(and.provincia)}</span>
-          </div>
-          <div class="resumen-linea">
-            <strong>Código postal</strong>
-            <span>${escaparHTML(and.codigoPostal)}</span>
-          </div>
-        `;
-      }
-
-      html += `
-        <div class="mensaje info" style="display:block">
-          El costo del envío Andreani será informado después de cotizarlo.
-        </div>
-      `;
-    }
-
-    if (metodoSeleccionado !== "ANDREANI") {
-      html += `
-        <div class="resumen-linea">
-          <strong>Correo electrónico</strong>
-          <span>${escaparHTML(document.getElementById("email").value)}</span>
-        </div>
-        <div class="resumen-linea">
-          <strong>Teléfono</strong>
-          <span>${escaparHTML(document.getElementById("telefono").value)}</span>
-        </div>
-      `;
-    } else {
-      const and = obtenerDatosAndreani();
-      html += `
-        <div class="resumen-linea">
-          <strong>Correo electrónico</strong>
-          <span>${escaparHTML(and.email)}</span>
-        </div>
-        <div class="resumen-linea">
-          <strong>Teléfono</strong>
-          <span>${escaparHTML(and.telefono)}</span>
-        </div>
-        <div class="resumen-linea">
-          <strong>DNI</strong>
-          <span>${escaparHTML(and.dni)}</span>
-        </div>
-      `;
-    }
-
-    document.getElementById("resumenPedido").innerHTML = html;
-  }
-
-  // --------------------------------------------------
-  // CONFIRMAR PEDIDO Y ENVIAR AL SERVIDOR
-  // --------------------------------------------------
-
-  async function confirmarPedido() {
-    ocultarMensaje("mensajeResumen");
-
-    const boton = document.getElementById("btnConfirmar");
-
-    try {
-      validarEntrega();
-
-      if (calcularTotalPuntos() > usuarioActual.puntos) {
-        throw new Error("No tenés puntos suficientes.");
-      }
-
-      boton.disabled = true;
-      boton.textContent = "Registrando pedido...";
-
-      const datos = {
-        action: "crearPedido",
-        nombre: usuarioActual.nombre,
-        apellido: usuarioActual.apellido,
-        email: document.getElementById("email").value.trim(),
-        telefono: document.getElementById("telefono").value.trim(),
-        metodo: metodoSeleccionado,
-        carrito: obtenerItemsCarrito(),
-        direccion: "",
-        codigoPostal: "",
-        provincia: "",
-        localidad: "",
-        zona: ""
-      };
-
-      if (metodoSeleccionado !== "RETIRO") {
-        datos.direccion =
-          document.getElementById("direccion").value.trim();
-
-        datos.codigoPostal =
-          document.getElementById("codigoPostal").value.trim();
-      }
-
-      if (metodoSeleccionado === "MOTO") {
-        datos.zona = document.getElementById("zona").value;
-        datos.localidad =
-          document.getElementById("localidadMoto").value;
-      }
-
-      if (metodoSeleccionado === "CORREO_ARGENTINO") {
-        datos.localidad =
-          document.getElementById("localidad").value.trim();
-
-        datos.provincia =
-          document.getElementById("provincia").value.trim();
-      }
-
-      if (metodoSeleccionado === "ANDREANI") {
-        const and = obtenerDatosAndreani();
-
-        datos.email = and.email;
-        datos.telefono = and.telefono;
-        datos.localidad = and.localidad;
-        datos.provincia = and.provincia;
-        datos.codigoPostal = and.codigoPostal;
-
-        if (tipoEntregaAndreani === "SUCURSAL") {
-          datos.direccion = "Sucursal Andreani: " + and.direccion +
-            " | Destinatario: " + and.nombre + " " + and.apellido +
-            " | DNI: " + and.dni;
-        } else {
-          datos.direccion = and.calle + " " + and.altura +
-            (and.piso ? ", Piso " + and.piso : "") +
-            (and.departamento ? ", Depto. " + and.departamento : "") +
-            " | Destinatario: " + and.nombre +
-            " | DNI: " + and.dni;
-        }
-      }
-
-      const respuesta = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8"
-        },
-        body: JSON.stringify(datos)
-      });
-
-      const resultado = await respuesta.json();
-
-      if (!resultado.ok) {
-        throw new Error(
-          resultado.error || "No se pudo registrar el pedido."
-        );
-      }
-
-      mostrarResultado(resultado);
-
-    } catch (error) {
-      mostrarMensaje(
-        "mensajeResumen",
-        error.message || "Ocurrió un error al registrar el pedido.",
-        "error"
-      );
-
-    } finally {
-      boton.disabled = false;
-      boton.textContent = "REALIZAR PEDIDO";
-    }
-  }
-
-  // --------------------------------------------------
-  // RESULTADO Y DATOS DE PAGO
-  // --------------------------------------------------
-
-  function mostrarResultado(resultado) {
-    actualizarPaso(4);
-
-    const transferencia = resultado.transferencia;
-    let contenidoPago = "";
-
-    if (
-      resultado.metodo === "MOTO" &&
-      transferencia &&
-      resultado.estadoPago === "PENDIENTE DE PAGO"
-    ) {
-      contenidoPago = `
-        <div class="transferencia" style="text-align:left">
-          <h3>Datos para realizar la transferencia</h3>
-
-          <strong>Banco:</strong> ${escaparHTML(transferencia.banco)}<br>
-          <strong>Titular:</strong> ${escaparHTML(transferencia.titular)}<br>
-          <strong>Alias:</strong> ${escaparHTML(transferencia.alias)}<br>
-          <strong>CBU:</strong> ${escaparHTML(transferencia.cbu)}<br>
-          <strong>CUIT:</strong> ${escaparHTML(transferencia.cuit)}<br>
-          <strong>Costo de envío:</strong> $${formatoNumero(resultado.costoEnvio)}<br><br>
-
-          Antes de transferir, verificá que el destinatario sea el indicado.
-          <br>
-          Una vez realizada la transferencia, enviá el comprobante por WhatsApp
-          indicando tu número de pedido.
-          <br><br>
-
-          <strong>WhatsApp:</strong>
-          ${escaparHTML(transferencia.whatsapp)}
-        </div>
-      `;
-
-    } else if (
-      resultado.metodo === "CORREO_ARGENTINO" ||
-      resultado.metodo === "ANDREANI"
-    ) {
-      contenidoPago = `
-        <div class="mensaje info" style="display:block;text-align:left">
-          Tu pedido quedó registrado y el envío está pendiente de cotización.
-          Nos comunicaremos para informarte el costo del envío.
-          No realices transferencias por el envío hasta recibir esa información.
-        </div>
-      `;
-
-    } else if (resultado.metodo === "RETIRO") {
-      contenidoPago = `
-        <div class="mensaje info" style="display:block;text-align:left">
-          Tu pedido quedó registrado para retiro.
-          Cuando esté listo, te enviaremos un correo electrónico.
-          Tendrás 60 días para retirarlo.
-        </div>
-      `;
-    }
-
-    document.getElementById("contenidoResultado").innerHTML = `
-      <div style="font-size:48px;margin-bottom:10px">🎉</div>
-
-      <h2>¡Pedido registrado!</h2>
-
-      <p>
-        Gracias por participar y elejir tus Boosters.
-        Tu pedido se registró correctamente.
-      </p>
-
-      <div class="direccion-retiro">
-        <strong>Número de pedido:</strong><br>
-        <span style="font-size:24px;color:#d95c0b;font-weight:bold">
-          ${escaparHTML(resultado.idPedido)}
-        </span>
-        <br><br>
-        <strong>Boosters:</strong> ${formatoNumero(resultado.cantidad)}<br>
-        <strong>Total:</strong> ${formatoNumero(resultado.totalPuntos)} puntos
-      </div>
-
-      ${contenidoPago}
-
-      <p style="font-size:13px;color:#777">
-        Guardá tu número de pedido para cualquier consulta.
-      </p>
-
-      <button
-        class="btn-principal"
-        style="margin-top:18px;"
-        onclick="volverAlInicio()"
-      >
-        Ir a Inicio
-      </button>
-    `;
-
-    mostrarSeccion("seccionResultado");
-  }
-
-  // --------------------------------------------------
-  // VOLVER AL INICIO PARA UN NUEVO INGRESO
-  // --------------------------------------------------
-
-  function volverAlInicio() {
-    sessionStorage.removeItem(CLAVE_PROGRESO);
-
-    usuarioActual = {
-      nombre: "",
-      apellido: "",
-      puntos: 0
+  if (metodoEntregaSeleccionado === "CORREO_ARGENTINO") {
+    const datos = {
+      metodo: "CORREO_ARGENTINO",
+      nombre: valor("caNombre"),
+      dni: valor("caDni"),
+      telefono: valor("caTelefono"),
+      email: valor("caEmail"),
+      destino: valor("caDestino"),
+      sucursal: valor("caSucursal"),
+      direccion: valor("caDireccion"),
+      localidad: valor("caLocalidad"),
+      provincia: valor("caProvincia"),
+      codigoPostal: valor("caCP")
     };
 
-    premios = [];
-    tarifasMoto = [];
-    carrito = {};
-    metodoSeleccionado = "";
-    tipoEntregaAndreani = "";
-    andreaniDatosEnviados = false;
-    resultadoFinal = null;
-    seccionActual = "seccionIngreso";
+    if (!datos.nombre || !datos.dni || !datos.telefono || !datos.email || !datos.destino || !datos.localidad || !datos.provincia || !datos.codigoPostal) {
+      throw new Error("Completá todos los datos obligatorios de Correo Argentino.");
+    }
 
-    [
-      "nombre",
-      "apellido",
-      "direccion",
-      "codigoPostal",
-      "provincia",
-      "localidad",
-      "zona",
-      "localidadMoto",
-      "email",
-      "telefono",
-      "andSucursalLocalidad",
-      "andSucursalProvincia",
-      "andSucursalCP",
-      "andSucursalDireccion",
-      "andSucNombre",
-      "andSucApellido",
-      "andSucDni",
-      "andSucEmail",
-      "andSucTelefono",
-      "andDomNombre",
-      "andDomDni",
-      "andDomTelefono",
-      "andDomEmail",
-      "andDomCalle",
-      "andDomAltura",
-      "andDomPiso",
-      "andDomDepto",
-      "andDomCP",
-      "andDomLocalidad",
-      "andDomProvincia"
-    ].forEach(function(id) {
-      const campo = document.getElementById(id);
+    if (datos.destino === "SUCURSAL" && !datos.sucursal) {
+      throw new Error("Ingresá la sucursal de destino.");
+    }
 
-      if (campo) {
-        campo.value = "";
-      }
-    });
+    if (datos.destino === "DOMICILIO" && !datos.direccion) {
+      throw new Error("Ingresá la dirección de entrega.");
+    }
 
-    [
-      "metodoRetiro",
-      "metodoMoto",
-      "metodoCorreo",
-      "metodoAndreani"
-    ].forEach(function(id) {
-      document.getElementById(id).classList.remove("seleccionado");
-    });
-
-    [
-      "bloqueRetiro",
-      "bloqueEnvio",
-      "bloqueZona",
-      "bloqueLocalidad",
-      "campoProvincia",
-      "avisoCotizacion",
-      "bloqueAndreani",
-      "andreaniFormularioSucursal",
-      "andreaniFormularioDomicilio"
-    ].forEach(function(id) {
-      document.getElementById(id).classList.add("oculto");
-    });
-
-    document.getElementById("zona").innerHTML =
-      '<option value="">Seleccioná una zona</option>';
-
-    document.getElementById("localidadMoto").innerHTML =
-      '<option value="">Primero seleccioná una zona</option>';
-
-    document.getElementById("costoMoto").textContent = "$0";
-    document.getElementById("bloqueContactoGeneral").classList.remove("oculto");
-    document.getElementById("andreaniTipoSucursal").classList.remove("seleccionado");
-    document.getElementById("andreaniTipoDomicilio").classList.remove("seleccionado");
-    ocultarMensaje("mensajeAndreani");
-
-    document.getElementById("puntosDisponibles").textContent = "0";
-    document.getElementById("totalPuntos").textContent = "0 puntos";
-    document.getElementById("grillaProductos").innerHTML = "";
-    document.getElementById("resumenPedido").innerHTML = "";
-    document.getElementById("contenidoResultado").innerHTML = "";
-    document.getElementById("contenidoHistorial").innerHTML = "";
-
-    ocultarMensaje("mensajeIngreso");
-    ocultarMensaje("mensajeProductos");
-    ocultarMensaje("mensajeEntrega");
-    ocultarMensaje("mensajeResumen");
-    ocultarMensaje("mensajeHistorial");
-
-    actualizarPaso(1);
-    mostrarSeccion("seccionIngreso");
+    return datos;
   }
 
-  // Si el usuario modifica algún dato después de preparar el mensaje,
-  // deberá volver a abrir WhatsApp para enviar la información actualizada.
-  document.querySelectorAll("#bloqueAndreani input").forEach(function(campo) {
-    campo.addEventListener("input", function() {
-      andreaniDatosEnviados = false;
+  if (metodoEntregaSeleccionado === "ANDREANI") {
+    const datos = {
+      metodo: "ANDREANI",
+      nombre: valor("anNombre"),
+      dni: valor("anDni"),
+      telefono: valor("anTelefono"),
+      email: valor("anEmail"),
+      destino: valor("anTipoEntrega"),
+      direccion: valor("anDireccion"),
+      localidad: valor("anLocalidad"),
+      provincia: valor("anProvincia"),
+      codigoPostal: valor("anCP")
+    };
+
+    if (!datos.nombre || !datos.dni || !datos.telefono || !datos.email || !datos.destino || !datos.direccion || !datos.localidad || !datos.provincia || !datos.codigoPostal) {
+      throw new Error("Completá todos los datos obligatorios de Andreani.");
+    }
+
+    return datos;
+  }
+
+  throw new Error("Seleccioná un método de entrega.");
+}
+
+/* =========================================================
+   CONFIRMAR PEDIDO
+========================================================= */
+
+async function confirmarPedido() {
+  if (pedidoEnProceso) return;
+
+  const mensaje = document.getElementById("mensajeEntrega");
+  mensaje.innerHTML = "";
+
+  try {
+    if (!metodoEntregaSeleccionado) {
+      throw new Error("Seleccioná un método de entrega.");
+    }
+
+    if (metodoEntregaSeleccionado !== "RETIRO" && calcularCantidadBoosters() < 10) {
+      throw new Error("Para realizar un envío necesitás seleccionar al menos 10 boosters.");
+    }
+
+    const entrega = obtenerDatosFormularioEntrega();
+
+    if (calcularTotalCarrito() > puntosActuales) {
+      throw new Error("No tenés puntos suficientes para realizar este canje.");
+    }
+
+    datosEntrega = entrega;
+
+    pedidoEnProceso = true;
+    const boton = document.getElementById("btnConfirmarPedido");
+    boton.disabled = true;
+    boton.textContent = "Registrando pedido...";
+
+    const pedido = {
+      nombre: usuarioActual.nombre,
+      apellido: usuarioActual.apellido,
+      usuario: usuarioActual.usuario || "",
+      email: usuarioActual.email || "",
+      puntos: calcularTotalCarrito(),
+      totalPuntos: calcularTotalCarrito(),
+      boosters: carrito.map(item => ({
+        nombre: item.nombre,
+        cantidad: item.cantidad,
+        puntos: item.puntos
+      })),
+      productos: carrito.map(item => ({
+        nombre: item.nombre,
+        cantidad: item.cantidad,
+        puntos: item.puntos
+      })),
+      cantidadBoosters: calcularCantidadBoosters(),
+      metodoEntrega: metodoEntregaSeleccionado,
+      entrega: entrega,
+      datosEntrega: entrega
+    };
+
+    const respuesta = await llamarAPI({
+      accion: "crearPedido",
+      pedido: pedido
     });
+
+    if (!respuesta || respuesta.error || respuesta.exito === false) {
+      throw new Error(respuesta?.mensaje || respuesta?.error || "No se pudo registrar el pedido.");
+    }
+
+    const numeroPedido =
+      respuesta.numeroPedido ||
+      respuesta.idPedido ||
+      respuesta.pedidoId ||
+      respuesta.id ||
+      "";
+
+    document.getElementById("mensajeConfirmacion").textContent =
+      respuesta.mensaje || "Tu pedido fue registrado correctamente.";
+
+    document.getElementById("datosPedidoConfirmado").innerHTML = `
+      ${numeroPedido ? `<p><strong>Número de pedido:</strong> ${escaparHTML(numeroPedido)}</p>` : ""}
+      <p><strong>Método de entrega:</strong> ${escaparHTML(metodoEntregaSeleccionado.replaceAll("_", " "))}</p>
+      <p><strong>Boosters:</strong> ${calcularCantidadBoosters()}</p>
+      <p><strong>Puntos utilizados:</strong> ${formatearNumero(calcularTotalCarrito())}</p>
+    `;
+
+    mostrarSeccion("seccionConfirmacion");
+
+  } catch (error) {
+    mostrarMensaje(mensaje, error.message || "Ocurrió un error al confirmar el pedido.", "error");
+  } finally {
+    pedidoEnProceso = false;
+    const boton = document.getElementById("btnConfirmarPedido");
+    boton.disabled = false;
+    boton.textContent = "Confirmar pedido";
+  }
+}
+
+/* =========================================================
+   HISTORIAL DE RECOMPENSAS
+========================================================= */
+
+async function consultarHistorial() {
+  mostrarSeccion("seccionHistorial");
+
+  const contenedor = document.getElementById("contenidoHistorial");
+  contenedor.innerHTML = "Consultando tu historial de recompensas...";
+
+  try {
+    const respuesta = await llamarAPI({
+      accion: "obtenerHistorial",
+      nombre: usuarioActual.nombre,
+      apellido: usuarioActual.apellido,
+      usuario: usuarioActual.usuario || ""
+    });
+
+    if (!respuesta || respuesta.error) {
+      throw new Error(respuesta?.mensaje || "No se pudo consultar tu historial.");
+    }
+
+    let historial = [];
+
+    if (Array.isArray(respuesta)) {
+      historial = respuesta;
+    } else if (Array.isArray(respuesta.historial)) {
+      historial = respuesta.historial;
+    } else if (Array.isArray(respuesta.pedidos)) {
+      historial = respuesta.pedidos;
+    } else if (Array.isArray(respuesta.registros)) {
+      historial = respuesta.registros;
+    }
+
+    renderizarHistorial(historial);
+
+  } catch (error) {
+    contenedor.innerHTML = `
+      <div class="mensaje error">
+        ${escaparHTML(error.message || "No se pudo consultar tu historial.")}
+      </div>
+    `;
+  }
+}
+
+function renderizarHistorial(historial) {
+  const contenedor = document.getElementById("contenidoHistorial");
+
+  if (!historial || !historial.length) {
+    contenedor.innerHTML = "<p>Todavía no tenés pedidos registrados.</p>";
+    return;
+  }
+
+  contenedor.innerHTML = "";
+
+  historial.forEach(pedido => {
+    const elemento = document.createElement("div");
+    elemento.className = "historial-item";
+
+    const numero = pedido.numeroPedido || pedido.idPedido || pedido.id || "Pedido";
+    const fecha = pedido.fecha || pedido.fechaPedido || "";
+    const estado = pedido.estado || pedido.estadoPedido || pedido.estado_de_pedido || "En proceso";
+    const entrega = pedido.metodoEntrega || pedido.entrega || "";
+    const total = pedido.puntos || pedido.totalPuntos || pedido.costo || "";
+
+    elemento.innerHTML = `
+      <div class="historial-cabecera">
+        <strong>${escaparHTML(String(numero))}</strong>
+        <span class="estado-pedido">${escaparHTML(String(estado))}</span>
+      </div>
+      ${fecha ? `<p><strong>Fecha:</strong> ${escaparHTML(String(fecha))}</p>` : ""}
+      ${entrega ? `<p><strong>Entrega:</strong> ${escaparHTML(String(entrega))}</p>` : ""}
+      ${total !== "" ? `<p><strong>Puntos:</strong> ${escaparHTML(String(total))}</p>` : ""}
+      ${pedido.detalle ? `<p>${escaparHTML(String(pedido.detalle))}</p>` : ""}
+    `;
+
+    contenedor.appendChild(elemento);
+  });
+}
+
+function cerrarHistorial() {
+  mostrarSeccion("seccionProductos");
+}
+
+/* =========================================================
+   COMUNICACIÓN CON APPS SCRIPT
+========================================================= */
+
+async function llamarAPI(datos) {
+  const parametros = new URLSearchParams();
+
+  Object.keys(datos).forEach(clave => {
+    const valor = datos[clave];
+
+    if (valor !== undefined && valor !== null) {
+      parametros.append(
+        clave,
+        typeof valor === "object" ? JSON.stringify(valor) : String(valor)
+      );
+    }
   });
 
-  // --------------------------------------------------
-  // INICIO DE LA PÁGINA
-  // --------------------------------------------------
+  const url = `${API_URL}?${parametros.toString()}`;
 
-  // Ya no se restaura el progreso anterior al abrir o actualizar.
-  // Siempre se exige ingresar nombre, apellido y pulsar el botón.
-  iniciarPagina();
+  const respuesta = await fetch(url, {
+    method: "GET",
+    redirect: "follow"
+  });
+
+  if (!respuesta.ok) {
+    throw new Error("No se pudo conectar con el servidor. Intentá nuevamente.");
+  }
+
+  const texto = await respuesta.text();
+
+  try {
+    return JSON.parse(texto);
+  } catch (error) {
+    console.error("Respuesta no válida del servidor:", texto);
+    throw new Error("El servidor devolvió una respuesta que no se pudo interpretar.");
+  }
+}
+
+/* =========================================================
+   UTILIDADES
+========================================================= */
+
+function valor(id) {
+  const elemento = document.getElementById(id);
+  return elemento ? elemento.value.trim() : "";
+}
+
+function mostrarMensaje(contenedor, texto, tipo = "info") {
+  contenedor.innerHTML = `
+    <div class="mensaje ${tipo}">
+      ${escaparHTML(texto)}
+    </div>
+  `;
+}
+
+function formatearNumero(numero) {
+  return Number(numero || 0).toLocaleString("es-AR");
+}
+
+function escaparHTML(valor) {
+  return String(valor ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function escaparAtributo(valor) {
+  return escaparHTML(valor).replaceAll("`", "&#096;");
+}
+
+/* =========================================================
+   INICIO DE LA PÁGINA
+========================================================= */
+
+function iniciarPagina() {
+  // Siempre se inicia desde la pantalla de ingreso.
+  // No se restaura el progreso anterior al abrir o actualizar.
+  mostrarSeccion("seccionIngreso");
+}
+
+iniciarPagina();
 
 </script>
 
