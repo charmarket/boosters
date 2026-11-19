@@ -1304,6 +1304,9 @@ function renderizarProductos() {
     return;
   }
 
+  // Ordenar boosters de menor a mayor cantidad de puntos.
+  productosDisponibles.sort((a, b) => a.puntos - b.puntos);
+
   grid.innerHTML = "";
 
   productosDisponibles.forEach((producto, indice) => {
