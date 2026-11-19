@@ -20,11 +20,19 @@
   * { box-sizing: border-box; }
 
   body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: var(--fondo);
-    color: var(--texto);
-  }
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--texto);
+
+  background:
+    linear-gradient(
+      rgba(255, 248, 241, .90),
+      rgba(255, 248, 241, .94)
+    ),
+    url("https://drive.google.com/thumbnail?id=1WdB_N_o50RRWUVba7fKzr0Tew4bJ3pKd&sz=w2000")
+    center / cover fixed;
+ }
 
   .contenedor {
     width: min(1180px, 94%);
