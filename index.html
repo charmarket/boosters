@@ -82,7 +82,7 @@
   /* ENCABEZADO */
 
   header {
-    background: var(--naranja);
+    background: #ff9638;
     border-bottom: 1px solid var(--naranja-oscuro);
     padding: 18px 0;
   }
@@ -668,11 +668,6 @@
 
 <header>
   <div class="contenedor encabezado">
-    <img
-      class="logo"
-      src="https://lh3.googleusercontent.com/d/1kdUUypk6s558Qmu5ocRPCK7isohJ8kTy"
-      alt="Logo Charmarket"
-    >
     <div class="marca">
       <h1>CHARMARKET</h1>
     </div>
@@ -704,10 +699,6 @@
         </div>
 
         <div class="inicio-tarjeta-contenido">
-          <p>
-            Ingresá tu nombre y apellido para consultar tus puntos disponibles.
-          </p>
-
           <div class="campo">
             <label for="nombre">Nombre</label>
             <input
@@ -760,14 +751,15 @@
 
     <div class="aviso-vigencia">
       Los boosters seleccionados tienen 60 días de vigencia.
-      <button
-        class="enlace-reglamento"
-        type="button"
-        onclick="abrirReglamento()"
-      >
-        Leer reglamento completo
-      </button>
     </div>
+
+    <button
+      class="enlace-reglamento"
+      type="button"
+      onclick="abrirReglamento()"
+    >
+      Leer reglamento completo
+    </button>
 
     <section class="ranking-seccion">
 
