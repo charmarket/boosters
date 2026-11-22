@@ -177,7 +177,19 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 22px;
-    align-items: stretch;
+    align-items: start;
+  }
+
+  /* Nombre y apellido en la misma fila */
+  .inicio-datos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .inicio-datos-grid .campo {
+    min-width: 0;
+    margin-bottom: 16px;
   }
 
   .inicio-tarjeta {
@@ -771,28 +783,31 @@
             </svg>
           </span>
           
+          
           <span>Ingresá tus datos</span>
         </div>
 
-        <div class="inicio-tarjeta-contenido">
-          <div class="campo">
-            <label for="nombre">Nombre</label>
-            <input
-              type="text"
-              id="nombre"
-              placeholder="Ingresá tu nombre"
-              autocomplete="given-name"
-            >
-          </div>
+        <div class="inicio-tarjeta-contenido inicio-contenido-datos">
+          <div class="inicio-datos-grid">
+            <div class="campo">
+              <label for="nombre">Nombre</label>
+              <input
+                type="text"
+                id="nombre"
+                placeholder="Tu nombre"
+                autocomplete="given-name"
+              >
+            </div>
 
-          <div class="campo">
-            <label for="apellido">Apellido</label>
-            <input
-              type="text"
-              id="apellido"
-              placeholder="Ingresá tu apellido"
-              autocomplete="family-name"
-            >
+            <div class="campo">
+              <label for="apellido">Apellido</label>
+              <input
+                type="text"
+                id="apellido"
+                placeholder="Tu apellido"
+                autocomplete="family-name"
+              >
+            </div>
           </div>
 
           <button
@@ -808,7 +823,7 @@
         </div>
       </div>
 
-      <div class="inicio-tarjeta">
+      <div class="inicio-tarjeta inicio-tarjeta-imagen">
         <div class="inicio-tarjeta-contenido">
           <img
             class="inicio-imagen"
@@ -820,6 +835,7 @@
       </div>
 
     </div>
+
 
     <div class="aviso-vigencia">
       <svg
