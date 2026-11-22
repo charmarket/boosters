@@ -179,6 +179,10 @@
     gap: 22px;
     align-items: stretch;
   }
+  /* Acercar el cuadro de ingreso al de boosters */
+  .inicio-columnas > .inicio-tarjeta:first-child {
+    transform: translateX(12px);
+  }
 
   /* Nombre y apellido en la misma fila */
   .inicio-datos-grid {
@@ -798,6 +802,9 @@
     .inicio-columnas,
     .ranking-columnas {
       grid-template-columns: 1fr;
+    }
+    .inicio-columnas > .inicio-tarjeta:first-child {
+      transform: none;
     }
 
     .panel { padding: 18px; }
