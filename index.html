@@ -360,13 +360,42 @@
     box-shadow: 0 5px 18px rgba(60, 35, 15, .05);
   }
 
+  /* ENCABEZADOS TOP 10 Y TOP 100 */
+
   .ranking-cabecera {
-    background: var(--naranja);
-    color: white;
-    text-align: center;
-    padding: 15px;
-    font-size: 19px;
+    background: transparent;
+    color: #222222;
+    text-align: left;
+    padding: 16px 18px 4px;
+    font-size: 20px;
     font-weight: 800;
+  }
+
+  .ranking-etiqueta {
+    display: inline-block;
+    padding: 5px 14px;
+    border-radius: 50px;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .ranking-semanal .ranking-etiqueta {
+    background: var(--naranja);
+  }
+
+  .ranking-mensual .ranking-etiqueta {
+    background: #222222;
+  }
+
+  .ranking-nombre {
+    display: block;
+    margin-top: 8px;
+    color: #222222;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.2;
   }
 
   .ranking-contenido {
@@ -927,17 +956,18 @@
 
         <div class="ranking-tarjeta ranking-semanal">
           <div class="ranking-cabecera">
-            TOP 10 · Ranking semanal
-          </div>
-          <div class="ranking-contenido" style="padding: 18px 0;">
-            <img
-              class="ranking-imagen"
-              src="https://lh3.googleusercontent.com/d/1loYR8QVkOcNcHv4tLcm-h14hAlGkuVpx"
-              alt="Ranking semanal TOP 10"
-              loading="lazy"
-            >
-          </div>
+            <span class="ranking-etiqueta">TOP 10</span>
+            <span class="ranking-nombre">Ranking semanal</span>
         </div>
+        <div class="ranking-contenido" style="padding: 18px 0;">
+          <img
+            class="ranking-imagen"
+            src="https://lh3.googleusercontent.com/d/1loYR8QVkOcNcHv4tLcm-h14hAlGkuVpx"
+            alt="Ranking semanal TOP 10"
+            loading="lazy"
+          >
+        </div>
+      </div>
 
         <div class="ranking-tarjeta">
           <div class="ranking-cabecera">
