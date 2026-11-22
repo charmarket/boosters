@@ -425,6 +425,19 @@
     width: 100%;
   }
 
+  /* Botón exclusivo del TOP 10 */
+  .ranking-boton-semanal {
+    border: 2px solid var(--naranja);
+    background: #ffffff;
+    color: var(--naranja);
+  }
+
+  .ranking-boton-semanal:hover {
+    border-color: var(--naranja-oscuro);
+    background: #fff5ed;
+    color: var(--naranja-oscuro);
+  }
+
   /* MODAL */
 
   .modal {
@@ -966,6 +979,13 @@
             alt="Ranking semanal TOP 10"
             loading="lazy"
           >
+          <button
+            class="btn-principal ranking-boton ranking-boton-semanal"
+            type="button"
+            onclick="abrirTop10()"
+          >
+            Ver Top 10 completo
+          </button>
         </div>
       </div>
 
@@ -1227,6 +1247,7 @@
 const API_URL = "https://script.google.com/macros/s/AKfycbwQfu9b9kcBZbYfjC2zPykzxnjdBO4wfngrwBr23vEMiWCmi91eAtN7Cx5Zx8hOttnLgQ/exec";
 
 const URL_TOP100 = "https://drive.google.com/file/d/1Wp4xBSmaHsFjyJ1Y0TLArC1JgB4bNmgW/view";
+const URL_TOP10 = "https://drive.google.com/file/d/1loYR8QVkOcNcHv4tLcm-h14hAlGkuVpx/view";
 
 const DIRECCION_RETIRO = "Adolfo Alsina 4327, Villa Martelli, Buenos Aires, CP 1603";
 
@@ -1347,6 +1368,9 @@ function cerrarReglamento(event) {
 
 function abrirTop100() {
   window.open(URL_TOP100, "_blank", "noopener,noreferrer");
+}
+function abrirTop10() {
+  window.open(URL_TOP10, "_blank", "noopener,noreferrer");
 }
 
 /* =========================================================
