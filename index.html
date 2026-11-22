@@ -396,6 +396,11 @@
     background: var(--naranja);
   }
 
+  .ranking-tarjeta:not(.ranking-semanal) .ranking-etiqueta {
+    background: #000000;
+    color: #ffffff;
+  }
+
   .ranking-mensual .ranking-etiqueta {
     background: #222222;
   }
@@ -1043,7 +1048,8 @@
 
         <div class="ranking-tarjeta">
           <div class="ranking-cabecera">
-            TOP 100 · Ranking mensual
+            <span class="ranking-etiqueta">TOP 100</span>
+            <span class="ranking-nombre">Ranking mensual</span>
           </div>
           <div class="ranking-contenido">
             <img
