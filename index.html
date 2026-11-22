@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -403,31 +402,6 @@
 
   .ranking-mensual .ranking-etiqueta {
     background: #222222;
-  }
-  /* VISTA PREVIA DEL PDF TOP 100 */
-  .ranking-mensual {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .ranking-mensual .ranking-contenido {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    gap: 14px;
-  }
-
-  .ranking-pdf-vista {
-    width: 100%;
-    height: 360px;
-    border: 1px solid #eadfd5;
-    border-radius: 10px;
-    background: #ffffff;
-  }
-
-  .ranking-mensual .ranking-boton {
-    margin-top: auto;
-    width: 100%;
   }
 
   .ranking-nombre {
@@ -1071,34 +1045,29 @@
         </div>
       </div>
 
-        <div class="ranking-tarjeta ranking-mensual">
-
+        <div class="ranking-tarjeta">
           <div class="ranking-cabecera">
             <span class="ranking-etiqueta">TOP 100</span>
             <span class="ranking-nombre">Ranking mensual</span>
           </div>
-
           <div class="ranking-contenido">
+            <img
+              class="ranking-imagen"
+              src="https://lh3.googleusercontent.com/d/1acxg6QYrXS1sCsrhlkr91dCZlsFw3-C_"
+              alt="Ranking mensual TOP 100"
+              loading="lazy"
+            >
 
-          <iframe
-            class="ranking-pdf-vista"
-            src="https://drive.google.com/file/d/1Wp4xBSmaHsFjyJ1Y0TLArC1JgB4bNmgW/preview"
-            loading="lazy"
-            title="Vista previa del ranking mensual TOP 100"
-          ></iframe>
-
-          <button
-            class="btn-principal ranking-boton ranking-boton-semanal"
-            type="button"
-            onclick="abrirTop100()"
-          >
-            <span>Ver Top 100 completo</span>
-            <span class="ranking-flecha">›</span>
-          </button>
-
+            <button
+              class="btn-principal ranking-boton ranking-boton-semanal"
+              type="button"
+              onclick="abrirTop100()"
+            >
+              <span>Ver Top 100 completo</span>
+              <span class="ranking-flecha">›</span>
+            </button>
+          </div>
         </div>
-
-      </div>
 
       </div>
     </section>
